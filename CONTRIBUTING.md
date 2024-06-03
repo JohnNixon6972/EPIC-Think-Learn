@@ -2,10 +2,6 @@
 
 We are excited that you are interested in contributing to EPIC Think Learn! Your contributions help make this project better for everyone. The following is a set of guidelines for contributing to our project.
 
-## Code of Conduct
-
-By participating in this project, you agree to abide by our [Code of Conduct](CODE_OF_CONDUCT.md).
-
 ## How Can I Contribute?
 
 ### Reporting Bugs
