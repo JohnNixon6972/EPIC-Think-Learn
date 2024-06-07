@@ -12,7 +12,20 @@
           "package_name": "com.epic.app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "282675936913-6krs5e8hve5essggacedqmib5pq9d9j0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.epic.app",
+            "certificate_hash": "c48469feafe669c808e9a85b9e64a0c447ae10d8"
+          }
+        },
+        {
+          "client_id": "282675936913-b2a7tjcvcln7p9hklo9u6f2jo06ub4o4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBdR-ERBsChbOMThB33MzWyRSniRi8XKj0"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "282675936913-b2a7tjcvcln7p9hklo9u6f2jo06ub4o4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "282675936913-glq4n94dlftdc7l93qmm8j9stc6v92su.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.epic"
+              }
+            }
+          ]
         }
       }
     }
