@@ -3,9 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>282675936913-glq4n94dlftdc7l93qmm8j9stc6v92su.apps.googleusercontent.com</string>
+	<string>282675936913-uj6psg294odi02qar707jd2krekn7lgc.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.282675936913-glq4n94dlftdc7l93qmm8j9stc6v92su</string>
+	<string>com.googleusercontent.apps.282675936913-uj6psg294odi02qar707jd2krekn7lgc</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>282675936913-6krs5e8hve5essggacedqmib5pq9d9j0.apps.googleusercontent.com</string>
 	<key>API_KEY</key>
 	<string>AIzaSyC_zpjhM2WF8DegHgelUrhol7Ri5g4VqaY</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +15,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.example.epic</string>
+	<string>com.epic.epic</string>
 	<key>PROJECT_ID</key>
 	<string>epic-a00da</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +31,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:282675936913:ios:3b6b27505bdcb39f614930</string>
+	<string>1:282675936913:ios:b0c80ab36b84ac6f614930</string>
 </dict>
 </plist>

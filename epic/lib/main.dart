@@ -1,8 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:epic/cores/screens/loader.dart';
 import 'package:epic/features/auth/pages/login_page.dart';
+import 'package:epic/features/auth/pages/logout_page.dart';
 import 'package:epic/features/auth/pages/username_page.dart';
-import 'package:epic/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
                 stream: FirebaseFirestore.instance
                     .collection('users')
                     .doc(FirebaseAuth.instance.currentUser!.uid)
-                    .snapshots(),
+                    .snapshots(),  
                 builder: (context, snapshot) {
                   if (!snapshot.hasData || !snapshot.data!.exists) {
                     final user = FirebaseAuth.instance.currentUser;
@@ -55,7 +55,7 @@ class MyApp extends StatelessWidget {
                       ConnectionState.waiting) {
                     return const Loader();
                   }
-                  return const HomePage();
+                  return const LogoutPage();
                 });
           },
         ));

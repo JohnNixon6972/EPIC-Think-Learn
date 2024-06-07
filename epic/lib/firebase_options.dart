@@ -48,11 +48,13 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyC_zpjhM2WF8DegHgelUrhol7Ri5g4VqaY',
-    appId: '1:282675936913:ios:3b6b27505bdcb39f614930',
+    appId: '1:282675936913:ios:b0c80ab36b84ac6f614930',
     messagingSenderId: '282675936913',
     projectId: 'epic-a00da',
     storageBucket: 'epic-a00da.appspot.com',
-    iosBundleId: 'com.example.epic',
+    androidClientId: '282675936913-6krs5e8hve5essggacedqmib5pq9d9j0.apps.googleusercontent.com',
+    iosClientId: '282675936913-uj6psg294odi02qar707jd2krekn7lgc.apps.googleusercontent.com',
+    iosBundleId: 'com.epic.epic',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(

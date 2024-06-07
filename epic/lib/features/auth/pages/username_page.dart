@@ -11,7 +11,7 @@ class UsernamePage extends ConsumerStatefulWidget {
   final String displayName;
   final String profilePic;
   final String email;
-  const UsernamePage({
+  const UsernamePage({super.key, 
     required this.displayName,
     required this.profilePic,
     required this.email,
