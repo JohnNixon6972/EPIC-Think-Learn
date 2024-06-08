@@ -58,8 +58,7 @@ class MyApp extends StatelessWidget {
                       ConnectionState.waiting) {
                     return const Loader();
                   }
-                  return AccountPage(
-                      user: UserModel.fromMap(snapshot.data!.data()!));
+                  return const HomePage();
                 });
           },
         ));
