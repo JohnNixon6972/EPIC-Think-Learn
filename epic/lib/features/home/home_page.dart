@@ -1,8 +1,11 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:epic/cores/navigation/bottom_navigation.dart';
 import 'package:epic/cores/screens/error_page.dart';
 import 'package:epic/cores/screens/loader.dart';
 import 'package:epic/features/account/pages/account_page.dart';
 import 'package:epic/features/auth/provider/user_provider.dart';
+import 'package:epic/features/pages.dart';
+import 'package:epic/features/report/report.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -30,7 +33,7 @@ class _HomePageState extends State<HomePage> {
                   child: Text(
                     "Epic",
                     style: TextStyle(
-                        fontSize: 30,
+                        fontSize: 32,
                         fontWeight: FontWeight.bold,
                         color: Colors.black),
                   ),
@@ -70,25 +73,26 @@ class _HomePageState extends State<HomePage> {
                         error: (error, stackTrace) => const ErrorPage(),
                         loading: () => const Loader());
                   },
-                )
+                ),
               ],
             ),
-            const Expanded(child: Center(child: Text("Home Page"))),
+            Expanded(child: pages[currentIndex])
           ],
         ),
       ),
-      // bottomNavigationBar: BottomNavigation(
-      //   currentIndex: currentIndex,
-      //   onTap: (index) {
-      //     if(index != 2){
-      //       currentIndex = index;
-      //       setState(() {});
-      //     }else{
-      //       // showModalBottomSheet(context: context, builder: (context) => const CreateBottomSheet());
-      //     }
-      //   },
-
-      // ),
+      bottomNavigationBar: BottomNavigation(
+        onPressed: (index) {
+          if (index != 1) {
+            currentIndex = index;
+            setState(() {});
+          } else {
+            showModalBottomSheet(
+              context: context,
+              builder: (context) => const Report(),
+            );
+          }
+        },
+      ),
     );
   }
 }

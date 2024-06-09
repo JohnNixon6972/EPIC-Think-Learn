@@ -14,9 +14,6 @@ class PageTabBar extends StatelessWidget {
       indicatorPadding: EdgeInsets.only(top: 12),
       tabs: [
         Tab(
-          text: "Home",
-        ),
-        Tab(
           text: "Progress",
         ),
         Tab(

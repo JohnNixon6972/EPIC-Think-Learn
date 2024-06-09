@@ -23,121 +23,124 @@ class _MyProfileSettingsState extends ConsumerState<MyProfileSettings> {
         data: (currentUser) => Scaffold(
               body: SafeArea(
                 child: Padding(
-                  padding: const EdgeInsets.only(top: 0),
-                  child: Column(
-                    children: [
-                      Stack(
-                        children: [
-                          SizedBox(
-                              height: 170,
+                    padding: const EdgeInsets.only(top: 0),
+                    child: Column(
+                      children: [
+                        Stack(
+                          children: [
+                            SizedBox(
+                              height: 180,
                               width: double.infinity,
                               child: Image.network(
-                                currentUser.profilePic,
+                                "https://img.freepik.com/free-vector/hand-painted-watercolor-pastel-sky-background_23-2148902771.jpg?size=626&ext=jpg&ga=GA1.1.1141335507.1717891200&semt=sph",
                                 fit: BoxFit.cover,
-                              )),
-                          Positioned(
-                            left: 180,
-                            top: 60,
-                            child: CircleAvatar(
-                              radius: 30,
-                              backgroundColor: Colors.grey,
-                              backgroundImage: CachedNetworkImageProvider(
-                                  currentUser.profilePic),
+                              ),
                             ),
-                          ),
-                          Positioned(
-                            left: 180,
-                            top: 120,
-                            child: Text(
-                              currentUser.username,
-                              style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold),
+                            Positioned(
+                              left: MediaQuery.of(context).size.width / 2 - 50,
+                              top: 180 / 2 - 50,
+                              child: CircleAvatar(
+                                radius: 50,
+                                backgroundColor: Colors.grey,
+                                backgroundImage: CachedNetworkImageProvider(
+                                    currentUser.profilePic),
+                              ),
                             ),
-                          ),
-                          const SizedBox(height: 14),
-                          SettingsItem(
-                            identifier: "Name",
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (context) => SettingsDialog(
-                                  identifier: "Your New Display Name",
-                                  onSave: (name) {
-                                    ref
-                                        .watch(editSettingsProvider)
-                                        .editDisplayName(name);
+                            Positioned(
+                              left: MediaQuery.of(context).size.width / 2 - 25,
+                              top: 145,
+                              child: Text(
+                                currentUser.username,
+                                style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: Column(
+                            children: [
+                              SettingsItem(
+                                identifier: "Name",
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => SettingsDialog(
+                                      identifier: "Your New Display Name",
+                                      onSave: (name) {
+                                        ref
+                                            .watch(editSettingsProvider)
+                                            .editDisplayName(name);
+                                      },
+                                    ),
+                                  );
+                                },
+                                value: currentUser.username,
+                              ),
+                              const SizedBox(height: 14),
+                              SettingsItem(
+                                  identifier: "Handle",
+                                  onPressed: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) => SettingsDialog(
+                                        identifier: "Your New Username",
+                                        onSave: (username) {
+                                          ref
+                                              .watch(editSettingsProvider)
+                                              .editusername(username);
+                                        },
+                                      ),
+                                    );
                                   },
-                                ),
-                              );
-                            },
-                            value: currentUser.username,
-                          ),
-                          const SizedBox(height: 14),
-                          SettingsItem(
-                              identifier: "Handle",
-                              onPressed: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) => SettingsDialog(
-                                    identifier: "Your New Username",
-                                    onSave: (username) {
-                                      ref
-                                          .watch(editSettingsProvider)
-                                          .editusername(username);
-                                    },
+                                  value: currentUser.username),
+                              const SizedBox(height: 14),
+                              SettingsItem(
+                                identifier: "Description",
+                                onPressed: () {
+                                  showDialog(
+                                    context: context,
+                                    builder: (context) => SettingsDialog(
+                                      identifier: "Your New Description",
+                                      onSave: (description) {
+                                        ref
+                                            .watch(editSettingsProvider)
+                                            .editDescription(description);
+                                      },
+                                    ),
+                                  );
+                                },
+                                value: currentUser.username,
+                              ),
+                              Row(
+                                children: [
+                                  const Text(
+                                    "Kepp my profile private",
                                   ),
-                                );
-                              },
-                              value: currentUser.username),
-                          const SizedBox(height: 14),
-                          SettingsItem(
-                            identifier: "Description",
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (context) => SettingsDialog(
-                                  identifier: "Your New Description",
-                                  onSave: (description) {
-                                    ref
-                                        .watch(editSettingsProvider)
-                                        .editDescription(description);
-                                  },
-                                ),
-                              );
-                            },
-                            value: currentUser.username,
+                                  const SizedBox(width: 10),
+                                  Switch(
+                                    value: isSwitched,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        isSwitched = value;
+                                      });
+                                    },
+                                  )
+                                ],
+                              ),
+                              const Text(
+                                "Changes made on your name and profile pictures are visible only on this app and not other Google Services.",
+                                style: TextStyle(color: Colors.blueGrey),
+                                textAlign: TextAlign.center,
+                              ),
+                            ],
                           ),
-                          Padding(
-                            padding:
-                                const EdgeInsets.only(left: 12.0, right: 8),
-                            child: Row(
-                              children: [
-                                const Text(
-                                  "Kepp my profile private",
-                                ),
-                                Switch(
-                                  value: isSwitched,
-                                  onChanged: (value) {
-                                    setState(() {
-                                      isSwitched = value;
-                                    });
-                                  },
-                                )
-                              ],
-                            ),
-                          ),
-                          const Text(
-                            "Changes made on your name and profile pictures are visible only on this app and not other Google Services.",
-                            style: TextStyle(color: Colors.blueGrey),
-                            textAlign: TextAlign.center,
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                ),
+                        )
+                      ],
+                    )),
               ),
             ),
         error: (error, stackTrace) => const ErrorPage(),

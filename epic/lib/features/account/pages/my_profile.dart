@@ -15,7 +15,7 @@ class MyProfile extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ref.watch(currentUserprovider).when(
         data: (currentUser) => DefaultTabController(
-            length: 4,
+            length: 3,
             child: Scaffold(
               body: SafeArea(
                   child: Padding(
@@ -23,7 +23,7 @@ class MyProfile extends ConsumerWidget {
                 child: Column(
                   children: [
                     TopHeader(user: currentUser),
-                    const Text("More abput this profile"),
+                    const Text("More about this profile"),
                     const Buttons(),
                     const PageTabBar(),
                     const TabPages()

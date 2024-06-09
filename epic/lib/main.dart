@@ -1,11 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:epic/cores/screens/loader.dart';
-import 'package:epic/features/account/pages/account_page.dart';
-import 'package:epic/features/auth/model/user_model.dart';
 import 'package:epic/features/auth/pages/login_page.dart';
-import 'package:epic/features/auth/pages/logout_page.dart';
 import 'package:epic/features/auth/pages/username_page.dart';
-import 'package:epic/home_page.dart';
+import 'package:epic/features/home/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
