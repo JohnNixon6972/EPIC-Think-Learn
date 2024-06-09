@@ -33,7 +33,7 @@ EPIC Think Learn is a digital platform created in collaboration with EPIC Think 
 Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/EPIC-think-learn.git
+git clone https://github.com/JohnNixon6972/EPIC-think-learn.git
 ```
 
 Navigate to the project directory:
