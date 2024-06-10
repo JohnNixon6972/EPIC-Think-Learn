@@ -17,6 +17,7 @@ class MyProfile extends ConsumerWidget {
         data: (currentUser) => DefaultTabController(
             length: 3,
             child: Scaffold(
+              backgroundColor: Colors.transparent,
               body: SafeArea(
                   child: Padding(
                 padding: const EdgeInsets.only(top: 20.0),

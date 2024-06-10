@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
                 const Padding(
                   padding: EdgeInsets.only(left: 12),
                   child: Text(
-                    "Epic",
+                    "EPIC",
                     style: TextStyle(
                         fontSize: 32,
                         fontWeight: FontWeight.bold,

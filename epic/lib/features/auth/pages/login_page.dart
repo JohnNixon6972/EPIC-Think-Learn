@@ -121,8 +121,6 @@ class LoginPage extends ConsumerWidget {
               height: 50,
             ),
             Spring.bubbleButton(
-              //optional can use gesture detector
-
               onTap: () {
                 ref.read(authServiceProvider).signInWithGoogle();
               },
