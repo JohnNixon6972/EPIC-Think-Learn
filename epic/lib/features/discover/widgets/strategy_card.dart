@@ -1,24 +1,25 @@
 import 'package:epic/cores/app_constants.dart';
+import 'package:epic/features/strategies/strategies.dart';
 import 'package:flutter/material.dart';
 
 class StrategyCard extends StatelessWidget {
-  final StrategyType strategy;
+  final Strategies strategy;
   const StrategyCard({
     required this.strategy,
     super.key,
   });
 
-  String getImage(StrategyType strategy) {
+  String getImage(Strategies strategy) {
     switch (strategy) {
-      case StrategyType.memory:
+      case Strategies.memory:
         return AppConstants.memoryCardImage;
-      case StrategyType.attention:
+      case Strategies.attention:
         return AppConstants.attentionCardImage;
-      case StrategyType.inhibition:
+      case Strategies.inhibition:
         return AppConstants.inhibitionCardImage;
-      case StrategyType.planning:
+      case Strategies.planning:
         return AppConstants.planningCardImage;
-      case StrategyType.selfRegulation:
+      case Strategies.selfRegulation:
         return AppConstants.selfRegulationCardImage;
     }
   }

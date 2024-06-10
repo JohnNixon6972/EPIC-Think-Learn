@@ -1,7 +1,7 @@
-import 'package:epic/cores/app_constants.dart';
 import 'package:epic/cores/methods.dart';
 import 'package:epic/cores/screens/error_page.dart';
 import 'package:epic/cores/screens/loader.dart';
+import 'package:epic/features/strategies/strategies.dart';
 import 'package:epic/features/auth/provider/user_provider.dart';
 import 'package:epic/features/discover/widgets/strategy_card.dart';
 import 'package:flutter/material.dart';
@@ -105,10 +105,10 @@ class Discover extends ConsumerWidget {
                               mainAxisSpacing: 10,
                             ),
                             children: const [
-                              StrategyCard(strategy: StrategyType.memory),
-                              StrategyCard(strategy: StrategyType.attention),
-                              StrategyCard(strategy: StrategyType.inhibition),
-                              StrategyCard(strategy: StrategyType.planning),
+                              StrategyCard(strategy: Strategies.memory),
+                              StrategyCard(strategy: Strategies.attention),
+                              StrategyCard(strategy: Strategies.inhibition),
+                              StrategyCard(strategy: Strategies.planning),
                             ]),
                       )
                     ],

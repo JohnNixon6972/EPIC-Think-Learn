@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:epic/cores/widgets/flat_button.dart';
+import 'package:epic/features/account/parts/difficulties.dart';
 import 'package:epic/features/auth/repository/user_data_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -11,7 +12,8 @@ class UsernamePage extends ConsumerStatefulWidget {
   final String displayName;
   final String profilePic;
   final String email;
-  const UsernamePage({super.key, 
+  const UsernamePage({
+    super.key,
     required this.displayName,
     required this.profilePic,
     required this.email,
@@ -102,7 +104,10 @@ class _UsernamePageState extends ConsumerState<UsernamePage> {
                 ),
               ),
             ),
-            const Spacer(),
+            SizedBox(
+                height: MediaQuery.of(context).size.height * 0.6,
+                
+                child: const DifficultiesScreen()),
             Padding(
               padding: const EdgeInsets.only(bottom: 30, left: 8, right: 8),
               child: FlatButton(
