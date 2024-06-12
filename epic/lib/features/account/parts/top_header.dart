@@ -19,7 +19,7 @@ class TopHeader extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.only(top: 10, bottom: 4.0),
-          child: Text(user.displayName,
+          child: Text(user.username,
               style:
                   const TextStyle(fontSize: 26, fontWeight: FontWeight.bold)),
         ),

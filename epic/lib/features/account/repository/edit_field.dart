@@ -11,11 +11,11 @@ class EditSettingsField {
 
   EditSettingsField({required this.firestore, required this.auth});
 
-  editDisplayName(String displayName) async {
+  editStrategy(List<String> order) async {
     await firestore
         .collection('users')
         .doc(auth.currentUser!.uid)
-        .update({'displayName': displayName});
+        .update({'strategies': order});
   }
 
   editusername(String username) async {

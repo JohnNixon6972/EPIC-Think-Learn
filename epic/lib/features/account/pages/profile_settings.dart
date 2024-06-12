@@ -23,7 +23,7 @@ class _MyProfileSettingsState extends ConsumerState<MyProfileSettings> {
   Widget build(BuildContext context) {
     return ref.watch(currentUserprovider).when(
         data: (currentUser) => Scaffold(
-          backgroundColor: Colors.transparent,
+              backgroundColor: Colors.transparent,
               body: SafeArea(
                 child: Padding(
                   padding: const EdgeInsets.only(top: 0),
@@ -66,24 +66,6 @@ class _MyProfileSettingsState extends ConsumerState<MyProfileSettings> {
                         padding: const EdgeInsets.all(12.0),
                         child: Column(
                           children: [
-                            SettingsItem(
-                              identifier: "Name",
-                              onPressed: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) => SettingsDialog(
-                                    identifier: "Your New Display Name",
-                                    onSave: (name) {
-                                      ref
-                                          .watch(editSettingsProvider)
-                                          .editDisplayName(name);
-                                    },
-                                  ),
-                                );
-                              },
-                              value: currentUser.username,
-                            ),
-                            const SizedBox(height: 14),
                             SettingsItem(
                                 identifier: "Handle",
                                 onPressed: () {
