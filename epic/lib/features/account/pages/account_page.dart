@@ -43,7 +43,7 @@ class AccountPage extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(top: 12.0),
                             child: Text(
-                              user.displayName,
+                              user.username,
                               style: const TextStyle(
                                   fontSize: 24, fontWeight: FontWeight.bold),
                             ),
@@ -65,7 +65,6 @@ class AccountPage extends StatelessWidget {
                   ],
                 ),
               ),
-              // TODO: Add the rest of the UI
               const Spacer(),
               const Padding(
                 padding: EdgeInsets.only(bottom: 12.0),
