@@ -130,7 +130,7 @@ class LoginPage extends ConsumerWidget {
                   fontWeight: FontWeight.bold,
                   letterSpacing: 3,
                 ),
-                speed: Duration(
+                speed: const Duration(
                   milliseconds: 100,
                 ),
               ),
@@ -161,7 +161,7 @@ class LoginPage extends ConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Icon(
+                          Icon(
                             Icons.people,
                             color: AppConstants.secondaryColor,
                             size: 30,
