@@ -6,11 +6,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final formKey = GlobalKey<FormState>();
 
-class UsernamePage extends ConsumerStatefulWidget {
+class StrenghtsDifficulties extends ConsumerStatefulWidget {
   final String displayName;
   final String profilePic;
   final String email;
-  const UsernamePage({
+  const StrenghtsDifficulties({
     super.key,
     required this.displayName,
     required this.profilePic,
@@ -18,10 +18,10 @@ class UsernamePage extends ConsumerStatefulWidget {
   });
 
   @override
-  ConsumerState<UsernamePage> createState() => _UsernamePageState();
+  ConsumerState<StrenghtsDifficulties> createState() => _StrenghtsDifficultiesState();
 }
 
-class _UsernamePageState extends ConsumerState<UsernamePage> {
+class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
   final PageController _pageController = PageController();
   // int _currentIndex = Difficulties.values.length;
   int _currentIndex = 0;
