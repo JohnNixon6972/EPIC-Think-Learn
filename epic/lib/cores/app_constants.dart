@@ -7,9 +7,12 @@ class AppConstants{
   static const String planningCardImage = 'assets/images/planning.jpg';
   static const String selfRegulationCardImage = 'assets/images/self_regulation.jpg';
 
-  static const Color primaryColor = Colors.deepPurple;
-  static  Color primaryColorLight = Colors.deepPurple.shade50;
+  static const Color primaryColor = Colors.red;
+  static  Color primaryColorLight = Colors.red.shade50;
 
-  static const Color secondaryColor = Colors.blue;
-  static Color secondaryColorLight = Colors.blue.shade50;
+  static const Color secondaryColor = Colors.amber;
+  static Color secondaryColorLight = Colors.amber.shade50;
+
+  static const Color tertiaryColor = Colors.teal;
+  static Color tertiaryColorLight = Colors.teal.shade50;
 }
