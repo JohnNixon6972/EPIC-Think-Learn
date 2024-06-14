@@ -153,7 +153,7 @@ class LoginPage extends ConsumerWidget {
                     height: 75,
                     width: 175,
                     decoration: BoxDecoration(
-                      color: AppConstants.primaryColorLight,
+                      color: AppConstants.secondaryColorLight,
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: const Center(
@@ -163,14 +163,14 @@ class LoginPage extends ConsumerWidget {
                         children: [
                           Icon(
                             Icons.people,
-                            color: AppConstants.secondaryColor,
+                            color: AppConstants.primaryColor,
                             size: 30,
                           ),
                           Text(
                             'Parent',
                             style: TextStyle(
                               fontSize: 20,
-                              color: AppConstants.secondaryColor,
+                              color: AppConstants.primaryColor,
                               fontWeight: FontWeight.w700,
                               letterSpacing: 2,
                             ),
@@ -192,7 +192,7 @@ class LoginPage extends ConsumerWidget {
                     height: 75,
                     width: 175,
                     decoration: BoxDecoration(
-                      color: AppConstants.primaryColorLight,
+                      color: AppConstants.secondaryColorLight,
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: const Center(
@@ -202,14 +202,14 @@ class LoginPage extends ConsumerWidget {
                         children: [
                           Icon(
                             Icons.child_care_rounded,
-                            color: AppConstants.secondaryColor,
+                            color: AppConstants.primaryColor,
                             size: 30,
                           ),
                           Text(
                             'Child',
                             style: TextStyle(
                               fontSize: 20,
-                              color: AppConstants.secondaryColor,
+                              color: AppConstants.primaryColor,
                               fontWeight: FontWeight.w700,
                               letterSpacing: 3,
                             ),
