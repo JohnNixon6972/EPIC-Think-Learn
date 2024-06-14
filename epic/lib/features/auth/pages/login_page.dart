@@ -32,9 +32,9 @@ class LoginPage extends ConsumerWidget {
                   endAngle: 360,
                   curve: Curves.easeInBack,
                   animDuration: const Duration(seconds: 3),
-                  child: const login_animation(
+                  child: const LoginAnimation(
                     color: AppConstants.primaryColor,
-                    icon_name: Icons.games,
+                    iconName: Icons.games,
                   ),
                 ),
                 const SizedBox(
@@ -47,9 +47,9 @@ class LoginPage extends ConsumerWidget {
                   endAngle: 0,
                   curve: Curves.easeInBack,
                   animDuration: const Duration(seconds: 3),
-                  child: const login_animation(
+                  child: const LoginAnimation(
                     color: AppConstants.secondaryColor,
-                    icon_name: Icons.note_add,
+                    iconName: Icons.note_add,
                   ),
                 ),
               ],
@@ -67,9 +67,9 @@ class LoginPage extends ConsumerWidget {
                   endAngle: 360,
                   curve: Curves.easeInBack, //def=1s
                   animDuration: const Duration(seconds: 3),
-                  child: const login_animation(
+                  child: const LoginAnimation(
                     color: AppConstants.secondaryColor,
-                    icon_name: Icons.directions_run_outlined,
+                    iconName: Icons.directions_run_outlined,
                   ),
                 ),
                 const SizedBox(
@@ -82,9 +82,9 @@ class LoginPage extends ConsumerWidget {
                   endAngle: 0, //def=360
                   animDuration: const Duration(seconds: 3),
                   curve: Curves.easeInBack,
-                  child: const login_animation(
+                  child: const LoginAnimation(
                     color: AppConstants.secondaryColor,
-                    icon_name: Icons.pending_actions,
+                    iconName: Icons.pending_actions,
                   ),
                 ),
               ],
@@ -229,12 +229,12 @@ class LoginPage extends ConsumerWidget {
 }
 
 // ignore: camel_case_types
-class login_animation extends StatelessWidget {
+class LoginAnimation extends StatelessWidget {
   final Color color;
-  final IconData icon_name;
-  const login_animation({
+  final IconData iconName;
+  const LoginAnimation({
     required this.color,
-    required this.icon_name,
+    required this.iconName,
     super.key,
   });
 
@@ -248,7 +248,7 @@ class login_animation extends StatelessWidget {
         borderRadius: BorderRadius.circular(5),
       ),
       child: Icon(
-        icon_name,
+        iconName,
         color: AppConstants.secondaryColorLight,
         size: 50,
       ),
