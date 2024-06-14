@@ -92,11 +92,6 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              // LinearProgressIndicator(
-              //   value: (_currentIndex + 1) / difficulties.length,
-              //   valueColor: const AlwaysStoppedAnimation<Color>(Colors.blue),
-              //   backgroundColor: Colors.grey[300],
-              // ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
