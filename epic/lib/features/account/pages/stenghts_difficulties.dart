@@ -1,4 +1,5 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'package:epic/cores/app_constants.dart';
 import 'package:epic/features/account/repository/edit_field.dart';
 import 'package:epic/features/strategies/strategies.dart';
 import 'package:flutter/material.dart';
@@ -70,118 +71,123 @@ class _UsernamePageState extends ConsumerState<UsernamePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 14),
-              child: Text(
-                "Lets get to know you better ${widget.displayName}",
-                style: const TextStyle(color: Colors.blueGrey, fontSize: 24),
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "${widget.displayName}, let's get to know each other better!",
+                style: const TextStyle(
+                  color: AppConstants.primaryColor,
+                  fontSize: 22,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-            ),
-            const Padding(
-              padding: EdgeInsets.only(left: 8.0),
-              child: Text(
-                "Please select the thing you find difficult:",
-                style: TextStyle(color: Colors.blue, fontSize: 16),
+              const Text(
+                "Please select the act you find the easiest:",
+                style: TextStyle(
+                  color: AppConstants.tertiaryColor,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-            ),
-            // LinearProgressIndicator(
-            //   value: (_currentIndex + 1) / difficulties.length,
-            //   valueColor: const AlwaysStoppedAnimation<Color>(Colors.blue),
-            //   backgroundColor: Colors.grey[300],
-            // ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                for (var i = 0; i < difficulties.length; i++)
-                  Container(
-                    margin: const EdgeInsets.all(4),
-                    width: 10,
-                    height: 10,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: i == _currentIndex
-                          ? Colors.green
-                          : i < _currentIndex
-                              ? Colors.blue
-                              : Colors.grey,
-                    ),
-                  ),
-              ],
-            ),
-            Expanded(
-              child: _currentIndex == difficulties.length
-                  ? const Center(
-                      child: Text(
-                        'We will tailor your experience based on your selection.',
-                        style: TextStyle(fontSize: 24),
-                        textAlign: TextAlign.center,
+              // LinearProgressIndicator(
+              //   value: (_currentIndex + 1) / difficulties.length,
+              //   valueColor: const AlwaysStoppedAnimation<Color>(Colors.blue),
+              //   backgroundColor: Colors.grey[300],
+              // ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  for (var i = 0; i < difficulties.length; i++)
+                    Container(
+                      margin: const EdgeInsets.all(4),
+                      width: 10,
+                      height: 10,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: i == _currentIndex
+                            ? AppConstants.secondaryColor
+                            : i < _currentIndex
+                                ? AppConstants.tertiaryColor
+                                : Colors.grey,
                       ),
-                    )
-                  : PageView.builder(
-                      controller: _pageController,
-                      itemCount: difficulties.length,
-                      onPageChanged: (index) {
-                        setState(() {
-                          _currentIndex = index;
-                        });
-                      },
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                difficulties[index].name,
-                                style: const TextStyle(fontSize: 24),
-                                textAlign: TextAlign.center,
-                              ),
-                              const SizedBox(height: 20),
-                              const Text(
-                                'Areas of Improvement:',
-                                style: TextStyle(fontSize: 18),
-                                textAlign: TextAlign.center,
-                              ),
-                              for (var strategy
-                                  in difficulties[index].areaOfImprovement)
+                    ),
+                ],
+              ),
+              Expanded(
+                child: _currentIndex == difficulties.length
+                    ? const Center(
+                        child: Text(
+                          'We will tailor your experience based on your selection.',
+                          style: TextStyle(fontSize: 24),
+                          textAlign: TextAlign.center,
+                        ),
+                      )
+                    : PageView.builder(
+                        controller: _pageController,
+                        itemCount: difficulties.length,
+                        onPageChanged: (index) {
+                          setState(() {
+                            _currentIndex = index;
+                          });
+                        },
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
                                 Text(
-                                  strategy.name,
-                                  style: const TextStyle(fontSize: 16),
+                                  difficulties[index].name,
+                                  style: const TextStyle(fontSize: 24),
                                   textAlign: TextAlign.center,
                                 ),
-                            ],
-                          ),
-                        );
-                      },
-                    ),
-            ),
-            _currentIndex == difficulties.length
-                ? Center(
-                    child: ElevatedButton(
-                      onPressed: _onSubmit,
-                      child: const Text('Complete',
-                          style: TextStyle(
-                            fontSize: 24,
-                          )),
-                    ),
-                  )
-                : Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      ElevatedButton(
-                        onPressed: _handleYes, // Handle Yes action
-                        child: const Text('Yes'),
+                                const SizedBox(height: 20),
+                                const Text(
+                                  'Areas of Improvement:',
+                                  style: TextStyle(fontSize: 18),
+                                  textAlign: TextAlign.center,
+                                ),
+                                for (var strategy
+                                    in difficulties[index].areaOfImprovement)
+                                  Text(
+                                    strategy.name,
+                                    style: const TextStyle(fontSize: 16),
+                                    textAlign: TextAlign.center,
+                                  ),
+                              ],
+                            ),
+                          );
+                        },
                       ),
-                      ElevatedButton(
-                        onPressed: _nextPage, // Handle No action
-                        child: const Text('No'),
+              ),
+              _currentIndex == difficulties.length
+                  ? Center(
+                      child: ElevatedButton(
+                        onPressed: _onSubmit,
+                        child: const Text('Complete',
+                            style: TextStyle(
+                              fontSize: 24,
+                            )),
                       ),
-                    ],
-                  ),
-          ],
+                    )
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ElevatedButton(
+                          onPressed: _handleYes, // Handle Yes action
+                          child: const Text('Yes'),
+                        ),
+                        ElevatedButton(
+                          onPressed: _nextPage, // Handle No action
+                          child: const Text('No'),
+                        ),
+                      ],
+                    ),
+            ],
+          ),
         ),
       ),
     );
