@@ -15,6 +15,7 @@ class LoginPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
+      backgroundColor: AppConstants.tertiaryColorLight,
       body: SafeArea(
           child: Center(
         child: Column(
@@ -126,7 +127,7 @@ class LoginPage extends ConsumerWidget {
                 'Get Started as',
                 textStyle: const TextStyle(
                   fontSize: 20,
-                  color: AppConstants.primaryColor,
+                  color: AppConstants.tertiaryColor,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 3,
                 ),
