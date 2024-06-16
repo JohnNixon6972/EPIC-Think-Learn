@@ -55,6 +55,7 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
   }
 
   void _onSubmit() {
+    print("object");
     List<MapEntry<Strategies, int>> sortedStrategies =
         _strategiesToImprove.entries.toList()
           ..sort((a, b) => b.value.compareTo(a.value));
@@ -138,24 +139,64 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                 Expanded(
                   child: _currentIndex == difficulties.length
                       ? Center(
-                          child: AnimatedTextKit(
-                            isRepeatingAnimation: true,
-                            pause: const Duration(milliseconds: 2),
-                            animatedTexts: [
-                              ColorizeAnimatedText(
-                                "We will tailour your experience based on your strenghts!",
-                                textAlign: TextAlign.center,
-                                textStyle: const TextStyle(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
-                                  letterSpacing: 2,
-                                ),
-                                colors: [
-                                  AppConstants.secondaryColor,
-                                  AppConstants.secondaryColor,
-                                  AppConstants.primaryColor,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              AnimatedTextKit(
+                                isRepeatingAnimation: true,
+                                pause: const Duration(milliseconds: 2),
+                                animatedTexts: [
+                                  ColorizeAnimatedText(
+                                    "We will tailor your experience based on your strenghts!",
+                                    textAlign: TextAlign.center,
+                                    textStyle: const TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 2,
+                                    ),
+                                    colors: [
+                                      AppConstants.secondaryColor,
+                                      AppConstants.secondaryColor,
+                                      AppConstants.primaryColor,
+                                    ],
+                                  ),
                                 ],
                               ),
+                              const SizedBox(height: 20),
+                              Center(
+                                child: Column(
+                                  children: [
+                                    Spring.bubbleButton(
+                                      onTap: _onSubmit,
+                                      child: Container(
+                                        height: 50,
+                                        width: 150,
+                                        decoration: BoxDecoration(
+                                          color: AppConstants.tertiaryColor,
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                        ),
+                                        child: const Center(
+                                          child: Text(
+                                            'Let`s go!',
+                                            style: TextStyle(
+                                              fontSize: 22,
+                                              color:
+                                                  AppConstants.secondaryColor,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      animDuration: Duration(seconds: 1),
+                                      bubbleStart: .4,
+                                      bubbleEnd: .9,
+                                      curve: Curves.linear, //Curves.elasticOut
+                                      delay: Duration(milliseconds: 0),
+                                    ),
+                                  ],
+                                ),
+                              )
                             ],
                           ),
                         )
@@ -175,7 +216,7 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                                 Spring.animatedCard(
                                   fromWidth: 0,
                                   toWidth:
-                                      MediaQuery.of(context).size.width - 40,
+                                      MediaQuery.of(context).size.width - 30,
                                   fromHeight: 0,
                                   toHeight: 130,
                                   fromColor: AppConstants.primaryColor,
@@ -208,12 +249,16 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                                 const SizedBox(height: 20),
                                 _currentIndex == difficulties.length
                                     ? Center(
-                                        child: ElevatedButton(
-                                          onPressed: _onSubmit,
-                                          child: const Text('Complete',
-                                              style: TextStyle(
-                                                fontSize: 24,
-                                              )),
+                                        child: Column(
+                                          children: [
+                                            ElevatedButton(
+                                              onPressed: _onSubmit,
+                                              child: const Text('Complete',
+                                                  style: TextStyle(
+                                                    fontSize: 24,
+                                                  )),
+                                            ),
+                                          ],
                                         ),
                                       )
                                     : Row(
