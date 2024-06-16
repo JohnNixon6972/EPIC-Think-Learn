@@ -247,87 +247,67 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                                   ),
                                 ),
                                 const SizedBox(height: 20),
-                                _currentIndex == difficulties.length
-                                    ? Center(
-                                        child: Column(
-                                          children: [
-                                            ElevatedButton(
-                                              onPressed: _onSubmit,
-                                              child: const Text('Complete',
-                                                  style: TextStyle(
-                                                    fontSize: 24,
-                                                  )),
-                                            ),
-                                          ],
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceEvenly,
+                                  children: [
+                                    Spring.bubbleButton(
+                                      onTap: _handleYes, // Handle Yes action
+                                      child: Container(
+                                        height: 50,
+                                        width: 75,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(50),
                                         ),
-                                      )
-                                    : Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceEvenly,
-                                        children: [
-                                          Spring.bubbleButton(
-                                            onTap:
-                                                _handleYes, // Handle Yes action
-                                            child: Container(
-                                              height: 50,
-                                              width: 75,
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.circular(50),
-                                              ),
-                                              child: const Center(
-                                                child: Text(
-                                                  'Yes',
-                                                  style: TextStyle(
-                                                    fontSize: 18,
-                                                    color: AppConstants
-                                                        .primaryColor,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                                ),
-                                              ),
+                                        child: const Center(
+                                          child: Text(
+                                            'Yes',
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                              color: AppConstants.primaryColor,
+                                              fontWeight: FontWeight.w500,
                                             ),
-                                            animDuration: Duration(seconds: 1),
-                                            bubbleStart: .4,
-                                            bubbleEnd: .9,
-                                            curve: Curves
-                                                .linear, //Curves.elasticOut
-                                            delay: Duration(milliseconds: 0),
                                           ),
-                                          Spring.bubbleButton(
-                                            onTap:
-                                                _nextPage, // Handle No action
-                                            child: Container(
-                                              height: 50,
-                                              width: 75,
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius:
-                                                    BorderRadius.circular(50),
-                                              ),
-                                              child: const Center(
-                                                child: Text(
-                                                  'No',
-                                                  style: TextStyle(
-                                                    fontSize: 18,
-                                                    color: AppConstants
-                                                        .primaryColor,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            animDuration: Duration(seconds: 1),
-                                            bubbleStart: .4,
-                                            bubbleEnd: .9,
-
-                                            curve: Curves
-                                                .linear, //Curves.elasticOut
-                                            delay: Duration(milliseconds: 0),
-                                          ),
-                                        ],
+                                        ),
                                       ),
+                                      animDuration: Duration(seconds: 1),
+                                      bubbleStart: .4,
+                                      bubbleEnd: .9,
+                                      curve: Curves.linear, //Curves.elasticOut
+                                      delay: Duration(milliseconds: 0),
+                                    ),
+                                    Spring.bubbleButton(
+                                      onTap: _nextPage, // Handle No action
+                                      child: Container(
+                                        height: 50,
+                                        width: 75,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                        ),
+                                        child: const Center(
+                                          child: Text(
+                                            'No',
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                              color: AppConstants.primaryColor,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      animDuration: Duration(seconds: 1),
+                                      bubbleStart: .4,
+                                      bubbleEnd: .9,
+
+                                      curve: Curves.linear, //Curves.elasticOut
+                                      delay: Duration(milliseconds: 0),
+                                    ),
+                                  ],
+                                ),
                                 const SizedBox(height: 20),
                                 const Text(
                                   'We can help you improve the following skills: ',
