@@ -4,6 +4,7 @@ class UserModel {
   final String profilePic;
   final String userId;
   final String type;
+  final List<String> strategies;
 
   UserModel({
     required this.username,
@@ -11,6 +12,7 @@ class UserModel {
     required this.profilePic,
     required this.userId,
     required this.type,
+    required this.strategies,
   });
 
   Map<String, dynamic> toMap() {
@@ -20,6 +22,7 @@ class UserModel {
       'profilePic': profilePic,
       'userId': userId,
       'type': type,
+      'strategies': strategies,
     };
   }
 
@@ -30,6 +33,7 @@ class UserModel {
       profilePic: map['profilePic'],
       userId: map['userId'],
       type: map['type'],
+      strategies: List<String>.from(map['strategies']),
     );
   }
 }

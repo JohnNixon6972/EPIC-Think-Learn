@@ -17,9 +17,9 @@ class UserDataService {
   UserDataService({required this.auth, required this.firestore});
 
   addUserDataToFirestore(
-      {
-      required String username,
+      {required String username,
       required String email,
+      required List<String> strategies,
       required String profilePic}) async {
     UserModel user = UserModel(
       username: username,
@@ -27,6 +27,7 @@ class UserDataService {
       profilePic: profilePic,
       userId: auth.currentUser!.uid,
       type: 'user',
+      strategies: strategies,
     );
 
     await firestore

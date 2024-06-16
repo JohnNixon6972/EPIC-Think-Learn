@@ -2,6 +2,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:epic/cores/app_constants.dart';
 import 'package:epic/features/account/repository/edit_field.dart';
+import 'package:epic/features/auth/repository/user_data_service.dart';
 import 'package:epic/features/strategies/strategies.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
@@ -54,7 +55,7 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
     setState(() {});
   }
 
-  void _onSubmit() {
+  void _onSubmit() async {
     print("object");
     List<MapEntry<Strategies, int>> sortedStrategies =
         _strategiesToImprove.entries.toList()
@@ -65,8 +66,12 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
     for (var strategy in sortedStrategies) {
       order.add(strategy.key.name);
     }
-
-    ref.read(editSettingsProvider).editStrategy(order);
+    await ref.read(userDataServiceProvider).addUserDataToFirestore(
+          strategies: order,
+          username: widget.displayName,
+          email: widget.email,
+          profilePic: widget.profilePic,
+        );
 
     // Save the data to the database
     // Navigate to the next page
