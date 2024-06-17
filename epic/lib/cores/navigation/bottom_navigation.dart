@@ -48,10 +48,10 @@ class _BottomNavigationState extends State<BottomNavigation> {
             icon: Icons.person,
             text: 'Profile',
           ),
-          GButton(
-            icon: Icons.settings,
-            text: 'Settings',
-          ),
+          // GButton(
+          //   icon: Icons.settings,
+          //   text: 'Settings',
+          // ),
         ],
         onTabChange: widget.onPressed,
         selectedIndex: currentIndex,

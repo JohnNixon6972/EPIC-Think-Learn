@@ -152,7 +152,7 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                                 pause: const Duration(milliseconds: 2),
                                 animatedTexts: [
                                   ColorizeAnimatedText(
-                                    "We will tailor your experience based on your strenghts!",
+                                    "We will tailor your experience based on your strengths!",
                                     textAlign: TextAlign.center,
                                     textStyle: const TextStyle(
                                       fontSize: 24,
@@ -218,6 +218,49 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
+                                const SizedBox(height: 20),
+                                const Text(
+                                  'We can help you improve the following skills: ',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w400,
+                                    color: AppConstants.tertiaryColor,
+                                  ),
+                                  textAlign: TextAlign.center,
+                                ),
+                                for (var strategy
+                                    in difficulties[index].areaOfImprovement)
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Spring.animatedCard(
+                                        fromWidth: 0,
+                                        toWidth:
+                                            MediaQuery.of(context).size.width /
+                                                2,
+                                        fromHeight: 0,
+                                        fromColor: AppConstants.tertiaryColor,
+                                        toColor: AppConstants.primaryColor
+                                            .withOpacity(0.9),
+                                        toHeight: 50,
+                                        child: Center(
+                                          child: Text(
+                                            strategy.name,
+                                            style: const TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.bold,
+                                              color:
+                                                  AppConstants.secondaryColor,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                SizedBox(
+                                  height: 20,
+                                ),
                                 Spring.animatedCard(
                                   fromWidth: 0,
                                   toWidth:
@@ -311,48 +354,36 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                                       curve: Curves.linear, //Curves.elasticOut
                                       delay: Duration(milliseconds: 0),
                                     ),
-                                  ],
-                                ),
-                                const SizedBox(height: 20),
-                                const Text(
-                                  'We can help you improve the following skills: ',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w400,
-                                    color: AppConstants.tertiaryColor,
-                                  ),
-                                  textAlign: TextAlign.center,
-                                ),
-                                for (var strategy
-                                    in difficulties[index].areaOfImprovement)
-                                  Center(
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Spring.animatedCard(
-                                        fromWidth: 0,
-                                        toWidth:
-                                            MediaQuery.of(context).size.width /
-                                                2,
-                                        fromHeight: 0,
-                                        fromColor: AppConstants.tertiaryColor,
-                                        toColor: AppConstants.primaryColor
-                                            .withOpacity(0.9),
-                                        toHeight: 50,
-                                        child: Center(
+                                    Spring.bubbleButton(
+                                      onTap: _nextPage, // Handle No action
+                                      child: Container(
+                                        height: 50,
+                                        width: 75,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                        ),
+                                        child: const Center(
                                           child: Text(
-                                            strategy.name,
-                                            style: const TextStyle(
+                                            'Skip',
+                                            style: TextStyle(
                                               fontSize: 18,
-                                              fontWeight: FontWeight.bold,
-                                              color:
-                                                  AppConstants.secondaryColor,
+                                              color: AppConstants.primaryColor,
+                                              fontWeight: FontWeight.w500,
                                             ),
-                                            textAlign: TextAlign.center,
                                           ),
                                         ),
                                       ),
+                                      animDuration: Duration(seconds: 1),
+                                      bubbleStart: .4,
+                                      bubbleEnd: .9,
+
+                                      curve: Curves.linear, //Curves.elasticOut
+                                      delay: Duration(milliseconds: 0),
                                     ),
-                                  ),
+                                  ],
+                                ),
                               ],
                             );
                           },

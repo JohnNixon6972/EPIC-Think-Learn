@@ -8,35 +8,41 @@ class TopHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Center(
-          child: CircleAvatar(
-            radius: 38,
-            backgroundColor: Colors.grey,
-            backgroundImage: CachedNetworkImageProvider(user.profilePic),
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(top: 10, bottom: 4.0),
-          child: Text(user.username,
+    return Padding(
+      padding: const EdgeInsets.only(top: 10, bottom: 4.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(user.username,
               style:
                   const TextStyle(fontSize: 26, fontWeight: FontWeight.bold)),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 9),
-          child: RichText(
-            text: TextSpan(
-              style: const TextStyle(fontSize: 13, color: Colors.blueGrey),
-              children: [
-                TextSpan(text: "@${user.username}"),
-                const TextSpan(text: "  Manage Your Account"),
-                const TextSpan(text: "  Edit Profile")
-              ],
-            ),
+          const Text(
+            "Changes made on your user name and profile picture are only reflected on this app and not on any other Google Services.",
+            style: TextStyle(color: Colors.blueGrey),
+            textAlign: TextAlign.center,
           ),
-        ),
-      ],
+          Text("Get connected to your parent/child"),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              const SizedBox(
+                height: 30,
+                width: 100,
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintStyle: TextStyle(fontSize: 17),
+                    hintText: 'Enter code',
+                    // suffixIcon: Icon(Icons.password),
+                    // contentPadding: EdgeInsets.all(20),
+                  ),
+                ),
+              ),
+              TextButton.icon(onPressed: () {}, label: Text("Connect")),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }

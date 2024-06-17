@@ -1,6 +1,5 @@
 import 'package:epic/cores/screens/error_page.dart';
 import 'package:epic/cores/screens/loader.dart';
-import 'package:epic/features/account/parts/buttons.dart';
 import 'package:epic/features/account/parts/tab_bar.dart';
 import 'package:epic/features/account/parts/tab_bar_view.dart';
 import 'package:epic/features/account/parts/top_header.dart';
@@ -24,8 +23,7 @@ class MyProfile extends ConsumerWidget {
                 child: Column(
                   children: [
                     TopHeader(user: currentUser),
-                    const Text("More about this profile"),
-                    const Buttons(),
+                    // const Buttons(),
                     const PageTabBar(),
                     const TabPages()
                   ],
