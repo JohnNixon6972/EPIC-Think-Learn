@@ -45,9 +45,11 @@ class MyApp extends StatelessWidget {
                     .doc(FirebaseAuth.instance.currentUser!.uid)
                     .snapshots(),
                 builder: (context, snapshot) {
-                  if (!snapshot.hasData || !snapshot.data!.exists || snapshot.data!.data()!['strategies'] == null) {
+                  if (!snapshot.hasData ||
+                      !snapshot.data!.exists ||
+                      snapshot.data!.data()!['strategies'] == null) {
                     final user = FirebaseAuth.instance.currentUser;
-                    return UsernamePage(
+                    return StrenghtsDifficulties(
                       displayName: user!.displayName!,
                       profilePic: user.photoURL!,
                       email: user.email!,

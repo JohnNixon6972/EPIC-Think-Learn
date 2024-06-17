@@ -15,6 +15,7 @@ class LoginPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
+      backgroundColor: AppConstants.tertiaryColorLight,
       body: SafeArea(
           child: Center(
         child: Column(
@@ -32,9 +33,9 @@ class LoginPage extends ConsumerWidget {
                   endAngle: 360,
                   curve: Curves.easeInBack,
                   animDuration: const Duration(seconds: 3),
-                  child: const login_animation(
+                  child: const LoginAnimation(
                     color: AppConstants.primaryColor,
-                    icon_name: Icons.games,
+                    iconName: Icons.games,
                   ),
                 ),
                 const SizedBox(
@@ -47,9 +48,9 @@ class LoginPage extends ConsumerWidget {
                   endAngle: 0,
                   curve: Curves.easeInBack,
                   animDuration: const Duration(seconds: 3),
-                  child: const login_animation(
+                  child: const LoginAnimation(
                     color: AppConstants.secondaryColor,
-                    icon_name: Icons.note_add,
+                    iconName: Icons.note_add,
                   ),
                 ),
               ],
@@ -67,9 +68,9 @@ class LoginPage extends ConsumerWidget {
                   endAngle: 360,
                   curve: Curves.easeInBack, //def=1s
                   animDuration: const Duration(seconds: 3),
-                  child: const login_animation(
+                  child: const LoginAnimation(
                     color: AppConstants.secondaryColor,
-                    icon_name: Icons.directions_run_outlined,
+                    iconName: Icons.directions_run_outlined,
                   ),
                 ),
                 const SizedBox(
@@ -82,9 +83,9 @@ class LoginPage extends ConsumerWidget {
                   endAngle: 0, //def=360
                   animDuration: const Duration(seconds: 3),
                   curve: Curves.easeInBack,
-                  child: const login_animation(
+                  child: const LoginAnimation(
                     color: AppConstants.secondaryColor,
-                    icon_name: Icons.pending_actions,
+                    iconName: Icons.pending_actions,
                   ),
                 ),
               ],
@@ -126,11 +127,11 @@ class LoginPage extends ConsumerWidget {
                 'Get Started as',
                 textStyle: const TextStyle(
                   fontSize: 20,
-                  color: AppConstants.primaryColor,
+                  color: AppConstants.tertiaryColor,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 3,
                 ),
-                speed: Duration(
+                speed: const Duration(
                   milliseconds: 100,
                 ),
               ),
@@ -153,7 +154,7 @@ class LoginPage extends ConsumerWidget {
                     height: 75,
                     width: 175,
                     decoration: BoxDecoration(
-                      color: AppConstants.primaryColorLight,
+                      color: AppConstants.secondaryColorLight,
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: const Center(
@@ -161,16 +162,16 @@ class LoginPage extends ConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          const Icon(
+                          Icon(
                             Icons.people,
-                            color: AppConstants.secondaryColor,
+                            color: AppConstants.primaryColor,
                             size: 30,
                           ),
                           Text(
                             'Parent',
                             style: TextStyle(
                               fontSize: 20,
-                              color: AppConstants.secondaryColor,
+                              color: AppConstants.primaryColor,
                               fontWeight: FontWeight.w700,
                               letterSpacing: 2,
                             ),
@@ -192,7 +193,7 @@ class LoginPage extends ConsumerWidget {
                     height: 75,
                     width: 175,
                     decoration: BoxDecoration(
-                      color: AppConstants.primaryColorLight,
+                      color: AppConstants.secondaryColorLight,
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: const Center(
@@ -202,14 +203,14 @@ class LoginPage extends ConsumerWidget {
                         children: [
                           Icon(
                             Icons.child_care_rounded,
-                            color: AppConstants.secondaryColor,
+                            color: AppConstants.primaryColor,
                             size: 30,
                           ),
                           Text(
                             'Child',
                             style: TextStyle(
                               fontSize: 20,
-                              color: AppConstants.secondaryColor,
+                              color: AppConstants.primaryColor,
                               fontWeight: FontWeight.w700,
                               letterSpacing: 3,
                             ),
@@ -229,12 +230,12 @@ class LoginPage extends ConsumerWidget {
 }
 
 // ignore: camel_case_types
-class login_animation extends StatelessWidget {
+class LoginAnimation extends StatelessWidget {
   final Color color;
-  final IconData icon_name;
-  const login_animation({
+  final IconData iconName;
+  const LoginAnimation({
     required this.color,
-    required this.icon_name,
+    required this.iconName,
     super.key,
   });
 
@@ -248,7 +249,7 @@ class login_animation extends StatelessWidget {
         borderRadius: BorderRadius.circular(5),
       ),
       child: Icon(
-        icon_name,
+        iconName,
         color: AppConstants.secondaryColorLight,
         size: 50,
       ),
