@@ -15,11 +15,16 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
 
-  runApp(const ProviderScope(child: MyApp()));
+  runApp(ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  String _type = '';
+  void _setType(String type) {
+    _type = type;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +40,9 @@ class MyApp extends StatelessWidget {
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
-              return LoginPage();
+              return LoginPage(
+                setUserType: _setType,
+              );
             } else if (snapshot.connectionState == ConnectionState.waiting) {
               return const Loader();
             }
@@ -53,6 +60,7 @@ class MyApp extends StatelessWidget {
                       displayName: user!.displayName!,
                       profilePic: user.photoURL!,
                       email: user.email!,
+                      type: _type,
                     );
                     // return LogoutPage();
                   } else if (snapshot.connectionState ==

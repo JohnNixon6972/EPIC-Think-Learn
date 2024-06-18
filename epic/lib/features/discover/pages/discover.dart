@@ -1,11 +1,10 @@
 import 'package:epic/cores/methods.dart';
 import 'package:epic/cores/screens/error_page.dart';
 import 'package:epic/cores/screens/loader.dart';
-import 'package:epic/features/strategies/strategies.dart';
 import 'package:epic/features/auth/provider/user_provider.dart';
-import 'package:epic/features/discover/widgets/strategy_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class Discover extends ConsumerWidget {
   const Discover({super.key});
@@ -97,19 +96,12 @@ class Discover extends ConsumerWidget {
                       ),
                       SizedBox(
                         height: 370,
-                        child: GridView(
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              crossAxisSpacing: 10,
-                              mainAxisSpacing: 10,
-                            ),
-                            children: const [
-                              StrategyCard(strategy: Strategies.memory),
-                              StrategyCard(strategy: Strategies.attention),
-                              StrategyCard(strategy: Strategies.inhibition),
-                              StrategyCard(strategy: Strategies.planning),
-                            ]),
+                        child: StaggeredGrid.count(
+                          crossAxisCount: 6,
+                          crossAxisSpacing: 5,
+                          mainAxisSpacing: 5,
+                          children: getStrategies(currentUser),
+                        ),
                       )
                     ],
                   ),
