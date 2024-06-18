@@ -5,6 +5,7 @@ class UserModel {
   final String userId;
   final String type;
   final List<String> strategies;
+  final String lastSeenStrategy;
 
   UserModel({
     required this.username,
@@ -13,6 +14,7 @@ class UserModel {
     required this.userId,
     required this.type,
     required this.strategies,
+    required this.lastSeenStrategy,
   });
 
   Map<String, dynamic> toMap() {
@@ -23,6 +25,7 @@ class UserModel {
       'userId': userId,
       'type': type,
       'strategies': strategies,
+      'lastSeenStrategy': lastSeenStrategy,
     };
   }
 
@@ -34,6 +37,7 @@ class UserModel {
       userId: map['userId'],
       type: map['type'],
       strategies: List<String>.from(map['strategies']),
+      lastSeenStrategy: map['lastSeenStrategy'],
     );
   }
 }

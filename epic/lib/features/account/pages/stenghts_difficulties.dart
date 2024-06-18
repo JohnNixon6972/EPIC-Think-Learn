@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:epic/cores/app_constants.dart';
-import 'package:epic/features/account/repository/edit_field.dart';
 import 'package:epic/features/auth/repository/user_data_service.dart';
 import 'package:epic/features/strategies/strategies.dart';
 import 'package:flutter/material.dart';
@@ -15,8 +14,10 @@ class StrenghtsDifficulties extends ConsumerStatefulWidget {
   final String displayName;
   final String profilePic;
   final String email;
+  final String type;
   const StrenghtsDifficulties({
     super.key,
+    required this.type,
     required this.displayName,
     required this.profilePic,
     required this.email,
@@ -66,15 +67,23 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
     for (var strategy in sortedStrategies) {
       order.add(strategy.key.name);
     }
+
+    // add remaining strategies
+    for (var strategy in Strategies.values) {
+      if (!order.contains(strategy.name)) {
+        order.add(strategy.name);
+      }
+    }
+
     await ref.read(userDataServiceProvider).addUserDataToFirestore(
           strategies: order,
           username: widget.displayName,
           email: widget.email,
           profilePic: widget.profilePic,
+          lastSeenStrategy: order[0],
+          type: widget.type,
         );
 
-    // Save the data to the database
-    // Navigate to the next page
   }
 
   @override
@@ -113,7 +122,7 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                   animatedTexts: [
                     TypewriterAnimatedText(
                       "Please let us know if you find it easy to do the following task:",
-                      textStyle: TextStyle(
+                      textStyle: const TextStyle(
                         color: AppConstants.tertiaryColor,
                         fontSize: 18,
                         fontWeight: FontWeight.w400,
@@ -193,11 +202,11 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                                           ),
                                         ),
                                       ),
-                                      animDuration: Duration(seconds: 1),
+                                      animDuration: const Duration(seconds: 1),
                                       bubbleStart: .4,
                                       bubbleEnd: .9,
                                       curve: Curves.linear, //Curves.elasticOut
-                                      delay: Duration(milliseconds: 0),
+                                      delay: const Duration(milliseconds: 0),
                                     ),
                                   ],
                                 ),
@@ -258,7 +267,7 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                                       ),
                                     ),
                                   ),
-                                SizedBox(
+                                const SizedBox(
                                   height: 20,
                                 ),
                                 Spring.animatedCard(
@@ -320,39 +329,11 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                                           ),
                                         ),
                                       ),
-                                      animDuration: Duration(seconds: 1),
+                                      animDuration: const Duration(seconds: 1),
                                       bubbleStart: .4,
                                       bubbleEnd: .9,
                                       curve: Curves.linear, //Curves.elasticOut
-                                      delay: Duration(milliseconds: 0),
-                                    ),
-                                    Spring.bubbleButton(
-                                      onTap: _nextPage, // Handle No action
-                                      child: Container(
-                                        height: 50,
-                                        width: 75,
-                                        decoration: BoxDecoration(
-                                          color: Colors.white,
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                        ),
-                                        child: const Center(
-                                          child: Text(
-                                            'No',
-                                            style: TextStyle(
-                                              fontSize: 18,
-                                              color: AppConstants.primaryColor,
-                                              fontWeight: FontWeight.w500,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      animDuration: Duration(seconds: 1),
-                                      bubbleStart: .4,
-                                      bubbleEnd: .9,
-
-                                      curve: Curves.linear, //Curves.elasticOut
-                                      delay: Duration(milliseconds: 0),
+                                      delay: const Duration(milliseconds: 0),
                                     ),
                                     Spring.bubbleButton(
                                       onTap: _nextPage, // Handle No action
@@ -375,12 +356,12 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                                           ),
                                         ),
                                       ),
-                                      animDuration: Duration(seconds: 1),
+                                      animDuration: const Duration(seconds: 1),
                                       bubbleStart: .4,
                                       bubbleEnd: .9,
 
                                       curve: Curves.linear, //Curves.elasticOut
-                                      delay: Duration(milliseconds: 0),
+                                      delay: const Duration(milliseconds: 0),
                                     ),
                                   ],
                                 ),

@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:epic/cores/screens/error_page.dart';
 import 'package:epic/cores/screens/loader.dart';
 import 'package:epic/features/account/widgets/settings_dialog.dart';
