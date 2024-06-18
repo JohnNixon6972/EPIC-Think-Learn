@@ -22,4 +22,14 @@ class AppConstants {
   static const Color memoryColor = Color.fromARGB(255, 127, 0, 94);
   static const Color planningColor = Color.fromARGB(255, 33, 72, 94);
   static const Color selfregulationColor = Color.fromARGB(255, 34, 63, 49);
+
+  static const Color primaryBackgroundColor =
+      Color.fromARGB(255, 249, 249, 249);
+  static const Color secondayBackgroundColor =
+      Color.fromARGB(255, 67, 151, 168);
+
+  static const Color primaryTextColor = Colors.white;
+  static const Color secondaryTextColor = Color.fromARGB(255, 95, 119, 121);
+
+  static const Color primaryButtonColor = Color.fromARGB(255, 217, 168, 62);
 }

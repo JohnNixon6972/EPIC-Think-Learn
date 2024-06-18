@@ -23,5 +23,5 @@ class StrategyService {
         .snapshots()
         .map((snapshot) =>
             StrategyModel.fromMap(snapshot.data() as Map<String, dynamic>));
-  }
+  } 
 }
