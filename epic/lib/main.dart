@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:epic/cores/screens/loader.dart';
 import 'package:epic/features/auth/pages/login_page.dart';

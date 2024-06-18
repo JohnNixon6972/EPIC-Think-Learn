@@ -4,7 +4,6 @@ import 'package:epic/cores/screens/loader.dart';
 import 'package:epic/features/auth/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
 class Discover extends ConsumerWidget {
   const Discover({super.key});
@@ -95,14 +94,13 @@ class Discover extends ConsumerWidget {
                         height: 10,
                       ),
                       SizedBox(
-                        height: 370,
-                        child: StaggeredGrid.count(
-                          crossAxisCount: 6,
-                          crossAxisSpacing: 5,
-                          mainAxisSpacing: 5,
+                        height: 300,
+                        child: ListView(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
                           children: getStrategies(currentUser),
                         ),
-                      )
+                      ),
                     ],
                   ),
                 ),

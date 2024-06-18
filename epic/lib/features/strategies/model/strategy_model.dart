@@ -12,7 +12,6 @@ class StrategyModel {
   });
 
   factory StrategyModel.fromMap(Map<String, dynamic> map) {
-    print(map);
     final strategy = Strategies.values
         .firstWhere((element) => element.name == map['strategy']);
     return StrategyModel(
