@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:epic/features/auth/model/user_model.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +21,7 @@ class TopHeader extends StatelessWidget {
             style: TextStyle(color: Colors.blueGrey),
             textAlign: TextAlign.center,
           ),
-          Text("Get connected to your parent/child"),
+          const Text("Get connected to your parent/child"),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -38,7 +37,7 @@ class TopHeader extends StatelessWidget {
                   ),
                 ),
               ),
-              TextButton.icon(onPressed: () {}, label: Text("Connect")),
+              TextButton.icon(onPressed: () {}, label: const Text("Connect")),
             ],
           ),
         ],
