@@ -108,7 +108,9 @@ class Discover extends ConsumerWidget {
                 ),
               )),
             ),
-        error: (error, stackTrace) => const ErrorPage(),
+        error: (error, stackTrace) => ErrorPage(
+              message: error.toString(),
+            ),
         loading: () => const Loader());
   }
 }

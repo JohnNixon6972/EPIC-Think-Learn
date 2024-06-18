@@ -3,46 +3,32 @@ import 'package:flutter/material.dart';
 
 enum Strategies {
   memory(
-      days: 0,
-      levels: 0,
       name: "Memory",
       image: AppConstants.memoryCardImage,
       color: AppConstants.memoryColor),
   inhibition(
-      days: 0,
-      levels: 0,
       name: "Inhibition",
       image: AppConstants.inhibitionCardImage,
       color: AppConstants.inhibitionColor),
   attention(
-      days: 0,
-      levels: 0,
       image: AppConstants.attentionCardImage,
       name: "Attention",
       color: AppConstants.attentionColor),
   planning(
-      days: 0,
-      levels: 0,
       name: "Planning",
       image: AppConstants.planningCardImage,
       color: AppConstants.planningColor),
   selfRegulation(
-      days: 0,
-      levels: 0,
       image: AppConstants.selfRegulationCardImage,
       name: "Self Regulation",
       color: AppConstants.selfregulationColor);
 
   const Strategies(
       {required this.color,
-      required this.levels,
       required this.name,
-      required this.image,
-      required this.days});
+      required this.image,});
 
-  final int levels;
   final String name;
-  final int days;
   final Color color;
   final String image;
 }

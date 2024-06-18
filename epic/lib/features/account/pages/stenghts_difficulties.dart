@@ -57,7 +57,6 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
   }
 
   void _onSubmit() async {
-    print("object");
     List<MapEntry<Strategies, int>> sortedStrategies =
         _strategiesToImprove.entries.toList()
           ..sort((a, b) => b.value.compareTo(a.value));

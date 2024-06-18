@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:epic/features/auth/model/user_model.dart';
+import 'package:epic/features/strategies/model/strategy_model.dart';
+import 'package:epic/features/strategies/strategies.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -23,7 +25,6 @@ class UserDataService {
       required String lastSeenStrategy,
       required String type,
       required String profilePic}) async {
-        
     UserModel user = UserModel(
       username: username,
       email: email,
@@ -38,6 +39,15 @@ class UserDataService {
         .collection('users')
         .doc(auth.currentUser!.uid)
         .set(user.toMap());
+
+    for (Strategies strategy in Strategies.values) {
+      await firestore
+          .collection('users')
+          .doc(auth.currentUser!.uid)
+          .collection('strategies')
+          .doc(strategy.name)
+          .set(StrategyModel(level: 0, days: 0, strategy: strategy).toMap());
+    }
   }
 
   Future<UserModel> fetchCurrentUserData() async {

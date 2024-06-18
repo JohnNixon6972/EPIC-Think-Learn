@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 
 class ErrorPage extends StatelessWidget {
-  const ErrorPage({super.key});
+  final String message;
+  const ErrorPage({required this.message, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
+    return Center(
         child: Text(
-      'Something went wrong',
-      style: TextStyle(
-          color: Colors.red, fontSize: 20, fontWeight: FontWeight.bold),
+      'Something went wrong : $message',
+      style: const TextStyle(
+          color: Colors.red, fontSize: 18, fontWeight: FontWeight.bold),
     ));
   }
 }
