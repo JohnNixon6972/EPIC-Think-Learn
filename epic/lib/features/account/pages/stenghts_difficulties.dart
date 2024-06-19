@@ -82,7 +82,6 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
           lastSeenStrategy: order[0],
           type: widget.type,
         );
-
   }
 
   @override
@@ -107,7 +106,7 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                     ),
                   ],
                   child: Text(
-                    "${widget.displayName}, let's get to know each other better!",
+                    "Hey ${widget.displayName}, let's get to know each other better!",
                     style: const TextStyle(
                       color: AppConstants.primaryColor,
                       fontSize: 22,
@@ -331,6 +330,34 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                                       animDuration: const Duration(seconds: 1),
                                       bubbleStart: .4,
                                       bubbleEnd: .9,
+                                      curve: Curves.linear, //Curves.elasticOut
+                                      delay: const Duration(milliseconds: 0),
+                                    ),
+                                    Spring.bubbleButton(
+                                      onTap: _nextPage, // Handle No action
+                                      child: Container(
+                                        height: 50,
+                                        width: 75,
+                                        decoration: BoxDecoration(
+                                          color: Colors.white,
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                        ),
+                                        child: const Center(
+                                          child: Text(
+                                            'No',
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                              color: AppConstants.primaryColor,
+                                              fontWeight: FontWeight.w500,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                      animDuration: const Duration(seconds: 1),
+                                      bubbleStart: .4,
+                                      bubbleEnd: .9,
+
                                       curve: Curves.linear, //Curves.elasticOut
                                       delay: const Duration(milliseconds: 0),
                                     ),
