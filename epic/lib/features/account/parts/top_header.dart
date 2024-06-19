@@ -1,7 +1,6 @@
 import 'package:epic/cores/app_constants.dart';
 import 'package:epic/features/auth/model/user_model.dart';
 import 'package:flutter/material.dart';
-import 'package:spring/spring.dart';
 
 class TopHeader extends StatelessWidget {
   final UserModel user;
@@ -45,7 +44,7 @@ class TopHeader extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.4,
                 child: TextField(
                   decoration: InputDecoration(
-                    hintStyle: TextStyle(fontSize: 17),
+                    hintStyle: const TextStyle(fontSize: 17),
                     hintText: 'Enter code',
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(5),
