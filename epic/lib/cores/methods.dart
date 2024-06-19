@@ -22,21 +22,21 @@ String getGreetings() {
   return 'Good Evening 🌙';
 }
 
-List<Widget> getStrategies(UserModel currentUser) {
-  List<Widget> strategies = [
-    StrategyCard(strategyName: currentUser.strategies[0]),
-    StrategyCard(
-      strategyName: currentUser.strategies[1],
-    ),
-    StrategyCard(
-      strategyName: currentUser.strategies[2],
-    ),
-    StrategyCard(
-      strategyName: currentUser.strategies[3],
-    ),
-    StrategyCard(
-      strategyName: currentUser.strategies[4],
-    )
-  ];
-  return strategies;
-}
+// List<Widget> getStrategies(UserModel currentUser) {
+//   List<Widget> strategies = [
+//     StrategyCard(strategyName: currentUser.strategies[0]),
+//     StrategyCard(
+//       strategyName: currentUser.strategies[1],
+//     ),
+//     StrategyCard(
+//       strategyName: currentUser.strategies[2],
+//     ),
+//     StrategyCard(
+//       strategyName: currentUser.strategies[3],
+//     ),
+//     StrategyCard(
+//       strategyName: currentUser.strategies[4],
+//     )
+//   ];
+//   return strategies;
+// }

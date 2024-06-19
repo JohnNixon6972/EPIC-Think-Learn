@@ -1,7 +1,9 @@
 import 'package:epic/cores/methods.dart';
 import 'package:epic/cores/screens/error_page.dart';
 import 'package:epic/cores/screens/loader.dart';
+import 'package:epic/features/auth/model/user_model.dart';
 import 'package:epic/features/auth/provider/user_provider.dart';
+import 'package:epic/features/discover/widgets/strategy_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -95,10 +97,8 @@ class Discover extends ConsumerWidget {
                       ),
                       SizedBox(
                         height: 300,
-                        child: ListView(
-                          shrinkWrap: true,
-                          scrollDirection: Axis.horizontal,
-                          children: getStrategies(currentUser),
+                        child: StrategyView(
+                          currentUser: currentUser,
                         ),
                       ),
                     ],
@@ -111,4 +111,60 @@ class Discover extends ConsumerWidget {
             ),
         loading: () => const Loader());
   }
+}
+
+class StrategyView extends StatefulWidget {
+  final UserModel currentUser;
+  const StrategyView({
+    required this.currentUser,
+    super.key,
+  });
+
+  @override
+  State<StrategyView> createState() => _StrategyViewState();
+}
+
+class _StrategyViewState extends State<StrategyView> {
+  late PageController _pageController;
+  int _currentPage = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _pageController = PageController(
+      viewportFraction: 0.8,
+      initialPage: _currentPage,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return PageView.builder(
+      itemCount: 5,
+      onPageChanged: (int index) {
+        setState(() {
+          _currentPage = index;
+        });
+      },
+      controller: _pageController,
+      itemBuilder: (context, index) {
+        bool isActive = index == _currentPage;
+        return Center(
+          child: _buildCard(
+              StrategyCard(strategyName: widget.currentUser.strategies[index]),
+              isActive),
+        );
+      },
+    );
+  }
+}
+
+Widget _buildCard(Widget card, bool isActive) {
+  double scaleFactor = isActive ? 1 : 0.8;
+  return AnimatedContainer(
+    duration: const Duration(milliseconds: 350),
+    curve: Curves.easeInOut,
+    transform: Matrix4.identity()..scale(scaleFactor, scaleFactor),
+    child: card,
+  );
 }
