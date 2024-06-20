@@ -8,6 +8,9 @@ class AppConstants {
   static const String selfRegulationCardImage =
       'assets/images/self_regulation.jpg';
 
+  static const String cloudBackgroundImage =
+      'assets/images/cloud_background.png';
+
   static const Color primaryColor = Color.fromARGB(255, 168, 0, 56);
   static Color primaryColorLight = Colors.red.shade50;
 
@@ -25,7 +28,7 @@ class AppConstants {
 
   static const Color primaryBackgroundColor =
       Color.fromARGB(255, 249, 249, 249);
-  static const Color secondayBackgroundColor =
+  static const Color secondaryBackgroundColor =
       Color.fromARGB(255, 67, 151, 168);
 
   static const Color primaryTextColor = Colors.white;

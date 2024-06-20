@@ -1,0 +1,37 @@
+
+import 'package:flutter/material.dart';
+
+class CircularProgressBar extends StatelessWidget {
+  final int progress;
+  final Color color;
+  const CircularProgressBar({
+    required this.progress,
+    required this.color,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        SizedBox.square(
+          dimension: 90,
+          child: CircularProgressIndicator(
+            value: progress / 100,
+            color: color,
+            strokeWidth: 8.0,
+          ),
+        ),
+        Text(
+          '$progress%',
+          style: const TextStyle(
+            fontSize: 20.0,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
+      ],
+    );
+  }
+}
