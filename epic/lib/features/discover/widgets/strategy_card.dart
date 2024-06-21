@@ -4,6 +4,7 @@ import 'package:epic/cores/screens/loader.dart';
 import 'package:epic/features/strategies/pages/strategy_detail_page.dart';
 import 'package:epic/features/strategies/provider/strategy_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class StrategyCard extends ConsumerWidget {
@@ -19,8 +20,10 @@ class StrategyCard extends ConsumerWidget {
     return strategyAsync.when(
       data: (strategy) {
         final strategyData = strategy.strategy;
-        return Padding(
-          padding: const EdgeInsets.only(right: 10.0),
+        return Material(
+          elevation: 10,
+          borderRadius: BorderRadius.circular(10),
+          shadowColor: strategyData.color,
           child: GestureDetector(
             onTap: () {
               Navigator.push(
@@ -33,6 +36,7 @@ class StrategyCard extends ConsumerWidget {
               );
             },
             child: Container(
+              width: 300,
               decoration: BoxDecoration(
                 color: strategyData.color.withOpacity(0.5),
                 border: Border.all(
@@ -41,24 +45,29 @@ class StrategyCard extends ConsumerWidget {
                 ),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: Stack(
+              child: Column(
                 children: [
                   Hero(
                     tag: 'strategy-image-${strategyData.name}',
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8),
-                      child: Image.asset(
-                        strategyData.image,
-                        height: double.infinity,
-                        width: double.infinity,
-                        fit: BoxFit.cover,
+                      borderRadius: BorderRadius.circular(100),
+                      child: SizedBox(
+                        height: 100,
+                        width: 100,
+                        child: Image.asset(
+                          strategyData.image,
+                          height: double.infinity,
+                          width: double.infinity,
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
+                  Spacer(),
                   Align(
                     alignment: Alignment.bottomCenter,
-                    child: Padding(
-                      padding: const EdgeInsets.all(4.0),
+                    child: SizedBox(
+                      width: double.infinity,
                       child: TextButton(
                         onPressed: () {
                           Navigator.push(
@@ -71,16 +80,16 @@ class StrategyCard extends ConsumerWidget {
                           );
                         },
                         style: TextButton.styleFrom(
-                          backgroundColor: AppConstants.primaryButtonColor,
+                          backgroundColor: strategyData.color,
                           shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
+                            borderRadius: BorderRadius.circular(7.5),
                           ),
                         ),
                         child: Text(
                           strategyData.name,
                           style: const TextStyle(
                             color: Colors.white,
-                            fontSize: 20,
+                            fontSize: 17,
                             fontWeight: FontWeight.bold,
                           ),
                         ),

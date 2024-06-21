@@ -1,3 +1,4 @@
+import 'package:epic/cores/app_constants.dart';
 import 'package:epic/cores/methods.dart';
 import 'package:epic/cores/screens/error_page.dart';
 import 'package:epic/cores/screens/loader.dart';
@@ -14,7 +15,7 @@ class Discover extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ref.watch(currentUserprovider).when(
         data: (currentUser) => Scaffold(
-              backgroundColor: Colors.transparent,
+              backgroundColor: AppConstants.tertiaryColorLight,
               body: SafeArea(
                   child: Padding(
                 padding: const EdgeInsets.symmetric(
@@ -33,7 +34,7 @@ class Discover extends ConsumerWidget {
                       ),
                       Container(
                         width: double.infinity,
-                        height: 135,
+                        height: 120,
                         decoration: BoxDecoration(
                             color: Colors.blueGrey.withOpacity(0.1),
                             border: Border.all(color: Colors.grey),
@@ -44,26 +45,29 @@ class Discover extends ConsumerWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               const Text("Current Strategy"),
-                              const Text(
-                                "Memory",
-                                style: TextStyle(
-                                    fontSize: 18, fontWeight: FontWeight.bold),
-                              ),
                               const SizedBox(
                                 height: 10,
                               ),
                               LinearProgressIndicator(
-                                minHeight: 15,
+                                minHeight: 10,
                                 value: 0.3,
                                 backgroundColor: Colors.grey,
                                 valueColor:
                                     const AlwaysStoppedAnimation(Colors.blue),
                                 borderRadius: BorderRadius.circular(10),
                               ),
-                              const Spacer(),
+                              const SizedBox(
+                                height: 10,
+                              ),
                               Row(
-                                mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
+                                  const Text(
+                                    "Memory",
+                                    style: TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  Spacer(),
                                   TextButton(
                                     style: TextButton.styleFrom(
                                         backgroundColor: Colors.blueGrey[200],
@@ -96,7 +100,8 @@ class Discover extends ConsumerWidget {
                         height: 10,
                       ),
                       SizedBox(
-                        height: 300,
+                        height: 350,
+                        width: MediaQuery.of(context).size.width,
                         child: StrategyView(
                           currentUser: currentUser,
                         ),
@@ -132,36 +137,58 @@ class _StrategyViewState extends State<StrategyView> {
   void initState() {
     super.initState();
     _pageController = PageController(
-      viewportFraction: 0.8,
+      // viewportFraction: 0.8,
       initialPage: _currentPage,
     );
   }
 
   @override
   Widget build(BuildContext context) {
-    return PageView.builder(
-      itemCount: 5,
-      onPageChanged: (int index) {
-        setState(() {
-          _currentPage = index;
-        });
-      },
-      controller: _pageController,
-      itemBuilder: (context, index) {
-        bool isActive = index == _currentPage;
-        return Center(
-          child: _buildCard(
-              StrategyCard(strategyName: widget.currentUser.strategies[index]),
-              isActive),
-        );
-      },
+    return RawScrollbar(
+      thumbColor: AppConstants.primaryColor,
+      thickness: 3,
+      radius: Radius.circular(30),
+      thumbVisibility: true,
+      child: GridView.builder(
+        padding: EdgeInsets.zero,
+        physics: const BouncingScrollPhysics(),
+        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+          maxCrossAxisExtent: 175.0,
+          mainAxisExtent: 175,
+          childAspectRatio: 0.4,
+        ),
+        itemCount: 5,
+        controller: _pageController,
+        itemBuilder: (context, index) {
+          bool isActive = index == _currentPage;
+          return SizedBox(
+            height: 200,
+            width: MediaQuery.of(context).size.width / 3,
+            child: GestureDetector(
+              onTap: () {
+                setState(() {
+                  _currentPage = index;
+                });
+              },
+              child: Center(
+                child: _buildCard(
+                    StrategyCard(
+                      strategyName: widget.currentUser.strategies[index],
+                    ),
+                    isActive),
+              ),
+            ),
+          );
+        },
+      ),
     );
   }
 }
 
 Widget _buildCard(Widget card, bool isActive) {
-  double scaleFactor = isActive ? 1 : 0.8;
+  double scaleFactor = 0.8;
   return AnimatedContainer(
+    padding: const EdgeInsets.all(08),
     duration: const Duration(milliseconds: 350),
     curve: Curves.easeInOut,
     transform: Matrix4.identity()..scale(scaleFactor, scaleFactor),
