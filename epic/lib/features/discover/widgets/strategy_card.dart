@@ -94,7 +94,7 @@ class StrategyCard extends ConsumerWidget {
         );
       },
       error: (error, stackTrace) => ErrorPage(
-        message: error.toString(),
+        message: error.toString() + stackTrace.toString(),
       ),
       loading: () => const Loader(),
     );
