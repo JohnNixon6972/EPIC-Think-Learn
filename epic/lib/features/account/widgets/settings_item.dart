@@ -1,3 +1,4 @@
+import 'package:epic/cores/app_constants.dart';
 import 'package:flutter/material.dart';
 
 class SettingsItem extends StatelessWidget {
@@ -20,17 +21,29 @@ class SettingsItem extends StatelessWidget {
           children: [
             Text(
               identifier,
-              style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 15),
+              style: const TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 15,
+                color: AppConstants.tertiaryColor,
+              ),
             ),
             const SizedBox(
               height: 4,
             ),
-            Text(value)
+            Text(
+              value,
+              style: const TextStyle(
+                fontSize: 14,
+              ),
+            ),
           ],
         ),
         IconButton(
           onPressed: onPressed,
-          icon: const Icon(Icons.edit),
+          icon: Icon(
+            this.identifier == "Code" ? Icons.copy : Icons.edit,
+            color: AppConstants.primaryColor,
+          ),
         )
       ],
     );

@@ -1,3 +1,4 @@
+import 'package:epic/cores/app_constants.dart';
 import 'package:epic/cores/screens/error_page.dart';
 import 'package:epic/cores/screens/loader.dart';
 import 'package:epic/features/account/widgets/settings_dialog.dart';
@@ -17,7 +18,7 @@ class MyProfileSettings extends ConsumerStatefulWidget {
 }
 
 class _MyProfileSettingsState extends ConsumerState<MyProfileSettings> {
-  bool isSwitched = false;
+  bool isSwitched = true;
   @override
   Widget build(BuildContext context) {
     return ref.watch(currentUserprovider).when(
@@ -27,98 +28,98 @@ class _MyProfileSettingsState extends ConsumerState<MyProfileSettings> {
                 child: Padding(
                   padding: const EdgeInsets.only(top: 0),
                   child: SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(12.0),
-                          child: Column(
-                            children: [
-                              SettingsItem(
-                                  identifier: "Handle",
-                                  onPressed: () {
-                                    showDialog(
-                                      context: context,
-                                      builder: (context) => SettingsDialog(
-                                        identifier: "Your New Username",
-                                        onSave: (username) {
-                                          ref
-                                              .watch(editSettingsProvider)
-                                              .editusername(username);
-                                        },
-                                      ),
-                                    );
-                                  },
-                                  value: currentUser.username),
-                              const SizedBox(height: 14),
-                              SettingsItem(
-                                identifier: "Description",
-                                onPressed: () {
-                                  showDialog(
-                                    context: context,
-                                    builder: (context) => SettingsDialog(
-                                      identifier: "Your New Description",
-                                      onSave: (description) {
-                                        ref
-                                            .watch(editSettingsProvider)
-                                            .editDescription(description);
-                                      },
-                                    ),
-                                  );
-                                },
-                                value: currentUser.username,
-                              ),
-                              Row(
-                                children: [
-                                  const Text(
-                                    "Kepp my profile private",
-                                  ),
-                                  const SizedBox(width: 10),
-                                  Switch(
-                                    value: isSwitched,
-                                    onChanged: (value) {
-                                      setState(() {
-                                        isSwitched = value;
-                                      });
+                    child: Padding(
+                      padding: const EdgeInsets.all(12.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          SettingsItem(
+                              identifier: "Username",
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) => SettingsDialog(
+                                    identifier: "Your New Username",
+                                    onSave: (username) {
+                                      ref
+                                          .watch(editSettingsProvider)
+                                          .editusername(username);
                                     },
-                                  )
-                                ],
+                                  ),
+                                );
+                              },
+                              value: currentUser.username),
+                          Divider(),
+                          SettingsItem(
+                              identifier: "My Code",
+                              onPressed: () {
+                                //copy the code
+                              },
+                              value: "EPIC-1234"),
+                          Divider(),
+                          SettingsItem(
+                              identifier: "Role",
+                              onPressed: () {
+                                //copy the code
+                              },
+                              value: "Parent/child"),
+                          Divider(),
+                          Row(
+                            children: [
+                              const Text(
+                                "Keep my profile private",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
-                              const SizedBox(
-                                height: 50,
-                              ),
-                              Align(
-                                alignment: Alignment.topRight,
-                                child: GestureDetector(
-                                  onTap: () async {
-                                    await GoogleSignIn().signOut();
-                                    await FirebaseAuth.instance.signOut();
-                                  },
-                                  child: Container(
-                                    height: 47,
-                                    width: 170,
-                                    decoration: const BoxDecoration(
-                                      color: Colors.red,
-                                      borderRadius:
-                                          BorderRadius.all(Radius.circular(12)),
-                                    ),
-                                    child: const Center(
-                                      child: Text(
-                                        "Log Out",
-                                        style: TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.w500),
-                                      ),
+                              Spacer(),
+                              Switch(
+                                value: isSwitched,
+                                activeColor: AppConstants.primaryColor,
+                                inactiveTrackColor: AppConstants.secondaryColor,
+                                onChanged: (value) {
+                                  setState(() {
+                                    isSwitched = value;
+                                  });
+                                },
+                              )
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 50,
+                          ),
+                          Align(
+                            alignment: Alignment.center,
+                            child: GestureDetector(
+                              onTap: () async {
+                                await GoogleSignIn().signOut();
+                                await FirebaseAuth.instance.signOut();
+                              },
+                              child: Container(
+                                height: 45,
+                                width: 150,
+                                decoration: const BoxDecoration(
+                                  color: AppConstants.tertiaryColor,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(12)),
+                                ),
+                                child: const Center(
+                                  child: Text(
+                                    "Log Out",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 16,
                                     ),
                                   ),
                                 ),
                               ),
-                              const SizedBox(
-                                height: 90,
-                              ),
-                            ],
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
