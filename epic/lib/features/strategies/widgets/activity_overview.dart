@@ -1,12 +1,15 @@
 import 'package:epic/cores/app_constants.dart';
+
 import 'package:epic/cores/games/games.dart';
+import 'package:epic/cores/games/game_internals/provider/game_provider.dart';
 import 'package:epic/cores/widgets/cloud_text_box.dart';
 import 'package:epic/features/strategies/model/strategy_model.dart';
 import 'package:epic/features/strategies/provider/strategy_provider.dart';
 import 'package:epic/features/strategies/strategies.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ActivityOverview extends StatelessWidget {
+class ActivityOverview extends ConsumerWidget {
   final StrategyModel model;
   final Function(StrategyNav) changeNav;
 
@@ -14,7 +17,7 @@ class ActivityOverview extends StatelessWidget {
       {required this.changeNav, required this.model, super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     Game game = model.strategy.game;
     Strategies strategy = model.strategy;
 
@@ -29,6 +32,8 @@ class ActivityOverview extends StatelessWidget {
           ),
         ),
         onPressed: () {
+          final gameService = ref.watch(gameServiceProvider);
+          gameService.setGame(strategyModel: model);
           changeNav(StrategyNav.activity);
         },
         child: const Text(

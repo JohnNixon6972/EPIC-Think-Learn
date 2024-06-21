@@ -52,25 +52,25 @@ class _StrategyBodyState extends State<StrategyBody> {
 
   @override
   Widget build(BuildContext context) {
-    final Widget activityWidget = widget.model.strategy.game.gameWidget;
+    final strategyModel = widget.model;
 
     return Scaffold(
         backgroundColor: AppConstants.primaryBackgroundColor,
         appBar: CustomStrategiesAppBar(
             changeNav: _changeNav,
             currentNav: _currentNav,
-            title: widget.model.strategy.name,
-            color: widget.model.strategy.color),
+            title: strategyModel.strategy.name,
+            color: strategyModel.strategy.color),
         body: switch (_currentNav) {
           StrategyNav.detail => StrategyDetail(
-              model: widget.model,
+              model: strategyModel,
               changeNav: _changeNav,
             ),
           StrategyNav.activityOverview => ActivityOverview(
               changeNav: _changeNav,
-              model: widget.model,
+              model: strategyModel,
             ),
-          StrategyNav.activity => activityWidget
+          StrategyNav.activity => strategyModel.strategy.game.gameWidget,
         });
   }
 }
