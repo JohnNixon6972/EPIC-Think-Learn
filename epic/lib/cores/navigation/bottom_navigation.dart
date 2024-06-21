@@ -1,3 +1,4 @@
+import 'package:epic/cores/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
@@ -16,24 +17,22 @@ class _BottomNavigationState extends State<BottomNavigation> {
     return Padding(
       padding: const EdgeInsets.only(top: 5.0, bottom: 20, left: 12, right: 12),
       child: GNav(
-        rippleColor: Colors.grey[100]!,
-        hoverColor: Colors.grey[100]!,
+        backgroundColor: AppConstants.tertiaryColorLight,
+        rippleColor: AppConstants.secondaryColor,
+        hoverColor: AppConstants.primaryColor,
         haptic: true,
         tabBorderRadius: 15,
-        tabActiveBorder: Border.all(color: Colors.black, width: 1),
-        tabShadow: [
-          BoxShadow(
-            blurRadius: 13,
-            color: Colors.grey.withOpacity(0.25),
-          )
-        ],
+        tabActiveBorder: Border.all(
+          color: AppConstants.tertiaryColor,
+          width: 1,
+        ),
         curve: Curves.easeInToLinear,
         duration: const Duration(milliseconds: 900),
         gap: 8,
-        color: Colors.grey[800],
-        activeColor: Colors.blueGrey,
+        color: AppConstants.secondaryColor,
+        activeColor: AppConstants.primaryColor,
         iconSize: 32,
-        tabBackgroundColor: Colors.blueGrey.withOpacity(0.1),
+        tabBackgroundColor: AppConstants.secondaryColorLight,
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
         tabs: const [
           GButton(
@@ -48,10 +47,6 @@ class _BottomNavigationState extends State<BottomNavigation> {
             icon: Icons.person,
             text: 'Profile',
           ),
-          // GButton(
-          //   icon: Icons.settings,
-          //   text: 'Settings',
-          // ),
         ],
         onTabChange: widget.onPressed,
         selectedIndex: currentIndex,
