@@ -16,7 +16,7 @@ class StrategyModel {
         .firstWhere((element) => element.name == map['strategy']);
     return StrategyModel(
       strategy: strategy,
-      level: map['level'],
+      level: map['levels'],
       days: map['days'],
     );
   }
