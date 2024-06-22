@@ -63,26 +63,21 @@ class TopHeader extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.4,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(5),
-                  color: AppConstants.secondaryColor,
+                  color: AppConstants.primaryButtonColor,
                 ),
                 child: TextButton.icon(
+                    icon: const Icon(
+                      Icons.connect_without_contact,
+                      color: AppConstants.primaryTextColor,
+                    ),
                     onPressed: () {},
-                    label: const Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.connect_without_contact,
-                          color: AppConstants.primaryColor,
-                        ),
-                        Text(
-                          "Connect",
-                          style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.w600,
-                            color: AppConstants.primaryColor,
-                          ),
-                        ),
-                      ],
+                    label: const Text(
+                      "Connect",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                        color: AppConstants.primaryTextColor,
+                      ),
                     )),
               ),
             ],
