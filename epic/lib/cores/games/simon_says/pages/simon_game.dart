@@ -63,7 +63,6 @@ class _SimonGameState extends State<SimonGame> {
   }
 
   void playSequence() {
-    Random random = Random();
     for (int i = 0; i < controllersToAnimate.length; i++) {
       Future.delayed(
         Duration(seconds: i),
