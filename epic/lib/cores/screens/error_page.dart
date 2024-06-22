@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 
 class ErrorPage extends StatelessWidget {
@@ -6,11 +8,7 @@ class ErrorPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: Text(
-      'Something went wrong : $message',
-      style: const TextStyle(
-          color: Colors.red, fontSize: 18, fontWeight: FontWeight.bold),
-    ));
+    print('Error Page: $message');
+    return const Center();
   }
 }

@@ -13,6 +13,7 @@ class Discover extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    print("hello");
     return ref.watch(currentUserprovider).when(
         data: (currentUser) => Scaffold(
               backgroundColor: AppConstants.tertiaryColorLight,
@@ -67,7 +68,7 @@ class Discover extends ConsumerWidget {
                                         fontSize: 18,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  Spacer(),
+                                  const Spacer(),
                                   TextButton(
                                     style: TextButton.styleFrom(
                                         backgroundColor: Colors.blueGrey[200],
@@ -112,7 +113,7 @@ class Discover extends ConsumerWidget {
               )),
             ),
         error: (error, stackTrace) => ErrorPage(
-              message: error.toString(),
+              message: error.toString() + stackTrace.toString(),
             ),
         loading: () => const Loader());
   }
@@ -145,9 +146,10 @@ class _StrategyViewState extends State<StrategyView> {
   @override
   Widget build(BuildContext context) {
     return RawScrollbar(
+      controller: _pageController,
       thumbColor: AppConstants.primaryColor,
       thickness: 3,
-      radius: Radius.circular(30),
+      radius: const Radius.circular(30),
       thumbVisibility: true,
       child: GridView.builder(
         padding: EdgeInsets.zero,
