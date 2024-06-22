@@ -1,4 +1,3 @@
-import 'package:epic/cores/app_constants.dart';
 import 'package:epic/cores/games/simon_says/controllers/color_tile_controller.dart';
 import 'package:flutter/material.dart';
 
