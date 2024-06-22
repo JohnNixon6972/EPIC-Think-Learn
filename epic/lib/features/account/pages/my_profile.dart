@@ -19,16 +19,13 @@ class MyProfile extends ConsumerWidget {
             child: Scaffold(
               backgroundColor: AppConstants.primaryBackgroundColor,
               body: SafeArea(
-                  child: Padding(
-                padding: const EdgeInsets.only(top: 20.0),
-                child: Column(
-                  children: [
-                    TopHeader(user: currentUser),
-                    // const Buttons(),
-                    const PageTabBar(),
-                    const TabPages()
-                  ],
-                ),
+                  child: Column(
+                children: [
+                  TopHeader(user: currentUser),
+                  // const Buttons(),
+                  const PageTabBar(),
+                  const TabPages()
+                ],
               )),
             )),
         error: (error, stackTrace) => ErrorPage(
