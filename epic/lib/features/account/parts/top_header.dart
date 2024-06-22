@@ -9,38 +9,37 @@ class TopHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 10, bottom: 4.0),
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(user.username,
-              style:
-                  const TextStyle(fontSize: 26, fontWeight: FontWeight.bold)),
+              style: const TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.bold,
+                  color: AppConstants.secondaryTextColor)),
           const Text(
             "Changes made on your user name and profile picture are only reflected on this app and not on any other Google Services.",
             style: TextStyle(
               color: Colors.blueGrey,
               fontSize: 12,
             ),
-            textAlign: TextAlign.center,
+            textAlign: TextAlign.justify,
           ),
-          const Align(
-            alignment: Alignment.centerLeft,
-            child: Padding(
-              padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
-              child: Text(
-                "Get connected to your parent/child",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                  color: AppConstants.secondaryBackgroundColor,
-                ),
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 8.0),
+            child: Text(
+              "Get connected to your parent/child",
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w600,
+                color: AppConstants.secondaryBackgroundColor,
               ),
             ),
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               SizedBox(
                 height: 50,
