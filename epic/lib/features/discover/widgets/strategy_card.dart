@@ -1,10 +1,8 @@
-import 'package:epic/cores/app_constants.dart';
 import 'package:epic/cores/screens/error_page.dart';
 import 'package:epic/cores/screens/loader.dart';
 import 'package:epic/features/strategies/pages/strategy_detail_page.dart';
 import 'package:epic/features/strategies/provider/strategy_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class StrategyCard extends ConsumerWidget {

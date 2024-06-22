@@ -50,21 +50,21 @@ class _MyProfileSettingsState extends ConsumerState<MyProfileSettings> {
                                 );
                               },
                               value: currentUser.username),
-                          Divider(),
+                          const Divider(),
                           SettingsItem(
                               identifier: "My Code",
                               onPressed: () {
                                 //copy the code
                               },
                               value: "EPIC-1234"),
-                          Divider(),
+                          const Divider(),
                           SettingsItem(
                               identifier: "Role",
                               onPressed: () {
                                 //copy the code
                               },
                               value: "Parent/child"),
-                          Divider(),
+                          const Divider(),
                           Row(
                             children: [
                               const Text(
@@ -74,7 +74,7 @@ class _MyProfileSettingsState extends ConsumerState<MyProfileSettings> {
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
-                              Spacer(),
+                              const Spacer(),
                               Switch(
                                 value: isSwitched,
                                 activeColor: AppConstants.primaryColor,

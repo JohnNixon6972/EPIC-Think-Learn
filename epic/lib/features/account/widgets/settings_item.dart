@@ -41,7 +41,7 @@ class SettingsItem extends StatelessWidget {
         IconButton(
           onPressed: onPressed,
           icon: Icon(
-            this.identifier == "Code" ? Icons.copy : Icons.edit,
+            identifier == "Code" ? Icons.copy : Icons.edit,
             color: AppConstants.primaryColor,
           ),
         )

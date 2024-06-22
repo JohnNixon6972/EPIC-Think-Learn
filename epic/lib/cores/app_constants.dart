@@ -11,7 +11,7 @@ class AppConstants {
   static const String cloudBackgroundImage =
       'assets/images/cloud_background.png';
 
-  static const Color primaryColor = Color.fromARGB(255, 168, 0, 56);
+  static const Color primaryColor = Color(0xffd50032);
   static Color primaryColorLight = Colors.red.shade50;
 
   static const Color secondaryColor = Colors.amber;
@@ -20,16 +20,15 @@ class AppConstants {
   static const Color tertiaryColor = Colors.teal;
   static Color tertiaryColorLight = Colors.teal.shade50;
 
-  static const Color attentionColor = Color.fromARGB(255, 222, 150, 45);
-  static const Color inhibitionColor = Color.fromARGB(255, 203, 78, 40);
-  static const Color memoryColor = Color.fromARGB(255, 127, 0, 94);
-  static const Color planningColor = Color.fromARGB(255, 33, 72, 94);
-  static const Color selfregulationColor = Color.fromARGB(255, 34, 63, 49);
+  static const Color attentionColor = Color(0xfff6a800);
+  static const Color inhibitionColor = Color(0xffff601f);
+  static const Color memoryColor = Color(0xff992b79);
+  static const Color planningColor = Color(0xff00546f);
+  static const Color selfregulationColor = Color(0xff144839);
 
   static const Color primaryBackgroundColor =
       Color.fromARGB(255, 249, 249, 249);
-  static const Color secondaryBackgroundColor =
-      Color.fromARGB(255, 67, 151, 168);
+  static const Color secondaryBackgroundColor = Color(0xff0099ab);
 
   static const Color primaryTextColor = Colors.white;
   static const Color secondaryTextColor = Color.fromARGB(255, 95, 119, 121);

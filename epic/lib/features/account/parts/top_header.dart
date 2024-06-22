@@ -25,14 +25,17 @@ class TopHeader extends StatelessWidget {
             ),
             textAlign: TextAlign.center,
           ),
-          const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text(
-              "Get connected to your parent/child",
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: AppConstants.primaryColor,
+          const Align(
+            alignment: Alignment.centerLeft,
+            child: Padding(
+              padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
+              child: Text(
+                "Get connected to your parent/child",
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: AppConstants.secondaryBackgroundColor,
+                ),
               ),
             ),
           ),
