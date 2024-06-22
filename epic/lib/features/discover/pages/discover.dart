@@ -16,7 +16,7 @@ class Discover extends ConsumerWidget {
     print("hello");
     return ref.watch(currentUserprovider).when(
         data: (currentUser) => Scaffold(
-              backgroundColor: AppConstants.tertiaryColorLight,
+              backgroundColor: AppConstants.primaryBackgroundColor,
               body: SafeArea(
                   child: Padding(
                 padding: const EdgeInsets.symmetric(
@@ -101,7 +101,7 @@ class Discover extends ConsumerWidget {
                         height: 10,
                       ),
                       SizedBox(
-                        height: 350,
+                        height: 300,
                         width: MediaQuery.of(context).size.width,
                         child: StrategyView(
                           currentUser: currentUser,
@@ -138,57 +138,82 @@ class _StrategyViewState extends State<StrategyView> {
   void initState() {
     super.initState();
     _pageController = PageController(
-      // viewportFraction: 0.8,
+      viewportFraction: 0.8,
       initialPage: _currentPage,
     );
   }
 
+  // @override
+  // Widget build(BuildContext context) {
+  //   return RawScrollbar(
+  //     controller: _pageController,
+  //     thumbColor: AppConstants.primaryColor,
+  //     thickness: 3,
+  //     radius: const Radius.circular(30),
+  //     thumbVisibility: true,
+  //     child: GridView.builder(
+  //       padding: EdgeInsets.zero,
+  //       physics: const BouncingScrollPhysics(),
+  //       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+  //         maxCrossAxisExtent: 175.0,
+  //         mainAxisExtent: 175,
+  //         childAspectRatio: 0.4,
+  //       ),
+  //       itemCount: 5,
+  //       controller: _pageController,
+  //       itemBuilder: (context, index) {
+  //         bool isActive = index == _currentPage;
+  //         return SizedBox(
+  //           height: 200,
+  //           width: MediaQuery.of(context).size.width / 3,
+  //           child: GestureDetector(
+  //             onTap: () {
+  //               setState(() {
+  //                 _currentPage = index;
+  //               });
+  //             },
+  //             child: Center(
+  //               child: _buildCard(
+  //                   StrategyCard(
+  //                     strategyName: widget.currentUser.strategies[index],
+  //                   ),
+  //                   isActive),
+  //             ),
+  //           ),
+  //         );
+  //       },
+  //     ),
+  //   );
+  // }
   @override
   Widget build(BuildContext context) {
-    return RawScrollbar(
+    return PageView.builder(
+      itemCount: 5,
       controller: _pageController,
-      thumbColor: AppConstants.primaryColor,
-      thickness: 3,
-      radius: const Radius.circular(30),
-      thumbVisibility: true,
-      child: GridView.builder(
-        padding: EdgeInsets.zero,
-        physics: const BouncingScrollPhysics(),
-        gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-          maxCrossAxisExtent: 175.0,
-          mainAxisExtent: 175,
-          childAspectRatio: 0.4,
-        ),
-        itemCount: 5,
-        controller: _pageController,
-        itemBuilder: (context, index) {
-          bool isActive = index == _currentPage;
-          return SizedBox(
-            height: 200,
-            width: MediaQuery.of(context).size.width / 3,
-            child: GestureDetector(
-              onTap: () {
-                setState(() {
-                  _currentPage = index;
-                });
-              },
-              child: Center(
-                child: _buildCard(
-                    StrategyCard(
-                      strategyName: widget.currentUser.strategies[index],
-                    ),
-                    isActive),
-              ),
-            ),
-          );
-        },
-      ),
+      onPageChanged: (index) {
+        setState(() {
+          _currentPage = index;
+        });
+      },
+      itemBuilder: (context, index) {
+        bool isActive = index == _currentPage;
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 15.0),
+          child: Center(
+            child: _buildCard(
+                StrategyCard(
+                  strategyName: widget.currentUser.strategies[index],
+                ),
+                isActive),
+          ),
+        );
+      },
     );
   }
 }
 
 Widget _buildCard(Widget card, bool isActive) {
-  double scaleFactor = 0.8;
+  double scaleFactor = isActive ? 1 : 0.8;
   return AnimatedContainer(
     padding: const EdgeInsets.all(08),
     duration: const Duration(milliseconds: 350),

@@ -15,37 +15,42 @@ class _BottomNavigationState extends State<BottomNavigation> {
   Widget build(BuildContext context) {
     int currentIndex = 0;
     return Padding(
-      padding: const EdgeInsets.only(top: 5.0, bottom: 20, left: 12, right: 12),
+      padding:
+          const EdgeInsets.only(top: 10.0, bottom: 20, left: 12, right: 12),
       child: GNav(
-        backgroundColor: AppConstants.tertiaryColorLight,
-        rippleColor: AppConstants.secondaryColor,
-        hoverColor: AppConstants.primaryColor,
+        backgroundColor: AppConstants.primaryButtonColor,
+        rippleColor: AppConstants.primaryBackgroundColor,
+        hoverColor: AppConstants.primaryBackgroundColor,
         haptic: true,
         tabBorderRadius: 15,
         tabActiveBorder: Border.all(
-          color: AppConstants.tertiaryColor,
+          color: AppConstants.primaryBackgroundColor,
           width: 1,
         ),
         curve: Curves.easeInToLinear,
         duration: const Duration(milliseconds: 900),
         gap: 8,
-        color: AppConstants.secondaryColor,
-        activeColor: AppConstants.primaryColor,
+        color: AppConstants.primaryBackgroundColor,
+        activeColor: AppConstants.primaryBackgroundColor,
         iconSize: 32,
-        tabBackgroundColor: AppConstants.secondaryColorLight,
+        tabBackgroundColor: AppConstants.primaryButtonColor,
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+        textStyle: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+            color: AppConstants.primaryBackgroundColor),
         tabs: const [
           GButton(
             icon: Icons.home,
-            text: 'Home',
+            text: 'HOME',
           ),
           GButton(
             icon: Icons.bar_chart,
-            text: 'Report',
+            text: 'REPORT',
           ),
           GButton(
             icon: Icons.person,
-            text: 'Profile',
+            text: 'PROFILE',
           ),
         ],
         onTabChange: widget.onPressed,

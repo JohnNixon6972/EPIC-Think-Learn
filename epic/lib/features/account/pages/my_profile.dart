@@ -1,3 +1,4 @@
+import 'package:epic/cores/app_constants.dart';
 import 'package:epic/cores/screens/error_page.dart';
 import 'package:epic/cores/screens/loader.dart';
 import 'package:epic/features/account/parts/tab_bar.dart';
@@ -16,7 +17,7 @@ class MyProfile extends ConsumerWidget {
         data: (currentUser) => DefaultTabController(
             length: 3,
             child: Scaffold(
-              backgroundColor: Colors.transparent,
+              backgroundColor: AppConstants.primaryBackgroundColor,
               body: SafeArea(
                   child: Padding(
                 padding: const EdgeInsets.only(top: 20.0),

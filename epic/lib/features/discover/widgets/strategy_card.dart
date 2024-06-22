@@ -36,7 +36,6 @@ class StrategyCard extends ConsumerWidget {
               );
             },
             child: Container(
-              width: 300,
               decoration: BoxDecoration(
                 color: strategyData.color.withOpacity(0.5),
                 border: Border.all(
@@ -47,13 +46,14 @@ class StrategyCard extends ConsumerWidget {
               ),
               child: Column(
                 children: [
+                  const Spacer(),
                   Hero(
                     tag: 'strategy-image-${strategyData.name}',
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(100),
                       child: SizedBox(
-                        height: 100,
-                        width: 100,
+                        height: 200,
+                        width: 200,
                         child: Image.asset(
                           strategyData.image,
                           height: double.infinity,
@@ -63,11 +63,11 @@ class StrategyCard extends ConsumerWidget {
                       ),
                     ),
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Align(
                     alignment: Alignment.bottomCenter,
                     child: SizedBox(
-                      width: double.infinity,
+                      width: MediaQuery.of(context).size.width * 0.5,
                       child: TextButton(
                         onPressed: () {
                           Navigator.push(
@@ -96,6 +96,7 @@ class StrategyCard extends ConsumerWidget {
                       ),
                     ),
                   ),
+                  const Spacer(),
                 ],
               ),
             ),
