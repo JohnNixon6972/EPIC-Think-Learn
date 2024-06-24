@@ -1,8 +1,10 @@
-
 import 'package:epic/features/strategies/model/strategy_model.dart';
 
 class GameService {
   late StrategyModel strategyModel;
+  late String userId;
+
+  GameService(this.userId);
 
   void setGame({required StrategyModel strategyModel}) {
     this.strategyModel = strategyModel;
@@ -23,5 +25,4 @@ class GameService {
   get game => strategyModel.strategy.game;
   get level => strategyModel.level;
   get days => strategyModel.days;
-  
 }

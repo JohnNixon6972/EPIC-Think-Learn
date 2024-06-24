@@ -23,7 +23,7 @@ enum Game {
       'Enhances cognitive skills such as attention, concentration, and mental agility.',
       'Strengthens inhibition by requiring players to resist the impulse to tap incorrect buttons.',
     ],
-    gameWidget: SimonGame(),
+    gameWidget: SimonGameScreen(),
   );
 
   final String name;
