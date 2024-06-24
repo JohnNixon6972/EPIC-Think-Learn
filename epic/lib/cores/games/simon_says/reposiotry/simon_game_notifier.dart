@@ -15,24 +15,35 @@ class GameNotifier extends StateNotifier<GameState> {
   late int count;
 
   GameNotifier(this.gameService) : super(GameState()) {
-     count = (gameService.level * 3) % 10;
+    count = (gameService.level * 3) % 10;
   }
 
-  void startTimer() {
+  void _startTimer() {
     _ticker = Ticker(_onTick);
     _startTime = Duration.zero;
     _ticker!.start();
   }
 
-  void stopTimer() {
+  void _stopTimer() {
     _ticker!.stop();
     _ticker!.dispose();
     _ticker = null;
   }
 
   void resetTimer() {
-    stopTimer();
+    if (_ticker != null) _stopTimer();
     state = state.copyWith(elapsedTime: Duration.zero);
+  }
+
+  void startGame() {
+    resetTimer();
+    state = state.copyWith(isGameOver: false);
+    _startTimer();
+  }
+
+  void endGame() {
+    _stopTimer();
+    state = state.copyWith(isGameOver: true);
   }
 
   void generateNewCommand() {

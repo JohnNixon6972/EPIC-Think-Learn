@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 enum Game {
   simonSays(
+    keyPhrase: 'Stop and Think',
     name: 'Simon Says',
     image:
         'https://fileserver.teachstarter.com/thumbnails/6169-simon-says-instruction-cards-3-thumbnail-0-600x400.png',
@@ -43,6 +44,6 @@ enum Game {
     required this.strategies,
     required this.benefits,
     required this.gameWidget,
-    this.keyPhrase = 'Stop and Think',
+    required this.keyPhrase,
   });
 }

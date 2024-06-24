@@ -11,6 +11,8 @@ class GameState {
   Color? backgroundColor;
   int? score;
   Duration? elapsedTime;
+  bool? isGameOver;
+
 
   GameState({
     this.shapes = const [
@@ -42,6 +44,7 @@ class GameState {
     this.message = "",
     this.score = 0,
     this.elapsedTime = Duration.zero,
+    this.isGameOver = true,
   });
 
   GameState copyWith({
@@ -54,6 +57,7 @@ class GameState {
     Color? backgroundColor,
     int? score,
     Duration? elapsedTime,
+    bool? isGameOver,
   }) {
     return GameState(
       shapes: shapes ?? this.shapes,
@@ -65,6 +69,7 @@ class GameState {
       backgroundColor: backgroundColor ?? this.backgroundColor,
       score: score ?? this.score,
       elapsedTime: elapsedTime ?? this.elapsedTime,
+      isGameOver: isGameOver ?? this.isGameOver,
     );
   }
 }
