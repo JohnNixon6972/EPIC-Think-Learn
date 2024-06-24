@@ -46,7 +46,7 @@ class UserDataService {
           .doc(auth.currentUser!.uid)
           .collection('strategies')
           .doc(strategy.name)
-          .set(StrategyModel(level: 0, days: 0, strategy: strategy).toMap());
+          .set(StrategyModel(level: 1, days: 0, strategy: strategy).toMap());
     }
   }
 
