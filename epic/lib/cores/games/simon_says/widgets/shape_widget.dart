@@ -12,14 +12,14 @@ class ShapeWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (shape) {
       case "Square":
-        return Container(width: size, height: size, color: Colors.grey);
+        return Container(width: size, height: size, color: Colors.white);
       case "Circle":
         return Container(
           width: size,
           height: size,
           decoration: const BoxDecoration(
             shape: BoxShape.circle,
-            color: Colors.grey,
+            color: Colors.white,
           ),
         );
       case "Triangle":
@@ -30,7 +30,7 @@ class ShapeWidget extends StatelessWidget {
           height: size,
           width: size,
           child: Material(
-            color: Colors.grey,
+            color: Colors.white,
             shape: PolygonShapeBorder(sides: 5),
             child: Center(),
           ),
@@ -40,7 +40,7 @@ class ShapeWidget extends StatelessWidget {
           height: size,
           width: size,
           child: Material(
-            color: Colors.grey,
+            color: Colors.white,
             shape: PolygonShapeBorder(sides: 6),
             child: Center(),
           ),
@@ -50,11 +50,11 @@ class ShapeWidget extends StatelessWidget {
             height: size,
             width: size,
             child: Material(
-              color: Colors.grey,
+              color: Colors.white,
               shape: StarShapeBorder(corners: 5),
             ));
       case "Heart":
-        return const Icon(Icons.favorite, size: size, color: Colors.grey);
+        return const Icon(Icons.favorite, size: size, color: Colors.white);
       case "Diamond":
         return CustomPaint(
             size: const Size(size, size), painter: DiamondPainter());

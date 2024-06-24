@@ -72,7 +72,8 @@ class SimonSaysPanel extends ConsumerWidget {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      color: AppConstants.primaryColor,
+                      color:
+                          gameNotifier.gameService.strategyModel.strategy.color,
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: Padding(
@@ -88,8 +89,7 @@ class SimonSaysPanel extends ConsumerWidget {
                                 color: AppConstants.primaryTextColor),
                           ),
                           const Padding(
-                            padding:
-                                EdgeInsets.symmetric(horizontal: 12.0),
+                            padding: EdgeInsets.symmetric(horizontal: 12.0),
                             child: Text("|",
                                 style: TextStyle(
                                     fontSize: 18,
@@ -110,18 +110,20 @@ class SimonSaysPanel extends ConsumerWidget {
                   const Spacer(),
                   Container(
                     decoration: BoxDecoration(
-                      color: AppConstants.primaryButtonColor,
+                      color: AppConstants.primaryColor,
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Consumer(
                         builder: (context, ref, child) {
-                          return Text("Score : ${gameState.score}",
-                              style: const TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                  color: AppConstants.primaryTextColor));
+                          return Text(
+                            "Score : ${gameState.score}",
+                            style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: AppConstants.primaryTextColor),
+                          );
                         },
                       ),
                     ),
