@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:epic/features/strategies/model/strategy_model.dart';
 
 class GameService {
@@ -12,10 +13,24 @@ class GameService {
 
   void updateLevel(int level) {
     strategyModel.level = level;
+    updateStrategyOnFirebase(strategyModel);
+  }
+
+  void updateStrategyOnFirebase(StrategyModel strategyModel) {
+    this.strategyModel = strategyModel;
+
+    // update on firebase
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(userId)
+        .collection('strategies')
+        .doc(strategyModel.strategy.name)
+        .update(strategyModel.toMap());
   }
 
   void updateDays(int days) {
     strategyModel.days = days;
+    updateStrategyOnFirebase(strategyModel);
   }
 
   void uploadData() {
