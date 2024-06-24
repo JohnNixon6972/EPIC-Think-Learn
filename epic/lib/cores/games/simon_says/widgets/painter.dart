@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class TrianglePainter extends CustomPainter {
   final Color color;
 
-  TrianglePainter({this.color = Colors.grey});
+  TrianglePainter({this.color = Colors.white});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -29,7 +29,7 @@ class TrianglePainter extends CustomPainter {
 class DiamondPainter extends CustomPainter {
   final Color color;
 
-  DiamondPainter({this.color = Colors.grey});
+  DiamondPainter({this.color = Colors.white});
 
   @override
   void paint(Canvas canvas, Size size) {
@@ -56,7 +56,7 @@ class DiamondPainter extends CustomPainter {
 class CrossPainter extends CustomPainter {
   final Color color;
 
-  CrossPainter({this.color = Colors.grey});
+  CrossPainter({this.color = Colors.white});
 
   @override
   void paint(Canvas canvas, Size size) {

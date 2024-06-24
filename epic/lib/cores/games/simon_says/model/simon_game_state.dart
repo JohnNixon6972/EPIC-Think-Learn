@@ -8,10 +8,11 @@ class GameState {
   Color? currentColor;
   String query;
   String message;
-  Color? backgroundColor;
+  Color backgroundColor;
   int? score;
   Duration? elapsedTime;
-  bool? isGameOver;
+  bool isGameOver;
+  bool isGameWon;
 
 
   GameState({
@@ -45,6 +46,7 @@ class GameState {
     this.score = 0,
     this.elapsedTime = Duration.zero,
     this.isGameOver = true,
+    this.isGameWon = false,
   });
 
   GameState copyWith({
@@ -58,6 +60,7 @@ class GameState {
     int? score,
     Duration? elapsedTime,
     bool? isGameOver,
+    bool? isGameWon,
   }) {
     return GameState(
       shapes: shapes ?? this.shapes,
@@ -70,6 +73,7 @@ class GameState {
       score: score ?? this.score,
       elapsedTime: elapsedTime ?? this.elapsedTime,
       isGameOver: isGameOver ?? this.isGameOver,
+      isGameWon: isGameWon ?? this.isGameWon,
     );
   }
 }

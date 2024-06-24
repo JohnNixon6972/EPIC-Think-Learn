@@ -1,4 +1,3 @@
-import 'package:epic/cores/app_constants.dart';
 import 'package:epic/cores/games/game_internals/provider/game_provider.dart';
 import 'package:epic/cores/games/game_internals/repository/game_service.dart';
 import 'package:epic/cores/games/simon_says/model/simon_game_state.dart';
@@ -12,10 +11,20 @@ class GameNotifier extends StateNotifier<GameState> {
 
   Ticker? _ticker;
   Duration _startTime = Duration.zero;
-  late int count;
+  late int _count;
 
   GameNotifier(this.gameService) : super(GameState()) {
-    count = (gameService.level * 3) % 10;
+    _count = _getShapeCount(gameService.level);
+    state = state.copyWith(
+        backgroundColor:
+            gameService.strategyModel.strategy.color.withOpacity(0.3));
+  }
+
+  int _getShapeCount(int level) {
+    int count = (gameService.level) % 10;
+    count < 2 ? count = 2 : count;
+
+    return count;
   }
 
   void _startTimer() {
@@ -48,7 +57,7 @@ class GameNotifier extends StateNotifier<GameState> {
 
   void generateNewCommand() {
     final random = Random();
-    final shape = state.shapes[random.nextInt(count)];
+    final shape = state.shapes[random.nextInt(_count)];
     final color = state.colors[random.nextInt(state.colors.length)];
     final query = "Color the $shape ${currentColorToString(color)}";
 
@@ -78,20 +87,41 @@ class GameNotifier extends StateNotifier<GameState> {
     return "unknown";
   }
 
+  void _checkScore() {
+    if (state.score == 2) {
+      state = state.copyWith(isGameWon: true, score: 0);
+      gameService.updateLevel(gameService.level + 1);
+
+      Future.delayed(const Duration(seconds: 4), () {
+        state = state.copyWith(isGameWon: false);
+        _count = _getShapeCount(gameService.level);
+      });
+    }
+  }
+
+  int get count => _count;
+
   void checkUserSelection(String shape, Color color) {
     if (shape == state.currentShape && color == state.currentColor) {
       state = state.copyWith(message: "Correct! Well done!");
       generateNewCommand();
+      _checkScore();
+
       Future.delayed(const Duration(seconds: 2), () {
         state = state.copyWith(
-            message: "", backgroundColor: AppConstants.primaryBackgroundColor);
+            message: "",
+            backgroundColor:
+                gameService.strategyModel.strategy.color.withOpacity(0.3));
       });
     } else {
       state = state.copyWith(
           message: "Wrong! Try again!", backgroundColor: Colors.red.shade300);
+
       Future.delayed(const Duration(seconds: 2), () {
         state = state.copyWith(
-            message: "", backgroundColor: AppConstants.primaryBackgroundColor);
+            message: "",
+            backgroundColor:
+                gameService.strategyModel.strategy.color.withOpacity(0.3));
       });
     }
   }
@@ -102,6 +132,6 @@ class GameNotifier extends StateNotifier<GameState> {
 }
 
 final gameProvider = StateNotifierProvider<GameNotifier, GameState>((ref) {
-  final gameService = ref.read(gameServiceProvider);
+  final gameService = ref.watch(gameServiceProvider);
   return GameNotifier(gameService);
 });
