@@ -67,7 +67,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Contact
 
-For any inquiries or support, please contact [jbn3@st-andrews.ac.uk, xm31@st-andrews.ac.uk, hp69@st-andrews.ac.uk].
+For any inquiries or support, please contact jbn3@st-andrews.ac.uk, xm31@st-andrews.ac.uk, hp69@st-andrews.ac.uk.
 
 ---
 
