@@ -1,4 +1,4 @@
-import 'package:epic/cores/games/simon_says/reposiotry/simon_game_notifier.dart';
+import 'package:epic/cores/games/simon_says/repository/simon_game_notifier.dart';
 import 'package:epic/cores/games/simon_says/widgets/color_palaette.dart';
 import 'package:epic/cores/games/simon_says/widgets/shape_widget.dart';
 import 'package:flutter/material.dart';
@@ -9,9 +9,9 @@ class ShapesPanel extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final shapes = ref.watch(gameProvider.select((state) => state.shapes));
-    final level = ref.watch(gameProvider.notifier).count;
-    ref.watch(gameProvider.select((state) => state.currentColor));
+    final shapes = ref.watch(simonGameProvider.select((state) => state.shapes));
+    final level = ref.watch(simonGameProvider.notifier).count;
+    ref.watch(simonGameProvider.select((state) => state.currentColor));
 
     return Expanded(
       child: GridView.count(
