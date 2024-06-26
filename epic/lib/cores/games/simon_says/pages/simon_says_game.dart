@@ -8,8 +8,8 @@ import 'package:epic/cores/widgets/celebration_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class SimonGameScreen extends ConsumerWidget {
-  const SimonGameScreen({super.key});
+class SimonSaysGame extends ConsumerWidget {
+  const SimonSaysGame({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

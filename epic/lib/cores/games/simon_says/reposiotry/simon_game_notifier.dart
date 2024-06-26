@@ -1,3 +1,4 @@
+import 'package:epic/cores/app_constants.dart';
 import 'package:epic/cores/games/game_internals/provider/game_provider.dart';
 import 'package:epic/cores/games/game_internals/repository/game_service.dart';
 import 'package:epic/cores/games/simon_says/model/simon_game_state.dart';
@@ -16,8 +17,7 @@ class GameNotifier extends StateNotifier<GameState> {
   GameNotifier(this.gameService) : super(GameState()) {
     _count = _getShapeCount(gameService.level);
     state = state.copyWith(
-        backgroundColor:
-            gameService.strategyModel.strategy.color.withOpacity(0.3));
+        backgroundColor: AppConstants.inhibitionColor.withOpacity(0.2));
   }
 
   int _getShapeCount(int level) {
@@ -110,8 +110,7 @@ class GameNotifier extends StateNotifier<GameState> {
       Future.delayed(const Duration(seconds: 2), () {
         state = state.copyWith(
             message: "",
-            backgroundColor:
-                gameService.strategyModel.strategy.color.withOpacity(0.3));
+            backgroundColor: AppConstants.inhibitionColor.withOpacity(0.2));
       });
     } else {
       state = state.copyWith(
@@ -120,8 +119,7 @@ class GameNotifier extends StateNotifier<GameState> {
       Future.delayed(const Duration(seconds: 2), () {
         state = state.copyWith(
             message: "",
-            backgroundColor:
-                gameService.strategyModel.strategy.color.withOpacity(0.3));
+            backgroundColor: AppConstants.inhibitionColor..withOpacity(0.3));
       });
     }
   }

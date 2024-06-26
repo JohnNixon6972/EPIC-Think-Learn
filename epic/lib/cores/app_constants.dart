@@ -33,5 +33,6 @@ class AppConstants {
   static const Color primaryTextColor = Colors.white;
   static const Color secondaryTextColor = Color.fromARGB(255, 95, 119, 121);
 
-  static const Color primaryButtonColor = Color.fromARGB(255, 217, 168, 62);
+  // static const Color primaryButtonColor = Color.fromARGB(255, 217, 168, 62);
+  static const Color primaryButtonColor = attentionColor;
 }

@@ -6,7 +6,7 @@ enum Strategies {
   memory(
       name: "Memory",
       image: AppConstants.memoryCardImage,
-      game: Game.simonSays,
+      game: Game.teaTowel,
       color: AppConstants.memoryColor),
 
   inhibition(

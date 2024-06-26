@@ -1,30 +1,55 @@
-import 'package:epic/cores/games/simon_says/pages/simon_game.dart';
+import 'package:epic/cores/games/simon_says/pages/simon_says_game.dart';
+import 'package:epic/cores/games/tea_towel/pages/tea_towel_game.dart';
 import 'package:flutter/material.dart';
 
 enum Game {
   simonSays(
-    keyPhrase: 'Stop and Think',
-    name: 'Simon Says',
-    image:
-        'https://fileserver.teachstarter.com/thumbnails/6169-simon-says-instruction-cards-3-thumbnail-0-600x400.png',
+      keyPhrase: 'Stop and Think',
+      name: 'Simon Says',
+      image: 'assets/images/strategies/inhibition_strategy.png',
+      description:
+          'Simon Says is a classic memory and attention game where players must mimic sequences of colors or sounds.',
+      rules: [
+        'The game will display a sequence of colors or sounds.',
+        'The player must repeat the sequence correctly by tapping the corresponding buttons.',
+        'If the player makes a mistake or taps the wrong button, the game ends.',
+      ],
+      strategies: [
+        'Focus on memorizing the sequence as it is presented.',
+        'Start with shorter sequences and gradually increase the difficulty as you improve.',
+        'Take breaks between games to maintain concentration.',
+      ],
+      benefits: [
+        'Improves memory recall and pattern recognition.',
+        'Enhances cognitive skills such as attention, concentration, and mental agility.',
+        'Strengthens inhibition by requiring players to resist the impulse to tap incorrect buttons.',
+      ],
+      gameWidget: SimonSaysGame()),
+
+  teaTowel(
+    keyPhrase: 'I Found a Way to Remember',
+    name: 'Tea Towel',
+    image: 'assets/images/strategies/memory_strategy.png',
     description:
-        'Simon Says is a classic memory and attention game where players must mimic sequences of colors or sounds.',
+        'The Tea Towel Game challenges players to remember a set of items before they are hidden, testing and improving memory recall.',
     rules: [
-      'The game will display a sequence of colors or sounds.',
-      'The player must repeat the sequence correctly by tapping the corresponding buttons.',
-      'If the player makes a mistake or taps the wrong button, the game ends.',
+      'The game will display a few items on the screen for 20 seconds.',
+      'After 20 seconds, the items will be hidden.',
+      'The player must recall and select the tiles (object names) that they had seen previously.',
+      'The number of items will increase as the game progresses.',
     ],
     strategies: [
-      'Focus on memorizing the sequence as it is presented.',
-      'Start with shorter sequences and gradually increase the difficulty as you improve.',
-      'Take breaks between games to maintain concentration.',
+      'Group items into categories to make them easier to recall.',
+      'Visualize the items in a familiar setting to strengthen memory.',
+      'Take breaks and try different strategies to see which works best for each individual.'
     ],
     benefits: [
-      'Improves memory recall and pattern recognition.',
-      'Enhances cognitive skills such as attention, concentration, and mental agility.',
-      'Strengthens inhibition by requiring players to resist the impulse to tap incorrect buttons.',
+      'Enhances memory recall and visual memory.',
+      'Encourages the use of effective memory strategies.',
+      'Improves attention to detail and observational skills.',
+      'Helps develop cognitive skills such as concentration and focus.'
     ],
-    gameWidget: SimonGameScreen(),
+    gameWidget: TeaTowelGame(),
   );
 
   final String name;
