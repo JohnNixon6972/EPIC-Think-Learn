@@ -1,3 +1,4 @@
+import 'package:epic/cores/games/4_in_a_row/screens/game_screen/game_screen.dart';
 import 'package:epic/cores/games/simon_says/pages/simon_says_game.dart';
 import 'package:epic/cores/games/tea_towel/pages/tea_towel_game.dart';
 import 'package:flutter/material.dart';
@@ -50,6 +51,33 @@ enum Game {
       'Helps develop cognitive skills such as concentration and focus.'
     ],
     gameWidget: TeaTowelGame(),
+  ),
+
+  fourInARow(
+    keyPhrase: 'I can Plan',
+    name: '4 in a row',
+    image: 'assets/images/strategies/memory_strategy.png',
+    description:
+        '4 in a Row is a strategic game where players take turns dropping colored discs into a grid, aiming to connect four of their discs in a row horizontally, vertically, or diagonally.',
+    rules: [
+      'Players take turns dropping one of their colored discs from the top into a column.',
+      'The game continues until one player connects four of their discs in a row or all columns are filled without a winner.',
+      'If a player connects four discs horizontally, vertically, or diagonally, they win.',
+      'If all columns are filled and no player has connected four discs, the game ends in a draw.',
+    ],
+    strategies: [
+      'Plan ahead and anticipate your opponent’s moves.',
+      'Focus on creating multiple lines of four simultaneously.',
+      'Block your opponent’s attempts to connect four discs.',
+      'Control the center columns to increase your chances of winning.',
+    ],
+    benefits: [
+      'Develops strategic thinking and planning skills.',
+      'Enhances problem-solving abilities.',
+      'Encourages patience and careful consideration of each move.',
+      'Improves spatial awareness and pattern recognition.',
+    ],
+    gameWidget: FourInARow(),
   );
 
   final String name;

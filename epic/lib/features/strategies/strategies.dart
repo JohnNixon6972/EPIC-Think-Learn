@@ -22,7 +22,7 @@ enum Strategies {
   planning(
       name: "Planning",
       image: AppConstants.planningCardImage,
-      game: Game.simonSays,
+      game: Game.fourInARow,
       color: AppConstants.planningColor),
   selfRegulation(
       image: AppConstants.selfRegulationCardImage,
