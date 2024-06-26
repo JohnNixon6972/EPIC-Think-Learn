@@ -1,3 +1,4 @@
+import 'package:epic/cores/app_constants.dart';
 import 'package:epic/cores/games/4_in_a_row/controllers/game_controller.dart';
 import 'package:epic/cores/games/4_in_a_row/screens/widgets/game_body.dart';
 import 'package:flutter/material.dart';
@@ -16,14 +17,40 @@ class _FourInARowState extends State<FourInARow> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Obx(() => Text(
-                gameController.turnYellow ? "Player Yellow" : "Player Red",
-                style: TextStyle(
-                  color: gameController.turnYellow ? Colors.yellow : Colors.red,
+        body: Column(
+      children: [
+        Obx(() => Padding(
+              padding: const EdgeInsets.only(
+                top: 20,
+                bottom: 20,
+              ),
+              child: Center(
+                child: Container(
+                  height: 40,
+                  width: 200,
+                  decoration: BoxDecoration(
+                      color: gameController.turnYellow
+                          ? AppConstants.secondaryColor
+                          : AppConstants.primaryColor,
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Center(
+                    child: Text(
+                      gameController.turnYellow
+                          ? "Your turn"
+                          : "Opponent's turn",
+                      style: const TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.w700,
+                        color: AppConstants.primaryTextColor,
+                        // gameController.turnYellow ? Colors.yellow : Colors.red,
+                      ),
+                    ),
+                  ),
                 ),
-              )),
-        ),
-        body: const GameBody());
+              ),
+            )),
+        const GameBody(),
+      ],
+    ));
   }
 }

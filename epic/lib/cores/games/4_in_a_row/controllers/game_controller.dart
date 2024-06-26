@@ -51,14 +51,10 @@ class GameController extends GetxController {
       update();
 
       final int winner = checkVictory();
-
+  
       if (winner != 0) {
         Get.defaultDialog(
-            onWillPop: () {
-              resetGame();
-              return Future.value(true);
-            },
-            title: winner == 1 ? 'YELLOW WON' : 'RED WON',
+            title: winner == 1 ? 'YOU WON' : 'OPPONENT WON',
             content: Cell(
               currentCellMode: winner == 1 ? cellMode.YELLOW : cellMode.RED,
             )).then((value) => resetGame());
