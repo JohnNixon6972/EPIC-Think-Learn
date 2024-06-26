@@ -14,7 +14,6 @@ class GameState {
   bool isGameOver;
   bool isGameWon;
 
-
   GameState({
     this.shapes = const [
       "Square",
@@ -40,7 +39,7 @@ class GameState {
     ],
     this.currentShape = "Square",
     this.currentColor = Colors.red,
-    this.backgroundColor = AppConstants.primaryBackgroundColor,
+    this.backgroundColor = AppConstants.inhibitionColor,
     this.query = "Color the Square red",
     this.message = "",
     this.score = 0,

@@ -28,12 +28,12 @@ class CloudTextBox extends StatelessWidget {
               image: const AssetImage(AppConstants.cloudBackgroundImage),
             ),
           ),
-          Positioned(
-            left: width * 0.1,
-            bottom: height * 0.28,
-            child: Center(
-              child: SizedBox(
-                width: width * 0.8,
+          Column(
+            children: [
+              SizedBox(
+                height: height * 0.6,
+              ),
+              Center(
                 child: Text(
                   text,
                   softWrap: true,
@@ -41,7 +41,7 @@ class CloudTextBox extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               ),
-            ),
+            ],
           ),
         ],
       ),

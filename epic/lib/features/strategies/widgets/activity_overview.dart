@@ -33,7 +33,7 @@ class ActivityOverview extends ConsumerWidget {
         ),
         onPressed: () {
           final gameService = ref.watch(gameServiceProvider);
-          gameService.setGame(strategyModel: model );
+          gameService.setGame(strategyModel: model);
           changeNav(StrategyNav.activity);
         },
         child: const Text(
@@ -72,13 +72,12 @@ class ActivityOverview extends ConsumerWidget {
                     ],
                   ),
                   ClipRRect(
-                    borderRadius: BorderRadius.circular(10),
-                    child: Image.network(
-                      game.image,
-                      width: 150,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                      borderRadius: BorderRadius.circular(10),
+                      child: Image(
+                        image: AssetImage(game.image),
+                        height: 90,
+                        fit: BoxFit.cover,
+                      )),
                 ],
               ),
               const SizedBox(
