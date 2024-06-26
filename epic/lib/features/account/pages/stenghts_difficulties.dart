@@ -87,7 +87,7 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppConstants.tertiaryColorLight,
+      backgroundColor: AppConstants.primaryBackgroundColor,
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(18.0),
@@ -115,18 +115,13 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                   ),
                 ),
                 const SizedBox(height: 10),
-                AnimatedTextKit(
-                  isRepeatingAnimation: false,
-                  animatedTexts: [
-                    TypewriterAnimatedText(
-                      "Please let us know if you find it easy to do the following task:",
-                      textStyle: const TextStyle(
-                        color: AppConstants.tertiaryColor,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w400,
-                      ),
-                    ),
-                  ],
+                const Text(
+                  "Please let us know if you find it difficult to do the following task:",
+                  style: TextStyle(
+                    color: AppConstants.tertiaryColor,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
                 const SizedBox(height: 10),
                 Row(
@@ -142,7 +137,7 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                           color: i == _currentIndex
                               ? AppConstants.secondaryColor
                               : i < _currentIndex
-                                  ? AppConstants.tertiaryColor
+                                  ? AppConstants.primaryColor
                                   : Colors.grey,
                         ),
                       ),
@@ -154,25 +149,15 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              AnimatedTextKit(
-                                isRepeatingAnimation: true,
-                                pause: const Duration(milliseconds: 2),
-                                animatedTexts: [
-                                  ColorizeAnimatedText(
-                                    "We will tailor your experience based on your strengths!",
-                                    textAlign: TextAlign.center,
-                                    textStyle: const TextStyle(
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold,
-                                      letterSpacing: 2,
-                                    ),
-                                    colors: [
-                                      AppConstants.secondaryColor,
-                                      AppConstants.secondaryColor,
-                                      AppConstants.primaryColor,
-                                    ],
-                                  ),
-                                ],
+                              Text(
+                                "We will tailor your experience based on your strengths!",
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  color: AppConstants.tertiaryColor,
+                                  fontSize: 24,
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: 2,
+                                ),
                               ),
                               const SizedBox(height: 20),
                               Center(
@@ -184,7 +169,7 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                                         height: 50,
                                         width: 150,
                                         decoration: BoxDecoration(
-                                          color: AppConstants.tertiaryColor,
+                                          color: AppConstants.secondaryColor,
                                           borderRadius:
                                               BorderRadius.circular(50),
                                         ),
@@ -194,7 +179,7 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                                             style: TextStyle(
                                               fontSize: 22,
                                               color:
-                                                  AppConstants.secondaryColor,
+                                                  AppConstants.primaryTextColor,
                                               fontWeight: FontWeight.bold,
                                             ),
                                           ),
@@ -229,8 +214,8 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                                 const Text(
                                   'We can help you improve the following skills: ',
                                   style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w400,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.w500,
                                     color: AppConstants.tertiaryColor,
                                   ),
                                   textAlign: TextAlign.center,
@@ -240,16 +225,26 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                                   Center(
                                     child: Padding(
                                       padding: const EdgeInsets.all(8.0),
-                                      child: Spring.animatedCard(
-                                        fromWidth: 0,
-                                        toWidth:
-                                            MediaQuery.of(context).size.width /
-                                                2,
-                                        fromHeight: 0,
-                                        fromColor: AppConstants.tertiaryColor,
-                                        toColor: AppConstants.primaryColor
-                                            .withOpacity(0.9),
-                                        toHeight: 50,
+                                      child: Container(
+                                        height: 50,
+                                        width: 150,
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(50),
+                                          color: strategy.name == 'Memory'
+                                              ? AppConstants.memoryColor
+                                              : strategy.name == 'Inhibition'
+                                                  ? AppConstants.inhibitionColor
+                                                  : strategy.name == 'Attention'
+                                                      ? AppConstants
+                                                          .attentionColor
+                                                      : strategy.name ==
+                                                              'Planning'
+                                                          ? AppConstants
+                                                              .planningColor
+                                                          : AppConstants
+                                                              .selfregulationColor,
+                                        ),
                                         child: Center(
                                           child: Text(
                                             strategy.name,
@@ -257,7 +252,7 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                                               fontSize: 18,
                                               fontWeight: FontWeight.bold,
                                               color:
-                                                  AppConstants.secondaryColor,
+                                                  AppConstants.primaryTextColor,
                                             ),
                                             textAlign: TextAlign.center,
                                           ),
@@ -268,35 +263,20 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                                 const SizedBox(
                                   height: 20,
                                 ),
-                                Spring.animatedCard(
-                                  fromWidth: 0,
-                                  toWidth:
-                                      MediaQuery.of(context).size.width - 30,
-                                  fromHeight: 0,
-                                  toHeight: 130,
-                                  fromColor: AppConstants.primaryColor,
-                                  toColor: Colors.white,
+                                Card(
+                                  elevation: 5,
+                                  color: AppConstants.tertiaryColor,
                                   child: Padding(
                                     padding: const EdgeInsets.all(8.0),
                                     child: Center(
-                                      child: AnimatedTextKit(
-                                        isRepeatingAnimation: false,
-                                        pause: const Duration(seconds: 2),
-                                        animatedTexts: [
-                                          ColorizeAnimatedText(
-                                            difficulties[index].name,
-                                            textAlign: TextAlign.center,
-                                            textStyle: const TextStyle(
-                                              fontSize: 24,
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                            colors: [
-                                              AppConstants.primaryColor,
-                                              AppConstants.secondaryColor,
-                                              AppConstants.secondaryColor,
-                                            ],
-                                          ),
-                                        ],
+                                      child: Text(
+                                        difficulties[index].name,
+                                        textAlign: TextAlign.center,
+                                        style: const TextStyle(
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.w400,
+                                          color: AppConstants.primaryTextColor,
+                                        ),
                                       ),
                                     ),
                                   ),
@@ -306,13 +286,15 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    Spring.bubbleButton(
-                                      onTap: _handleYes, // Handle Yes action
+                                    TextButton(
+                                      onPressed:
+                                          _handleYes, // Handle Yes action
+
                                       child: Container(
-                                        height: 50,
-                                        width: 75,
+                                        height: 40,
+                                        width: 70,
                                         decoration: BoxDecoration(
-                                          color: Colors.white,
+                                          color: AppConstants.secondaryColor,
                                           borderRadius:
                                               BorderRadius.circular(50),
                                         ),
@@ -321,25 +303,23 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                                             'Yes',
                                             style: TextStyle(
                                               fontSize: 18,
-                                              color: AppConstants.primaryColor,
-                                              fontWeight: FontWeight.w500,
+                                              color:
+                                                  AppConstants.primaryTextColor,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                           ),
                                         ),
                                       ),
-                                      animDuration: const Duration(seconds: 1),
-                                      bubbleStart: .4,
-                                      bubbleEnd: .9,
-                                      curve: Curves.linear, //Curves.elasticOut
-                                      delay: const Duration(milliseconds: 0),
                                     ),
-                                    Spring.bubbleButton(
-                                      onTap: _nextPage, // Handle No action
+                                    TextButton(
+                                      onPressed: () {
+                                        _nextPage();
+                                      }, // Handle No action
                                       child: Container(
-                                        height: 50,
-                                        width: 75,
+                                        height: 40,
+                                        width: 70,
                                         decoration: BoxDecoration(
-                                          color: Colors.white,
+                                          color: AppConstants.secondaryColor,
                                           borderRadius:
                                               BorderRadius.circular(50),
                                         ),
@@ -348,26 +328,21 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                                             'No',
                                             style: TextStyle(
                                               fontSize: 18,
-                                              color: AppConstants.primaryColor,
-                                              fontWeight: FontWeight.w500,
+                                              color:
+                                                  AppConstants.primaryTextColor,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                           ),
                                         ),
                                       ),
-                                      animDuration: const Duration(seconds: 1),
-                                      bubbleStart: .4,
-                                      bubbleEnd: .9,
-
-                                      curve: Curves.linear, //Curves.elasticOut
-                                      delay: const Duration(milliseconds: 0),
                                     ),
-                                    Spring.bubbleButton(
-                                      onTap: _nextPage, // Handle No action
+                                    TextButton(
+                                      onPressed: _nextPage, // Handle No action
                                       child: Container(
-                                        height: 50,
-                                        width: 75,
+                                        height: 40,
+                                        width: 70,
                                         decoration: BoxDecoration(
-                                          color: Colors.white,
+                                          color: AppConstants.secondaryColor,
                                           borderRadius:
                                               BorderRadius.circular(50),
                                         ),
@@ -376,18 +351,13 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                                             'Skip',
                                             style: TextStyle(
                                               fontSize: 18,
-                                              color: AppConstants.primaryColor,
-                                              fontWeight: FontWeight.w500,
+                                              color:
+                                                  AppConstants.primaryTextColor,
+                                              fontWeight: FontWeight.bold,
                                             ),
                                           ),
                                         ),
                                       ),
-                                      animDuration: const Duration(seconds: 1),
-                                      bubbleStart: .4,
-                                      bubbleEnd: .9,
-
-                                      curve: Curves.linear, //Curves.elasticOut
-                                      delay: const Duration(milliseconds: 0),
                                     ),
                                   ],
                                 ),
