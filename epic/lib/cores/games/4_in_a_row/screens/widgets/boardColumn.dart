@@ -37,7 +37,7 @@ class BoardColumn extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         gameController.playColumn(columnNumber);
-        Future.delayed(const Duration(seconds: 2), () {
+        Future.delayed(const Duration(seconds: 1), () {
           gameController.playColumn(Random().nextInt(7));
         });
       },

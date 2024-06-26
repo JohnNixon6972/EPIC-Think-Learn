@@ -1,4 +1,4 @@
-
+import 'package:epic/cores/app_constants.dart';
 import 'package:epic/cores/games/4_in_a_row/screens/widgets/coin.dart';
 import 'package:flutter/material.dart';
 
@@ -20,11 +20,11 @@ class Cell extends StatelessWidget {
     switch (this.currentCellMode) {
       case cellMode.YELLOW:
         return const Coin(
-          CoinColor: Colors.yellow,
+          CoinColor: AppConstants.secondaryColor,
         );
       case cellMode.RED:
         return const Coin(
-          CoinColor: Colors.red,
+          CoinColor: AppConstants.primaryColor,
         );
       default:
         return const Coin(
@@ -42,7 +42,7 @@ class Cell extends StatelessWidget {
           child: Container(
             height: 50,
             width: 50,
-            color: Colors.blue,
+            color: AppConstants.tertiaryColor,
           ),
         ),
         Positioned.fill(
