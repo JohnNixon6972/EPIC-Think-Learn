@@ -51,7 +51,7 @@ class GameController extends GetxController {
       update();
 
       final int winner = checkVictory();
-
+  
       if (winner != 0) {
         Get.defaultDialog(
             title: winner == 1 ? 'YOU WON' : 'OPPONENT WON',
