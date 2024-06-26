@@ -19,7 +19,7 @@ class LoginPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      backgroundColor: AppConstants.tertiaryColorLight,
+      backgroundColor: AppConstants.primaryBackgroundColor,
       body: SafeArea(
           child: Center(
         child: Column(
@@ -38,7 +38,7 @@ class LoginPage extends ConsumerWidget {
                   curve: Curves.easeInBack,
                   animDuration: const Duration(seconds: 3),
                   child: const LoginAnimation(
-                    color: AppConstants.primaryColor,
+                    color: AppConstants.selfregulationColor,
                     iconName: Icons.games,
                   ),
                 ),
@@ -53,7 +53,7 @@ class LoginPage extends ConsumerWidget {
                   curve: Curves.easeInBack,
                   animDuration: const Duration(seconds: 3),
                   child: const LoginAnimation(
-                    color: AppConstants.secondaryColor,
+                    color: AppConstants.inhibitionColor,
                     iconName: Icons.note_add,
                   ),
                 ),
@@ -73,7 +73,7 @@ class LoginPage extends ConsumerWidget {
                   curve: Curves.easeInBack, //def=1s
                   animDuration: const Duration(seconds: 3),
                   child: const LoginAnimation(
-                    color: AppConstants.secondaryColor,
+                    color: AppConstants.memoryColor,
                     iconName: Icons.directions_run_outlined,
                   ),
                 ),
@@ -88,7 +88,7 @@ class LoginPage extends ConsumerWidget {
                   animDuration: const Duration(seconds: 3),
                   curve: Curves.easeInBack,
                   child: const LoginAnimation(
-                    color: AppConstants.secondaryColor,
+                    color: AppConstants.planningColor,
                     iconName: Icons.pending_actions,
                   ),
                 ),
@@ -105,8 +105,8 @@ class LoginPage extends ConsumerWidget {
               toWidth: MediaQuery.of(context).size.width * .75,
               fromHeight: 60,
               toHeight: 80,
-              fromColor: AppConstants.primaryColor,
-              toColor: AppConstants.secondaryColorLight,
+              fromColor: AppConstants.primaryColorLight,
+              toColor: AppConstants.primaryColor,
               colorDuration: const Duration(seconds: 2),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5),
@@ -116,7 +116,7 @@ class LoginPage extends ConsumerWidget {
                   'EPIC Think Learn',
                   style: TextStyle(
                     fontSize: 20,
-                    color: AppConstants.primaryColor,
+                    color: AppConstants.primaryTextColor,
                     fontWeight: FontWeight.bold,
                     letterSpacing: 2,
                   ),
@@ -130,7 +130,7 @@ class LoginPage extends ConsumerWidget {
               TyperAnimatedText(
                 'Get Started as',
                 textStyle: const TextStyle(
-                  fontSize: 20,
+                  fontSize: 24,
                   color: AppConstants.tertiaryColor,
                   fontWeight: FontWeight.bold,
                   letterSpacing: 3,
@@ -159,7 +159,7 @@ class LoginPage extends ConsumerWidget {
                     height: 75,
                     width: 175,
                     decoration: BoxDecoration(
-                      color: AppConstants.secondaryColorLight,
+                      color: AppConstants.secondaryColor,
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: const Center(
@@ -199,7 +199,7 @@ class LoginPage extends ConsumerWidget {
                     height: 75,
                     width: 175,
                     decoration: BoxDecoration(
-                      color: AppConstants.secondaryColorLight,
+                      color: AppConstants.secondaryColor,
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: const Center(
