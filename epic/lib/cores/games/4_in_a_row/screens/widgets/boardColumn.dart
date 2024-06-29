@@ -1,49 +1,54 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers
+
 import 'dart:math';
 
 import 'package:epic/cores/games/4_in_a_row/controllers/game_controller.dart';
 import 'package:epic/cores/games/4_in_a_row/screens/widgets/cell.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class BoardColumn extends StatelessWidget {
-  final GameController gameController = Get.find<GameController>();
-  final List<int> columnOfPlayerChips;
-  final int columnNumber;
+class BoardColumn extends ConsumerWidget {
+  final int colNum;
+  final List<int> chips;
 
-  BoardColumn({
+  const BoardColumn({
     super.key,
-    required this.columnOfPlayerChips,
-    required this.columnNumber,
+    required this.chips,
+    required this.colNum,
   });
 
-  List<Cell> _buildBoardColumn() {
-    return columnOfPlayerChips.reversed
-        .map((number) => number == 1
-            ? const Cell(
-                currentCellMode: cellMode.YELLOW,
-              )
-            : number == 2
-                ? const Cell(
-                    currentCellMode: cellMode.RED,
-                  )
-                : const Cell(
-                    currentCellMode: cellMode.EMPTY,
-                  ))
-        .toList();
-  }
-
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final gameNotifier = ref.read(gameControllerProvider.notifier);
+    List<Cell> _buildBoardColumn() {
+      return chips.reversed
+          .map((number) => number == 1
+              ? const Cell(
+                  Mode: cellMode.YELLOW,
+                )
+              : number == 2
+                  ? const Cell(
+                      Mode: cellMode.RED,
+                    )
+                  : const Cell(
+                      Mode: cellMode.EMPTY,
+                    ))
+          .toList();
+    }
+
     return GestureDetector(
       onTap: () {
-        gameController.playColumn(columnNumber);
+        gameNotifier.playColumn(colNum, context);
         Future.delayed(const Duration(seconds: 1), () {
-          gameController.playColumn(Random().nextInt(7));
+          gameNotifier.playColumn(Random().nextInt(7), context);
         });
       },
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: _buildBoardColumn(),
       ),
     );
+
+  
   }
 }
