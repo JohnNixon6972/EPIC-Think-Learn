@@ -1,4 +1,4 @@
-import 'package:epic/cores/games/simon_says/reposiotry/simon_game_notifier.dart';
+import 'package:epic/cores/games/simon_says/repository/simon_game_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -9,7 +9,7 @@ class ColorPaletteDialog extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final colors = ref.watch(gameProvider.select((state) => state.colors));
+    final colors = ref.watch(simonGameProvider.select((state) => state.colors));
     return AlertDialog(
       title: const Text('Select a Color'),
       content: SizedBox(
@@ -23,7 +23,7 @@ class ColorPaletteDialog extends ConsumerWidget {
             return GestureDetector(
               onTap: () {
                 ref
-                    .read(gameProvider.notifier)
+                    .read(simonGameProvider.notifier)
                     .checkUserSelection(shape, color);
                 Navigator.of(context).pop();
               },
@@ -35,7 +35,7 @@ class ColorPaletteDialog extends ConsumerWidget {
                     color: color,
                   ),
                   const SizedBox(height: 5),
-                  Text(GameNotifier.currentColorToString(color)),
+                  Text(SimonGameNotifier.currentColorToString(color)),
                 ],
               ),
             );

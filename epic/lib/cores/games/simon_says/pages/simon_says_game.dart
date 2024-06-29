@@ -1,9 +1,9 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:epic/cores/app_constants.dart';
-import 'package:epic/cores/games/simon_says/reposiotry/simon_game_notifier.dart';
+import 'package:epic/cores/games/simon_says/repository/simon_game_notifier.dart';
 import 'package:epic/cores/games/simon_says/widgets/bottom_bar.dart';
 import 'package:epic/cores/games/simon_says/widgets/shapes_panel.dart';
-import 'package:epic/cores/games/simon_says/widgets/simon_says_panel.dart';
+import 'package:epic/cores/games/widgets/top_panel.dart';
+import 'package:epic/cores/games/widgets/winning_text.dart';
 import 'package:epic/cores/widgets/celebration_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -13,8 +13,8 @@ class SimonSaysGame extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final gameNotifier = ref.read(gameProvider.notifier);
-    final gameState = ref.watch(gameProvider);
+    final gameNotifier = ref.read(simonGameProvider.notifier);
+    final gameState = ref.watch(simonGameProvider);
     return Scaffold(
       body: Stack(
         children: [
@@ -24,21 +24,8 @@ class SimonSaysGame extends ConsumerWidget {
             child: const CelebrationWidget(),
           ),
           gameState.isGameWon
-              ? Center(
-                  child: AnimatedTextKit(
-                      totalRepeatCount: 1,
-                      repeatForever: false,
-                      animatedTexts: [
-                        TypewriterAnimatedText(
-                          'Yaay! You Won!',
-                          textStyle: const TextStyle(
-                            fontSize: 30,
-                            color: AppConstants.primaryColor,
-                            fontWeight: FontWeight.bold,
-                          ),
-                          speed: const Duration(milliseconds: 100),
-                        ),
-                      ]),
+              ? const Center(
+                  child: WinningText(),
                 )
               : AnimatedContainer(
                   color: gameState.backgroundColor,
@@ -67,12 +54,15 @@ class SimonSaysGame extends ConsumerWidget {
                             ),
                           ),
                         )
-                      : const Column(
-                          key: Key('Game Column'),
+                      : Column(
+    
                           children: [
-                            SimonSaysPanel(),
-                            ShapesPanel(),
-                            BottomBar(),
+                            TopPanel(
+                              gameNotifier: gameNotifier,
+                              gameState: gameState,
+                            ),
+                            const ShapesPanel(),
+                            const BottomBar(),
                           ],
                         ),
                 ),

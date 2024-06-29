@@ -1,7 +1,7 @@
 import 'package:epic/cores/app_constants.dart';
 import 'package:flutter/material.dart';
 
-class GameState {
+class SimonGameState {
   final List<String> shapes;
   final List<Color> colors;
   String? currentShape;
@@ -14,7 +14,7 @@ class GameState {
   bool isGameOver;
   bool isGameWon;
 
-  GameState({
+  SimonGameState({
     this.shapes = const [
       "Square",
       "Circle",
@@ -48,7 +48,7 @@ class GameState {
     this.isGameWon = false,
   });
 
-  GameState copyWith({
+  SimonGameState copyWith({
     List<String>? shapes,
     List<Color>? colors,
     String? currentShape,
@@ -61,7 +61,7 @@ class GameState {
     bool? isGameOver,
     bool? isGameWon,
   }) {
-    return GameState(
+    return SimonGameState(
       shapes: shapes ?? this.shapes,
       colors: colors ?? this.colors,
       currentShape: currentShape ?? this.currentShape,

@@ -7,14 +7,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:math';
 import 'package:flutter/material.dart';
 
-class GameNotifier extends StateNotifier<GameState> {
+class SimonGameNotifier extends StateNotifier<SimonGameState> {
   final GameService gameService;
 
   Ticker? _ticker;
   Duration _startTime = Duration.zero;
   late int _count;
 
-  GameNotifier(this.gameService) : super(GameState()) {
+  SimonGameNotifier(this.gameService) : super(SimonGameState()) {
     _count = _getShapeCount(gameService.level);
     state = state.copyWith(
         backgroundColor: AppConstants.inhibitionColor.withOpacity(0.2));
@@ -129,7 +129,7 @@ class GameNotifier extends StateNotifier<GameState> {
   }
 }
 
-final gameProvider = StateNotifierProvider<GameNotifier, GameState>((ref) {
+final simonGameProvider = StateNotifierProvider<SimonGameNotifier, SimonGameState>((ref) {
   final gameService = ref.watch(gameServiceProvider);
-  return GameNotifier(gameService);
+  return SimonGameNotifier(gameService);
 });
