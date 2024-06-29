@@ -6,6 +6,6 @@ class GameBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Board();
+    return const Board();
   }
 }

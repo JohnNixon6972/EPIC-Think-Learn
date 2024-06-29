@@ -1,3 +1,5 @@
+// ignore_for_file: camel_case_types, constant_identifier_names, non_constant_identifier_names, prefer_typing_uninitialized_variables
+
 import 'package:epic/cores/app_constants.dart';
 import 'package:epic/cores/games/4_in_a_row/screens/widgets/coin.dart';
 import 'package:flutter/material.dart';
@@ -9,22 +11,22 @@ enum cellMode {
 }
 
 class Cell extends StatelessWidget {
-  final currentCellMode;
+  final Mode;
 
   const Cell({
     super.key,
-    required this.currentCellMode,
+    required this.Mode,
   });
 
   Coin _buildCoin() {
-    switch (this.currentCellMode) {
+    switch (this.Mode) {
       case cellMode.YELLOW:
         return const Coin(
-          CoinColor: AppConstants.secondaryColor,
+          CoinColor: Colors.yellow,
         );
       case cellMode.RED:
         return const Coin(
-          CoinColor: AppConstants.primaryColor,
+          CoinColor: Colors.red,
         );
       default:
         return const Coin(
@@ -46,9 +48,13 @@ class Cell extends StatelessWidget {
           ),
         ),
         Positioned.fill(
-          child: Align(alignment: Alignment.center, child: _buildCoin()),
+          child: Align(
+            alignment: Alignment.center,
+            child: _buildCoin(),
+          ),
         ),
       ],
     );
   }
 }
+
