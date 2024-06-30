@@ -7,14 +7,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class TopPanel extends StatelessWidget {
+  final String gameText;
   final gameState;
   final gameNotifier;
   const TopPanel(
-      {required this.gameState, required this.gameNotifier, super.key});
+      {required this.gameText,
+      required this.gameState,
+      required this.gameNotifier,
+      super.key});
 
   @override
   Widget build(BuildContext context) {
-
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
@@ -32,8 +35,8 @@ class TopPanel extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text("Simon Says: ",
-                      style: TextStyle(
+                  Text(gameText,
+                      style: const TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                           color: AppConstants.primaryTextColor)),
@@ -74,36 +77,41 @@ class TopPanel extends StatelessWidget {
                 children: [
                   Container(
                     decoration: BoxDecoration(
-                      color:
-                          gameNotifier.gameService.strategyModel.strategy.color,
+                      color: AppConstants.primaryBackgroundColor,
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8.0, horizontal: 12),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             "Level : ${gameNotifier.gameService.level}",
-                            style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                                color: AppConstants.primaryTextColor),
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: gameNotifier
+                                  .gameService.strategyModel.strategy.color,
+                            ),
                           ),
-                          const Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 12.0),
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 12.0),
                             child: Text("|",
                                 style: TextStyle(
                                     fontSize: 18,
                                     fontWeight: FontWeight.bold,
-                                    color: AppConstants.primaryTextColor)),
+                                    color: gameNotifier.gameService
+                                        .strategyModel.strategy.color)),
                           ),
                           Text(
                             "Duration: ${formatDuration(gameState.elapsedTime ?? const Duration(seconds: 0))}",
-                            style: const TextStyle(
+                            style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
-                                color: AppConstants.primaryTextColor),
+                                color: gameNotifier
+                                    .gameService.strategyModel.strategy.color),
                           ),
                         ],
                       ),
@@ -116,7 +124,8 @@ class TopPanel extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 8.0, horizontal: 12),
                       child: Consumer(
                         builder: (context, ref, child) {
                           return Text(
