@@ -55,9 +55,9 @@ class SimonSaysGame extends ConsumerWidget {
                           ),
                         )
                       : Column(
-    
                           children: [
                             TopPanel(
+                              gameText: "Simon Says: ",
                               gameNotifier: gameNotifier,
                               gameState: gameState,
                             ),
