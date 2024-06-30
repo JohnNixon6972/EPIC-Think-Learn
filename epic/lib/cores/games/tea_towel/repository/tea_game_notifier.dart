@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:epic/cores/app_constants.dart';
@@ -27,7 +28,6 @@ class TeaGameNotifier extends StateNotifier<TeaGameState> {
       count = 5;
     }
     return count * 5 % state.objects.length;
-    // return 20;
   }
 
   void _startTimer() {
@@ -82,12 +82,24 @@ class TeaGameNotifier extends StateNotifier<TeaGameState> {
     state = state.copyWith(
         query: "Remember the items in the list below",
         currentItems: items,
+        timeLeft: _count * 5 * 2,
         currentItemNames: itemNames.toList(),
         isItemSelection: false);
+
+    Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (state.timeLeft == 0) {
+        timer.cancel();
+        state = state.copyWith(
+          query: "Select the items you remember",
+          isItemSelection: true,
+        );
+      } else {
+        state = state.copyWith(timeLeft: state.timeLeft - 1);
+      }
+    });
   }
 
   void selectItem(String itemName) {
-    // check if the item is already selected
     if (state.userSelectedItems.contains(itemName)) {
       state = state.copyWith(
           userSelectedItems: state.userSelectedItems
@@ -103,13 +115,12 @@ class TeaGameNotifier extends StateNotifier<TeaGameState> {
     if (state.score == 2) {
       state = state.copyWith(isGameWon: true, score: 0);
       gameService.updateLevel(gameService.level + 1);
-
-      Future.delayed(const Duration(seconds: 2), () {
-        state = state.copyWith(isGameWon: false);
-        _count = _getItemCount(gameService.level);
-        generateItems();
-      });
     }
+    Future.delayed(const Duration(seconds: 2), () {
+      state = state.copyWith(isGameWon: false);
+      _count = _getItemCount(gameService.level);
+      generateItems();
+    });
   }
 
   void checkItems() {

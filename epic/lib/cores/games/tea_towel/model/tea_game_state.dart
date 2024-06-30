@@ -39,7 +39,7 @@ class TeaGameState {
 
   int score;
   Duration? elapsedTime;
-  Duration? visibleTime;
+  int timeLeft;
   bool isGameOver;
   bool isGameWon;
   Color backgroundColor;
@@ -49,7 +49,7 @@ class TeaGameState {
     this.score = 0,
     this.isGameOver = true,
     this.isGameWon = false,
-    this.visibleTime = Duration.zero,
+    this.timeLeft = 0,
     this.isItemSelection = false,
     this.userSelectedItems = const [],
     this.currentItems = const [],
@@ -72,7 +72,7 @@ class TeaGameState {
     bool? isGameOver,
     bool? isItemSelection,
     int? score,
-    Duration? visibleTime,
+    int? timeLeft,
   }) {
     return TeaGameState(
       userSelectedItems: userSelectedItems ?? this.userSelectedItems,
@@ -86,7 +86,7 @@ class TeaGameState {
       message: message ?? this.message,
       score: score ?? this.score,
       isItemSelection: isItemSelection ?? this.isItemSelection,
-      visibleTime: visibleTime ?? this.visibleTime,
+      timeLeft: timeLeft ?? this.timeLeft,
     );
   }
 }
