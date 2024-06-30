@@ -16,62 +16,49 @@ class ItemView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(
-                    horizontal: 8.0)
-                .copyWith(bottom: 8),
-            child: Container(
-              padding: const EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                color: AppConstants
-                    .primaryBackgroundColor,
-                borderRadius:
-                    BorderRadius.circular(8),
-              ),
-              child: Text(
-                "Time Left to Remember: "
-                "${gameState.visibleTime!.inSeconds} seconds",
-                style: const TextStyle(
-                  color: AppConstants
-                      .secondaryTextColor,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding:
+              const EdgeInsets.symmetric(horizontal: 8.0).copyWith(bottom: 8),
+          child: Container(
+            padding: const EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              color: AppConstants.primaryBackgroundColor,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Text(
+              "Time Left to Remember: "
+              "${gameState.visibleTime!.inSeconds} seconds",
+              style: const TextStyle(
+                color: AppConstants.secondaryTextColor,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: GridView.builder(
-                gridDelegate:
-                    const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4,
-                  crossAxisSpacing: 10,
-                  mainAxisSpacing: 10,
-                ),
-                itemCount:
-                    gameState.currentItems.length,
-                itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      gameNotifier.selectItem(
-                          gameState
-                              .currentItems[index]
-                              .name);
-                    },
-                    child: Image.asset(
-                      gameState.currentItems[index]
-                          .image,
-                      fit: BoxFit.contain,
-                    ),
-                  );
-                },
+        ),
+        SizedBox(
+          height: MediaQuery.of(context).size.height * 0.57,
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: GridView.builder(
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 4,
+                crossAxisSpacing: 10,
+                mainAxisSpacing: 10,
               ),
+              itemCount: gameState.currentItems.length,
+              itemBuilder: (context, index) {
+                return Image.asset(
+                  gameState.currentItems[index].image,
+                  fit: BoxFit.contain,
+                );
+              },
             ),
           ),
-        ],
-      );
+        ),
+      ],
+    );
   }
 }

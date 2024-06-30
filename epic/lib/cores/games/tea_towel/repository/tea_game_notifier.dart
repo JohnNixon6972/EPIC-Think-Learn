@@ -27,6 +27,7 @@ class TeaGameNotifier extends StateNotifier<TeaGameState> {
       count = 5;
     }
     return count * 5 % state.objects.length;
+    // return 20;
   }
 
   void _startTimer() {
