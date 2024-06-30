@@ -1,7 +1,7 @@
 import 'package:epic/cores/app_constants.dart';
 import 'package:epic/cores/games/simon_says/repository/simon_game_notifier.dart';
-import 'package:epic/cores/games/simon_says/widgets/bottom_bar.dart';
 import 'package:epic/cores/games/simon_says/widgets/shapes_panel.dart';
+import 'package:epic/cores/games/widgets/end_game_button.dart';
 import 'package:epic/cores/games/widgets/top_panel.dart';
 import 'package:epic/cores/games/widgets/winning_text.dart';
 import 'package:epic/cores/widgets/celebration_widget.dart';
@@ -16,6 +16,9 @@ class SimonSaysGame extends ConsumerWidget {
     final gameNotifier = ref.read(simonGameProvider.notifier);
     final gameState = ref.watch(simonGameProvider);
     return Scaffold(
+      floatingActionButton: !gameState.isGameOver
+          ? EndGameButton(endGame: gameNotifier.endGame)
+          : null,
       body: Stack(
         children: [
           Visibility(
@@ -62,7 +65,6 @@ class SimonSaysGame extends ConsumerWidget {
                               gameState: gameState,
                             ),
                             const ShapesPanel(),
-                            const BottomBar(),
                           ],
                         ),
                 ),

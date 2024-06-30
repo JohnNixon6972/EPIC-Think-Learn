@@ -2,6 +2,7 @@ import 'package:epic/cores/app_constants.dart';
 import 'package:epic/cores/games/tea_towel/repository/tea_game_notifier.dart';
 import 'package:epic/cores/games/tea_towel/widgets/item_selection.dart';
 import 'package:epic/cores/games/tea_towel/widgets/item_view.dart';
+import 'package:epic/cores/games/widgets/end_game_button.dart';
 import 'package:epic/cores/games/widgets/top_panel.dart';
 import 'package:epic/cores/games/widgets/winning_text.dart';
 import 'package:epic/cores/widgets/celebration_widget.dart';
@@ -16,6 +17,9 @@ class TeaTowelGame extends ConsumerWidget {
     final gameNotifier = ref.read(teaGameProvider.notifier);
     final gameState = ref.watch(teaGameProvider);
     return Scaffold(
+      floatingActionButton: !gameState.isGameOver
+          ? EndGameButton(endGame: gameNotifier.endGame)
+          : null,
       body: Stack(
         children: [
           Visibility(
@@ -66,10 +70,10 @@ class TeaTowelGame extends ConsumerWidget {
                               height: 10,
                             ),
                             gameState.isItemSelection
-                                ? ItemView(
+                                ? ItemSelection(
                                     gameState: gameState,
                                     gameNotifier: gameNotifier)
-                                : ItemSelection(
+                                : ItemView(
                                     gameState: gameState,
                                     gameNotifier: gameNotifier),
                           ],
