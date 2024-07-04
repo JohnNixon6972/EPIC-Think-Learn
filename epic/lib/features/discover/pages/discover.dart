@@ -47,11 +47,8 @@ class Discover extends ConsumerWidget {
                             fontWeight: FontWeight.bold,
                             color: AppConstants.primaryColor),
                       ),
-                      const SizedBox(
-                        height: 10,
-                      ),
                       SizedBox(
-                        height: 300,
+                        height: 350,
                         width: MediaQuery.of(context).size.width,
                         child: StrategyView(
                           currentUser: currentUser,
