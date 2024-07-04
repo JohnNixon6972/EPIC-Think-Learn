@@ -47,6 +47,7 @@ dependencies:
   flutter_animate: ^4.5.0
   morphable_shape: ^1.6.6
   confetti: ^0.7.0
+  circular_reveal_animation: ^2.0.1
   percent_indicator: ^4.2.3
 
 dev_dependencies:

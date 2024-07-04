@@ -1,4 +1,3 @@
-
 import 'package:epic/cores/app_constants.dart';
 import 'package:flutter/material.dart';
 
@@ -14,11 +13,11 @@ class EndGameButton extends StatelessWidget {
     return TextButton(
       style: TextButton.styleFrom(
         backgroundColor: AppConstants.primaryBackgroundColor,
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.all(12),
         shape: RoundedRectangleBorder(
           side: const BorderSide(
               color: AppConstants.primaryButtonColor, width: 2),
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(12),
         ),
       ),
       onPressed: endGame,

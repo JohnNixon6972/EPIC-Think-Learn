@@ -1,6 +1,7 @@
 import 'package:epic/cores/app_constants.dart';
 import 'package:epic/cores/games/tea_towel/model/tea_game_state.dart';
 import 'package:epic/cores/games/tea_towel/repository/tea_game_notifier.dart';
+import 'package:epic/cores/games/tea_towel/widgets/reveal_animation.dart';
 import 'package:flutter/material.dart';
 
 class ItemView extends StatelessWidget {
@@ -29,7 +30,7 @@ class ItemView extends StatelessWidget {
             ),
             child: Text(
               "Time Left to Remember: "
-              "${gameState.visibleTime!.inSeconds} seconds",
+              "${gameState.timeLeft} seconds",
               style: const TextStyle(
                 color: AppConstants.secondaryTextColor,
                 fontSize: 16,
@@ -50,9 +51,11 @@ class ItemView extends StatelessWidget {
               ),
               itemCount: gameState.currentItems.length,
               itemBuilder: (context, index) {
-                return Image.asset(
-                  gameState.currentItems[index].image,
-                  fit: BoxFit.contain,
+                return RevealAnimation(
+                  child: Image.asset(
+                    gameState.currentItems[index].image,
+                    fit: BoxFit.contain,
+                  ),
                 );
               },
             ),
@@ -62,3 +65,7 @@ class ItemView extends StatelessWidget {
     );
   }
 }
+
+
+
+

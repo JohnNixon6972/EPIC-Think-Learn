@@ -1,6 +1,10 @@
+import 'package:epic/cores/screens/error_page.dart';
 import 'package:epic/features/auth/model/user_model.dart';
-import 'package:epic/features/discover/widgets/strategy_card.dart';
+import 'package:epic/features/auth/repository/user_data_service.dart';
+import 'package:epic/features/strategies/pages/strategy_detail_page.dart';
+import 'package:epic/features/strategies/provider/strategy_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class StrategyView extends StatefulWidget {
   final UserModel currentUser;
@@ -14,94 +18,142 @@ class StrategyView extends StatefulWidget {
 }
 
 class _StrategyViewState extends State<StrategyView> {
-  late PageController _pageController;
-  int _currentPage = 0;
+  final PageController _controller = PageController();
+  final _notifierScroll = ValueNotifier(0.0);
+  void listener() {
+    _notifierScroll.value = _controller.page!;
+  }
 
   @override
   void initState() {
+    _controller.addListener(listener);
     super.initState();
-    _pageController = PageController(
-      viewportFraction: 0.8,
-      initialPage: _currentPage,
-    );
   }
 
-  // @override
-  // Widget build(BuildContext context) {
-  //   return RawScrollbar(
-  //     controller: _pageController,
-  //     thumbColor: AppConstants.primaryColor,
-  //     thickness: 3,
-  //     radius: const Radius.circular(30),
-  //     thumbVisibility: true,
-  //     child: GridView.builder(
-  //       padding: EdgeInsets.zero,
-  //       physics: const BouncingScrollPhysics(),
-  //       gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-  //         maxCrossAxisExtent: 175.0,
-  //         mainAxisExtent: 175,
-  //         childAspectRatio: 0.4,
-  //       ),
-  //       itemCount: 5,
-  //       controller: _pageController,
-  //       itemBuilder: (context, index) {
-  //         bool isActive = index == _currentPage;
-  //         return SizedBox(
-  //           height: 200,
-  //           width: MediaQuery.of(context).size.width / 3,
-  //           child: GestureDetector(
-  //             onTap: () {
-  //               setState(() {
-  //                 _currentPage = index;
-  //               });
-  //             },
-  //             child: Center(
-  //               child: _buildCard(
-  //                   StrategyCard(
-  //                     strategyName: widget.currentUser.strategies[index],
-  //                   ),
-  //                   isActive),
-  //             ),
-  //           ),
-  //         );
-  //       },
-  //     ),
-  //   );
-  // }
+  @override
+  void dispose() {
+    _controller.removeListener(listener);
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return PageView.builder(
-      itemCount: 5,
-      controller: _pageController,
-      onPageChanged: (index) {
-        setState(() {
-          _currentPage = index;
-        });
-      },
-      itemBuilder: (context, index) {
-        bool isActive = index == _currentPage;
-        return Padding(
-          padding: const EdgeInsets.only(bottom: 15.0),
-          child: Center(
-            child: _buildCard(
-                StrategyCard(
-                  strategyName: widget.currentUser.strategies[index],
-                ),
-                isActive),
-          ),
+    double cardheight = 280;
+    double cardWidth = 250;
+    return ValueListenableBuilder<double>(
+      valueListenable: _notifierScroll,
+      builder: (context, value, _) {
+        return PageView.builder(
+          controller: _controller,
+          itemCount: 5,
+          itemBuilder: (context, index) {
+            final strategyName = widget.currentUser.strategies[index];
+            final percent = (index - value).abs();
+            final rotate = percent.clamp(0.0, 1.0);
+
+            return Consumer(
+              builder: (context, ref, child) {
+                final strategyAsync =
+                    ref.watch(strategyStreamProvider(strategyName));
+                return strategyAsync.when(
+                  data: (strategy) {
+                    final strategyData = strategy.strategy;
+                    return GestureDetector(
+                      onTap: () {
+
+                        // update last seen strategy
+                        ref
+                            .read(userDataServiceProvider)
+                            .updateLastSeenStrategy(strategyData.name);
+
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => StrategyDetailPage(
+                              strategyName: strategyData.name,
+                            ),
+                          ),
+                        );
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 15.0),
+                        child: Center(
+                          child: Stack(
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Container(
+                                    height: cardheight,
+                                    width: cardWidth,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white.withOpacity(0.7),
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: strategyData.color
+                                                .withOpacity(1),
+                                            blurRadius: 10,
+                                            offset: const Offset(5.0, 5.0),
+                                            spreadRadius: 5,
+                                          ),
+                                        ]),
+                                  ),
+                                  const SizedBox(height: 20),
+                                  Opacity(
+                                    opacity: 1 - rotate,
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          strategyData.name,
+                                          style: TextStyle(
+                                            fontSize: 20,
+                                            color: strategyData.color,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Transform(
+                                alignment: Alignment.centerLeft,
+                                transform: Matrix4.identity()
+                                  ..setEntry(3, 2, 0.002)
+                                  ..rotateY(1.2 * rotate)
+                                  ..translate(-rotate * 200),
+                                child: Hero(
+                                  tag: 'strategy-image-${strategyData.name}',
+                                  child: Image.asset(
+                                    strategyData.image,
+                                    height: cardheight,
+                                    width: cardWidth,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                  error: (error, stackTrace) => ErrorPage(
+                    message: error.toString() + stackTrace.toString(),
+                  ),
+                  loading: () {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
+                );
+              },
+            );
+          },
         );
       },
     );
   }
-}
-
-Widget _buildCard(Widget card, bool isActive) {
-  double scaleFactor = isActive ? 1 : 0.8;
-  return AnimatedContainer(
-    padding: const EdgeInsets.all(08),
-    duration: const Duration(milliseconds: 350),
-    curve: Curves.easeInOut,
-    transform: Matrix4.identity()..scale(scaleFactor, scaleFactor),
-    child: card,
-  );
 }

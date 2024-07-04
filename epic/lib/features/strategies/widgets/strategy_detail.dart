@@ -32,7 +32,7 @@ class StrategyDetail extends ConsumerWidget {
           changeNav(StrategyNav.activityOverview);
         },
         child: const Text(
-          'Goto Activity',
+          'Go to Activity',
           style: TextStyle(
               fontSize: 16,
               color: AppConstants.primaryTextColor,
