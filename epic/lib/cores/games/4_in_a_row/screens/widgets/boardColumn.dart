@@ -39,16 +39,17 @@ class BoardColumn extends ConsumerWidget {
     return GestureDetector(
       onTap: () {
         gameNotifier.playColumn(colNum, context);
-        Future.delayed(const Duration(seconds: 1), () {
-          gameNotifier.playColumn(Random().nextInt(7), context);
-        });
+
+        gameNotifier.isWinnerDeclared
+            ? Future.delayed(const Duration(seconds: 1), () {
+                gameNotifier.playColumn(Random().nextInt(7), context);
+              })
+            : null;
       },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: _buildBoardColumn(),
       ),
     );
-
-  
   }
 }

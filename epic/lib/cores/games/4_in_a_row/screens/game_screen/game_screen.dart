@@ -2,6 +2,7 @@ import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:epic/cores/app_constants.dart';
 import 'package:epic/cores/games/4_in_a_row/controllers/game_controller.dart';
 import 'package:epic/cores/games/4_in_a_row/screens/widgets/game_body.dart';
+import 'package:epic/cores/games/4_in_a_row/screens/widgets/levelIndicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -61,6 +62,7 @@ class FourInARow extends ConsumerWidget {
             const SizedBox(height: 20),
             const GameBody(),
             const SizedBox(height: 20),
+            const LevelIndicator(),
           ],
         ),
       ),
