@@ -43,9 +43,7 @@ class SimonSaysGame extends ConsumerWidget {
                                   backgroundColor:
                                       AppConstants.primaryButtonColor,
                                   padding: const EdgeInsets.all(12.0)),
-                              onPressed: () {
-                                gameNotifier.startGame();
-                              },
+                              onPressed: gameNotifier.startGame,
                               child: const Text(
                                 'Start Game',
                                 style: TextStyle(

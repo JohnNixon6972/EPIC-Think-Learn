@@ -7,6 +7,7 @@ class StrategyModel {
   int averageTime;
   int averageAccuracy;
   DateTime lastPlayed;
+  int timesPlayed;
 
   StrategyModel({
     required this.strategy,
@@ -15,6 +16,7 @@ class StrategyModel {
     required this.averageTime,
     required this.averageAccuracy,
     required this.lastPlayed,
+    required this.timesPlayed,
   });
 
   factory StrategyModel.fromMap(Map<String, dynamic> map) {
@@ -27,6 +29,7 @@ class StrategyModel {
       strategy: strategy,
       level: map['levels'],
       days: map['days'],
+      timesPlayed: map['timesPlayed'],
       lastPlayed: DateTime.fromMillisecondsSinceEpoch(
           map['lastPlayed'].millisecondsSinceEpoch),
     );
@@ -38,6 +41,7 @@ class StrategyModel {
       'levels': level,
       'days': days,
       'averageTime': averageTime,
+      'timesPlayed': timesPlayed,
       'averageAccuracy': averageAccuracy,
       'lastPlayed': lastPlayed,
     };

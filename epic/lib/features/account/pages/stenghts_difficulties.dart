@@ -1,5 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:epic/cores/app_constants.dart';
 import 'package:epic/features/auth/repository/user_data_service.dart';
 import 'package:epic/features/strategies/strategies.dart';

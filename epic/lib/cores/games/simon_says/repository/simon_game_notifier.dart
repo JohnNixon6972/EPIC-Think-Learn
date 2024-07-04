@@ -13,6 +13,7 @@ class SimonGameNotifier extends StateNotifier<SimonGameState> {
   Ticker? _ticker;
   Duration _startTime = Duration.zero;
   late int _count;
+  int totalQueries = 0;
 
   SimonGameNotifier(this.gameService) : super(SimonGameState()) {
     _count = _getShapeCount(gameService.level);
@@ -51,6 +52,9 @@ class SimonGameNotifier extends StateNotifier<SimonGameState> {
   }
 
   void endGame() {
+    final time = state.elapsedTime?.inSeconds;
+    gameService.updateAverageTime(time!);
+
     _stopTimer();
     state = state.copyWith(isGameOver: true);
   }
@@ -129,7 +133,8 @@ class SimonGameNotifier extends StateNotifier<SimonGameState> {
   }
 }
 
-final simonGameProvider = StateNotifierProvider<SimonGameNotifier, SimonGameState>((ref) {
+final simonGameProvider =
+    StateNotifierProvider<SimonGameNotifier, SimonGameState>((ref) {
   final gameService = ref.watch(gameServiceProvider);
   return SimonGameNotifier(gameService);
 });
