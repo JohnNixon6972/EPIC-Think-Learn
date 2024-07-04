@@ -34,6 +34,7 @@ class ActivityOverview extends ConsumerWidget {
         onPressed: () {
           final gameService = ref.watch(gameServiceProvider);
           gameService.setGame(strategyModel: model);
+          gameService.updateLastPlayed();
           changeNav(StrategyNav.activity);
         },
         child: const Text(

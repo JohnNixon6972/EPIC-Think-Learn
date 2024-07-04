@@ -53,6 +53,7 @@ class UserDataService {
             averageAccuracy: 0,
             averageTime: 0,
             lastPlayed: DateTime.now(),
+            timesPlayed: 0,
           ).toMap());
     }
   }
