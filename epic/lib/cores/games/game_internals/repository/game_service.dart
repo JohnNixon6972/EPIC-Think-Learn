@@ -33,11 +33,9 @@ class GameService {
     updateStrategyOnFirebase(strategyModel);
   }
 
-  void uploadData() {
-    // Upload data to the server
-  }
-
   get game => strategyModel.strategy.game;
   get level => strategyModel.level;
   get days => strategyModel.days;
+  get averageTime => strategyModel.averageTime;
+  get averageAccuracy => strategyModel.averageAccuracy;
 }
