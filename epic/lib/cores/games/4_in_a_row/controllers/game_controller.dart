@@ -2,13 +2,18 @@
 
 import 'package:epic/cores/app_constants.dart';
 import 'package:epic/cores/games/4_in_a_row/screens/widgets/cell.dart';
+import 'package:epic/cores/games/game_internals/provider/game_provider.dart';
+import 'package:epic/cores/games/game_internals/repository/game_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class GameController extends StateNotifier<List<List<int>>> {
-  GameController() : super([]) {
+  GameController(this.gameService) : super([]) {
     _buildBoard();
   }
+
+  final GameService gameService;
+  int points = 0;
 
   List<List<int>> get board => state;
   set board(List<List<int>> value) => state = value;
@@ -16,9 +21,25 @@ class GameController extends StateNotifier<List<List<int>>> {
   bool _turnYellow = true;
   bool get turnYellow => _turnYellow;
 
+  bool _isWinnerDeclared = false;
+  bool get isWinnerDeclared => _isWinnerDeclared;
+
   void _buildBoard() {
     board = List.generate(7, (_) => List.filled(6, 0));
     _turnYellow = true;
+    _isWinnerDeclared = false;
+  }
+
+  void incrementPoints() {
+    turnYellow == false ? points += 100 : points += 0;
+  }
+
+  void incrementLevel() {
+    incrementPoints();
+    if (points == 500) {
+      gameService.updateLevel(gameService.level + 1);
+      points = 0;
+    }
   }
 
   void playColumn(int playedcolNum, BuildContext context) {
@@ -43,11 +64,14 @@ class GameController extends StateNotifier<List<List<int>>> {
       int diagonal = checkDiagonalWin();
 
       if (horizontal == 1 || vertical == 1 || diagonal == 1) {
+        // gameService.updateLevel(gameService.level + 1);
+        incrementLevel();
+        _isWinnerDeclared = true;
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             backgroundColor: AppConstants.secondaryColor,
             elevation: 5,
-            duration: Duration(seconds: 1),
+            duration: Duration(seconds: 2),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(30),
@@ -71,11 +95,14 @@ class GameController extends StateNotifier<List<List<int>>> {
         );
         _buildBoard();
       } else if (horizontal == 2 || vertical == 2 || diagonal == 2) {
+        // gameService.updateLevel(gameService.level + 1);
+        _isWinnerDeclared = true;
+        incrementLevel();
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             backgroundColor: AppConstants.primaryColor,
             elevation: 5,
-            duration: Duration(seconds: 1),
+            duration: Duration(seconds: 2),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(30),
@@ -99,12 +126,13 @@ class GameController extends StateNotifier<List<List<int>>> {
         );
         _buildBoard();
       } else {
+        _isWinnerDeclared = true;
         if (isBoardFull()) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               backgroundColor: AppConstants.planningColor,
               elevation: 5,
-              duration: Duration(seconds: 1),
+              duration: Duration(seconds: 2),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(30),
@@ -125,11 +153,12 @@ class GameController extends StateNotifier<List<List<int>>> {
         }
       }
     } else {
+      _isWinnerDeclared = true;
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           backgroundColor: AppConstants.planningColor,
           elevation: 5,
-          duration: Duration(seconds: 1),
+          duration: Duration(seconds: 2),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(30),
@@ -256,5 +285,6 @@ class GameController extends StateNotifier<List<List<int>>> {
 
 final gameControllerProvider =
     StateNotifierProvider<GameController, List<List<int>>>((ref) {
-  return GameController();
+  final gameService = ref.watch(gameServiceProvider);
+  return GameController(gameService);
 });
