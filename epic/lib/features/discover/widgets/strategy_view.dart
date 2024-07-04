@@ -1,5 +1,6 @@
 import 'package:epic/cores/screens/error_page.dart';
 import 'package:epic/features/auth/model/user_model.dart';
+import 'package:epic/features/auth/repository/user_data_service.dart';
 import 'package:epic/features/strategies/pages/strategy_detail_page.dart';
 import 'package:epic/features/strategies/provider/strategy_provider.dart';
 import 'package:flutter/material.dart';
@@ -59,6 +60,12 @@ class _StrategyViewState extends State<StrategyView> {
                     final strategyData = strategy.strategy;
                     return GestureDetector(
                       onTap: () {
+
+                        // update last seen strategy
+                        ref
+                            .read(userDataServiceProvider)
+                            .updateLastSeenStrategy(strategyData.name);
+
                         Navigator.push(
                           context,
                           MaterialPageRoute(

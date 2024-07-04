@@ -67,4 +67,11 @@ class UserDataService {
         UserModel.fromMap(currentUserMap.data() as Map<String, dynamic>);
     return user;
   }
+
+  void updateLastSeenStrategy(String name) {
+    firestore
+        .collection('users')
+        .doc(auth.currentUser!.uid)
+        .update({'lastSeenStrategy': name});
+  }
 }
