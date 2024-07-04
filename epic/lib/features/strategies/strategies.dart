@@ -26,7 +26,7 @@ enum Strategies {
       color: AppConstants.planningColor),
   selfRegulation(
       image: AppConstants.selfRegulationCardImage,
-      game: Game.simonSays,
+      game: Game.howLongIsAMinute,
       name: "Self Regulation",
       color: AppConstants.selfregulationColor);
 
