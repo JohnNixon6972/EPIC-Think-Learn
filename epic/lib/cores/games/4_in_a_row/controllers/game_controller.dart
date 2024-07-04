@@ -1,6 +1,6 @@
 // ignore_for_file: invalid_use_of_protected_member
 
-
+import 'package:epic/cores/app_constants.dart';
 import 'package:epic/cores/games/4_in_a_row/screens/widgets/cell.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -45,9 +45,25 @@ class GameController extends StateNotifier<List<List<int>>> {
       if (horizontal == 1 || vertical == 1 || diagonal == 1) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
+            backgroundColor: AppConstants.secondaryColor,
+            elevation: 5,
+            duration: Duration(seconds: 1),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(30),
+                topRight: Radius.circular(30),
+              ),
+            ),
             content: Column(
               children: [
-                Text('Yellow wins!'),
+                Text(
+                  'Yellow wins!',
+                  style: TextStyle(
+                    color: AppConstants.primaryTextColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
                 Cell(Mode: cellMode.YELLOW),
               ],
             ),
@@ -57,9 +73,25 @@ class GameController extends StateNotifier<List<List<int>>> {
       } else if (horizontal == 2 || vertical == 2 || diagonal == 2) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
+            backgroundColor: AppConstants.primaryColor,
+            elevation: 5,
+            duration: Duration(seconds: 1),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(30),
+                topRight: Radius.circular(30),
+              ),
+            ),
             content: Column(
               children: [
-                Text('Red wins!'),
+                Text(
+                  'Red wins!',
+                  style: TextStyle(
+                    color: AppConstants.primaryTextColor,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20,
+                  ),
+                ),
                 Cell(Mode: cellMode.RED),
               ],
             ),
@@ -70,7 +102,23 @@ class GameController extends StateNotifier<List<List<int>>> {
         if (isBoardFull()) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text('It\'s a draw!'),
+              backgroundColor: AppConstants.planningColor,
+              elevation: 5,
+              duration: Duration(seconds: 1),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30),
+                  topRight: Radius.circular(30),
+                ),
+              ),
+              content: Text(
+                'It\'s a draw!',
+                style: TextStyle(
+                  color: AppConstants.primaryTextColor,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                ),
+              ),
             ),
           );
           _buildBoard();
@@ -79,7 +127,23 @@ class GameController extends StateNotifier<List<List<int>>> {
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
-          content: Text('This column is full. Choose another column.'),
+          backgroundColor: AppConstants.planningColor,
+          elevation: 5,
+          duration: Duration(seconds: 1),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(30),
+              topRight: Radius.circular(30),
+            ),
+          ),
+          content: Text(
+            'This column is full. Choose another column.',
+            style: TextStyle(
+              color: AppConstants.primaryTextColor,
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
+          ),
         ),
       );
     }
