@@ -1,4 +1,5 @@
 import 'package:epic/cores/games/4_in_a_row/screens/game_screen/game_screen.dart';
+import 'package:epic/cores/games/how_long_is_a_minute/gameScreen/gameScreen.dart';
 import 'package:epic/cores/games/simon_says/pages/simon_says_game.dart';
 import 'package:epic/cores/games/tea_towel/pages/tea_towel_game.dart';
 import 'package:flutter/material.dart';
@@ -52,6 +53,31 @@ enum Game {
     ],
     gameWidget: TeaTowelGame(),
   ),
+
+  howLongIsAMinute(
+  keyPhrase: 'I can self-regulate',
+  name: 'How Long is a Minute?',
+  image: 'assets/images/strategies/memory_strategy.png',
+  description:
+      'How Long is a Minute? is a fun and engaging game that helps us develop a sense of time. You start a timer and stop it when you think one minute has passed. The goal is to guess as close to one minute as possible.',
+  rules: [
+    'Press the start button to begin the timer.',
+    'Try to estimate when one minute has passed and press the stop button.',
+    'The game will show you how close your guess was to the actual one-minute mark.',
+    'Repeat and try to improve your accuracy with each attempt.',
+  ],
+  strategies: [
+    'Count seconds in your head to keep track of time.',
+    'Use a steady rhythm or song to help maintain a consistent pace.',
+    'Focus on your internal sense of timing and practice regularly.',
+  ],
+  benefits: [
+    'Improves awareness and perception of time.',
+    'Enhances concentration and focus.',
+    'Develops self-regulation and patience.',
+    'Encourages mindfulness and present-moment awareness.',
+  ],
+  gameWidget:  HowLongIsAMinute(),),
 
   fourInARow(
     keyPhrase: 'I can Plan',
