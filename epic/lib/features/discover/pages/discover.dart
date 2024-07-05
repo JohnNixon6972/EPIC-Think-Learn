@@ -43,7 +43,7 @@ class Discover extends ConsumerWidget {
                       const Text(
                         "Strategies",
                         style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 22,
                             fontWeight: FontWeight.bold,
                             color: AppConstants.primaryColor),
                       ),
@@ -61,7 +61,7 @@ class Discover extends ConsumerWidget {
                       const Text(
                         'Activities',
                         style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 22,
                             fontWeight: FontWeight.bold,
                             color: AppConstants.primaryColor),
                       ),
