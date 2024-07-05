@@ -96,7 +96,7 @@ class _HomePageState extends State<HomePage> {
         actions: [
           Consumer(
             builder: (context, ref, child) {
-              return ref.watch(currentUserprovider).when(
+              return ref.watch(currentUserProvider).when(
                   data: (currentUser) => Padding(
                         padding: const EdgeInsets.only(right: 12.0),
                         child: GestureDetector(

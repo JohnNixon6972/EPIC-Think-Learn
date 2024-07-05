@@ -13,7 +13,7 @@ class Discover extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(currentUserprovider).when(
+    return ref.watch(currentUserProvider).when(
         data: (currentUser) => Scaffold(
               backgroundColor: AppConstants.primaryBackgroundColor,
               body: SafeArea(

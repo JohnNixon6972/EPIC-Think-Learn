@@ -58,22 +58,13 @@ class UserDataService {
     }
   }
 
-  Future<UserModel> fetchCurrentUserData() async {
-    DocumentSnapshot currentUserMap =
-        await firestore.collection('users').doc(auth.currentUser!.uid).get();
-
-    UserModel user =
-        UserModel.fromMap(currentUserMap.data() as Map<String, dynamic>);
-    return user;
-  }
-
-  Future<UserModel> fetchAnyUserData(String userId) async {
-    DocumentSnapshot currentUserMap =
-        await firestore.collection('users').doc(userId).get();
-
-    UserModel user =
-        UserModel.fromMap(currentUserMap.data() as Map<String, dynamic>);
-    return user;
+  Stream<UserModel> fetchCurrentUserData() {
+    return firestore
+        .collection('users')
+        .doc(auth.currentUser!.uid)
+        .snapshots()
+        .map((snapshot) =>
+            UserModel.fromMap(snapshot.data() as Map<String, dynamic>));
   }
 
   void updateLastSeenStrategy(String name) {

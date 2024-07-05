@@ -50,6 +50,7 @@ dependencies:
   circular_reveal_animation: ^2.0.1
   percent_indicator: ^4.2.3
   flutter_spinkit: ^5.2.1
+  lottie: ^3.1.2
 
 dev_dependencies:
   flutter_test:
@@ -78,6 +79,7 @@ flutter:
     - assets/images/
     - assets/images/strategies/
     - assets/images/game_images/
+    - assets/animations/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
