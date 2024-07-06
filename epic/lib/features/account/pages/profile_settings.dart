@@ -21,7 +21,7 @@ class _MyProfileSettingsState extends ConsumerState<MyProfileSettings> {
   bool isSwitched = true;
   @override
   Widget build(BuildContext context) {
-    return ref.watch(currentUserprovider).when(
+    return ref.watch(currentUserProvider).when(
         data: (currentUser) => Scaffold(
               backgroundColor: Colors.transparent,
               body: SafeArea(

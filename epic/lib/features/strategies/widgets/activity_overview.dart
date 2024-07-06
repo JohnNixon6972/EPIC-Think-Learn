@@ -91,11 +91,12 @@ class ActivityOverview extends ConsumerWidget {
               ),
               Center(
                 child: CloudTextBox(
-                    height: 200,
-                    width: MediaQuery.of(context).size.width * 0.8,
+                    strategyColor: strategy.color,
+                    height: 230,
+                    width: MediaQuery.of(context).size.width,
                     text: game.keyPhrase,
-                    textStyle: TextStyle(
-                      color: strategy.color,
+                    textStyle: const TextStyle(
+                      color: AppConstants.primaryTextColor,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     )),

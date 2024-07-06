@@ -5,8 +5,7 @@ import 'package:epic/cores/screens/error_page.dart';
 import 'package:epic/cores/screens/loader.dart';
 import 'package:epic/features/account/pages/account_page.dart';
 import 'package:epic/features/auth/provider/user_provider.dart';
-import 'package:epic/features/pages.dart';
-import 'package:epic/features/report/report.dart';
+import 'package:epic/cores/pages.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -18,7 +17,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int currentIndex = 0;
+  int currentIndex = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +95,7 @@ class _HomePageState extends State<HomePage> {
         actions: [
           Consumer(
             builder: (context, ref, child) {
-              return ref.watch(currentUserprovider).when(
+              return ref.watch(currentUserProvider).when(
                   data: (currentUser) => Padding(
                         padding: const EdgeInsets.only(right: 12.0),
                         child: GestureDetector(
@@ -129,15 +128,9 @@ class _HomePageState extends State<HomePage> {
       ),
       bottomNavigationBar: BottomNavigation(
         onPressed: (index) {
-          if (index != 1) {
+          setState(() {
             currentIndex = index;
-            setState(() {});
-          } else {
-            showModalBottomSheet(
-              context: context,
-              builder: (context) => const Report(),
-            );
-          }
+          });
         },
       ),
     );
