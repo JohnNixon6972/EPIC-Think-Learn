@@ -14,7 +14,11 @@ class LevelIndicator extends ConsumerWidget {
     final points =
         ref.watch(gameControllerProvider.select((state) => state.points));
     // int currentLevel = gameService.level;
+
+    final currLevel = ref.watch(gameControllerProvider.notifier);
+
     double levelProgress = (points % 100) / 100;
+
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -36,8 +40,8 @@ class LevelIndicator extends ConsumerWidget {
               color: AppConstants.primaryColor,
               size: 30.0,
             ),
-            center: const Text(
-              'Level currentLevel',
+            center: Text(
+              'Level ${currLevel.currentLevel}',
               style: TextStyle(
                 color: AppConstants.secondaryColor,
                 fontSize: 18,

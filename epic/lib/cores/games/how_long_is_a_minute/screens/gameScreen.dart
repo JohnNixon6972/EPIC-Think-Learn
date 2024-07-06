@@ -16,8 +16,6 @@ class HowLongIsAMinute extends ConsumerWidget {
     final gameState = ref.watch(gameControllerProvider);
     final gameController = ref.read(gameControllerProvider.notifier);
 
-   
-
     return Scaffold(
       backgroundColor: AppConstants.tertiaryColorLight,
       body: Center(
@@ -59,7 +57,6 @@ class HowLongIsAMinute extends ConsumerWidget {
               ),
             ),
             const SizedBox(height: 20),
-          
             const LevelIndicator(),
             const Padding(
               padding: EdgeInsets.only(top: 35, bottom: 35),
