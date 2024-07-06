@@ -1,8 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:epic/cores/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter/scheduler.dart' show timeDilation;
 
 class SpinKitAnimation extends StatefulWidget {
   const SpinKitAnimation({super.key});

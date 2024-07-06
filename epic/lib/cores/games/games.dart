@@ -1,5 +1,5 @@
 import 'package:epic/cores/games/4_in_a_row/screens/game_screen/game_screen.dart';
-import 'package:epic/cores/games/how_long_is_a_minute/gameScreen/gameScreen.dart';
+import 'package:epic/cores/games/how_long_is_a_minute/screens/gameScreen.dart';
 import 'package:epic/cores/games/simon_says/pages/simon_says_game.dart';
 import 'package:epic/cores/games/tea_towel/pages/tea_towel_game.dart';
 import 'package:flutter/material.dart';

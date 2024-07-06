@@ -1,6 +1,5 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:epic/cores/app_constants.dart';
-import 'package:epic/cores/games/4_in_a_row/controllers/game_controller.dart';
 import 'package:epic/cores/games/4_in_a_row/screens/widgets/game_body.dart';
 import 'package:epic/cores/games/4_in_a_row/screens/widgets/levelIndicator.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +10,6 @@ class FourInARow extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final controller = ref.watch(gameControllerProvider.notifier);
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppConstants.primaryBackgroundColor,
