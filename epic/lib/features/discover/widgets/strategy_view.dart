@@ -60,8 +60,6 @@ class _StrategyViewState extends State<StrategyView> {
                     final strategyData = strategy.strategy;
                     return GestureDetector(
                       onTap: () {
-
-                        // update last seen strategy
                         ref
                             .read(userDataServiceProvider)
                             .updateLastSeenStrategy(strategyData.name);
@@ -110,7 +108,7 @@ class _StrategyViewState extends State<StrategyView> {
                                           style: TextStyle(
                                             fontSize: 20,
                                             color: strategyData.color,
-                                            fontWeight: FontWeight.bold,
+                                            fontWeight: FontWeight.w600,
                                           ),
                                         ),
                                       ],

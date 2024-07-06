@@ -13,7 +13,7 @@ class MyProfile extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(currentUserprovider).when(
+    return ref.watch(currentUserProvider).when(
         data: (currentUser) => DefaultTabController(
             length: 3,
             child: Scaffold(

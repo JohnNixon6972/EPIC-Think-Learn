@@ -13,7 +13,7 @@ class Discover extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref.watch(currentUserprovider).when(
+    return ref.watch(currentUserProvider).when(
         data: (currentUser) => Scaffold(
               backgroundColor: AppConstants.primaryBackgroundColor,
               body: SafeArea(
@@ -43,7 +43,7 @@ class Discover extends ConsumerWidget {
                       const Text(
                         "Strategies",
                         style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 22,
                             fontWeight: FontWeight.bold,
                             color: AppConstants.primaryColor),
                       ),
@@ -61,7 +61,7 @@ class Discover extends ConsumerWidget {
                       const Text(
                         'Activities',
                         style: TextStyle(
-                            fontSize: 18,
+                            fontSize: 22,
                             fontWeight: FontWeight.bold,
                             color: AppConstants.primaryColor),
                       ),
