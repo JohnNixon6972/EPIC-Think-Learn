@@ -25,6 +25,8 @@ class ActivityOverview extends ConsumerWidget {
       backgroundColor: AppConstants.primaryBackgroundColor,
       floatingActionButton: TextButton(
         style: TextButton.styleFrom(
+          elevation: 5,
+          shadowColor: AppConstants.primaryButtonColor,
           backgroundColor: AppConstants.primaryButtonColor,
           padding: const EdgeInsets.all(16),
           shape: RoundedRectangleBorder(

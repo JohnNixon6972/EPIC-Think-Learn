@@ -25,32 +25,52 @@ class ItemSelection extends StatelessWidget {
             children: gameState.objects.map((item) {
               String itemName = item.name;
               bool isSelected = gameState.userSelectedItems.contains(itemName);
-              return GestureDetector(
-                onTap: () {
-                  gameNotifier.selectItem(itemName);
-                },
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                  decoration: BoxDecoration(
-                    color: isSelected
+
+              return TextButton(
+                style: ButtonStyle(
+                  backgroundColor: WidgetStateProperty.all<Color>(
+                    isSelected
                         ? gameState.backgroundColor.withOpacity(1)
                         : AppConstants.primaryBackgroundColor,
-                    border: Border.all(
-                      color: gameState.backgroundColor.withOpacity(1),
-                      width: 1,
+                  ),
+                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                    RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                        side: BorderSide(
+                          color: gameState.backgroundColor.withOpacity(1),
+                          width: 1,
+                        )),
+                  ),
+                ),
+                onPressed: () {
+                  gameNotifier.selectItem(itemName);
+                },
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Flexible(
+                      fit: FlexFit.loose,
+                      child: Text(
+                        itemName,
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: isSelected
+                                ? AppConstants.primaryTextColor
+                                : gameState.backgroundColor.withOpacity(1)),
+                      ),
                     ),
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  child: Text(
-                    itemName,
-                    style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: isSelected
-                            ? AppConstants.primaryTextColor
-                            : gameState.backgroundColor.withOpacity(1)),
-                  ),
+                    gameNotifier.isCorrectItem(itemName)
+                        ? const Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              SizedBox(width: 5),
+                              Icon(Icons.check_circle_outline_rounded,
+                                  color: Colors.green),
+                            ],
+                          )
+                        : const SizedBox(),
+                  ],
                 ),
               );
             }).toList(),
@@ -61,6 +81,8 @@ class ItemSelection extends StatelessWidget {
         ),
         TextButton(
           style: TextButton.styleFrom(
+            elevation: 10,
+            shadowColor: Colors.black,
             backgroundColor: AppConstants.primaryButtonColor,
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10),

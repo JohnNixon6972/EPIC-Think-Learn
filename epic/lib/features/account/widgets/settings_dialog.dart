@@ -35,14 +35,14 @@ class _SettingsDialogState extends State<SettingsDialog> {
         ),
       ),
       actions: [
-        TextButton(
+        ElevatedButton(
           onPressed: () {},
           child: const Text(
             "CANCEL",
             style: TextStyle(color: Colors.black),
           ),
         ),
-        TextButton(
+        ElevatedButton(
             onPressed: () {},
             child: const Text("SAVE", style: TextStyle(color: Colors.blue)))
       ],

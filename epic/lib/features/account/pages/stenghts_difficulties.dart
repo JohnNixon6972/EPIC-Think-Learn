@@ -285,7 +285,7 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    TextButton(
+                                    ElevatedButton(
                                       onPressed:
                                           _handleYes, // Handle Yes action
 
@@ -310,7 +310,7 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                                         ),
                                       ),
                                     ),
-                                    TextButton(
+                                    ElevatedButton(
                                       onPressed: () {
                                         _nextPage();
                                       }, // Handle No action
@@ -335,7 +335,7 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                                         ),
                                       ),
                                     ),
-                                    TextButton(
+                                    ElevatedButton(
                                       onPressed: _nextPage, // Handle No action
                                       child: Container(
                                         height: 40,

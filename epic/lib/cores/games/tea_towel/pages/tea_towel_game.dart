@@ -9,7 +9,6 @@ import 'package:epic/cores/widgets/celebration_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-
 class TeaTowelGame extends ConsumerWidget {
   const TeaTowelGame({super.key});
 
@@ -38,7 +37,7 @@ class TeaTowelGame extends ConsumerWidget {
                   child: gameState.isGameOver
                       ? SizedBox.expand(
                           child: Center(
-                            child: TextButton(
+                            child: ElevatedButton(
                               style: TextButton.styleFrom(
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10)),

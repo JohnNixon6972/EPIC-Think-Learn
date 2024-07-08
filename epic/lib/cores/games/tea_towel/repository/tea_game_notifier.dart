@@ -15,11 +15,13 @@ class TeaGameNotifier extends StateNotifier<TeaGameState> {
   late int _count;
   Duration _startTime = Duration.zero;
   Ticker? _ticker;
+  List<bool> _isCorrect = [];
 
   TeaGameNotifier(this.gameService) : super(TeaGameState()) {
     _count = _getItemCount(gameService.level);
     state = state.copyWith(
         backgroundColor: AppConstants.memoryColor.withOpacity(0.2));
+    _isCorrect = List.generate(state.objects.length, (index) => false);
   }
 
   int _getItemCount(int level) {
@@ -70,7 +72,7 @@ class TeaGameNotifier extends StateNotifier<TeaGameState> {
     final random = Random();
     final items = <Item>[];
     final itemNames = <String>{}; // Use a Set to prevent duplicates
-
+    _isCorrect = List.generate(state.objects.length, (index) => false);
     while (items.length < _count) {
       final item = state.objects[random.nextInt(state.objects.length)];
       String name = item.name;
@@ -83,20 +85,25 @@ class TeaGameNotifier extends StateNotifier<TeaGameState> {
         query: "Remember the items in the list below",
         currentItems: items,
         timeLeft: _count * 5 * 2,
+        // timeLeft: 5,
         currentItemNames: itemNames.toList(),
         isItemSelection: false);
 
     Timer.periodic(const Duration(seconds: 1), (timer) {
       if (state.timeLeft == 0) {
         timer.cancel();
-        state = state.copyWith(
-          query: "Select the items you remember",
-          isItemSelection: true,
-        );
+        goToSelection();
       } else {
         state = state.copyWith(timeLeft: state.timeLeft - 1);
       }
     });
+  }
+
+  void goToSelection() {
+    state = state.copyWith(
+      query: "Select the items you remember",
+      isItemSelection: true,
+    );
   }
 
   void selectItem(String itemName) {
@@ -123,14 +130,33 @@ class TeaGameNotifier extends StateNotifier<TeaGameState> {
     });
   }
 
+  bool isCorrectItem(String itemName) {
+    int index = state.correctUserSelectedItems
+        .indexWhere((element) => element == itemName);
+
+    return index != -1;
+  }
+
   void checkItems() {
     List<String> correctItems = [];
+
+    // add the old correct items
+    for (var item in state.correctUserSelectedItems) {
+      correctItems.add(item);
+    }
 
     for (var item in state.userSelectedItems) {
       if (state.currentItemNames.contains(item)) {
         correctItems.add(item);
+
+        final index = state.currentItemNames.indexOf(item);
+        _isCorrect[index] = true;
       }
     }
+    // add unique  items
+    correctItems = correctItems.toSet().toList();
+
+    state = state.copyWith(correctUserSelectedItems: correctItems);
 
     final isCorrect = state.currentItemNames
         .every((element) => state.userSelectedItems.contains(element));

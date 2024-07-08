@@ -189,7 +189,7 @@ class HowLongIsAMinute extends ConsumerWidget {
                       ),
                       actions: [
                         Center(
-                          child: TextButton(
+                          child: ElevatedButton(
                             style: TextButton.styleFrom(
                               backgroundColor: AppConstants.secondaryColor,
                               shadowColor: AppConstants.secondaryColor,

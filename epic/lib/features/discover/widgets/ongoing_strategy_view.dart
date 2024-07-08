@@ -65,7 +65,7 @@ class OngoingStrategyView extends StatelessWidget {
                               fontWeight: FontWeight.bold),
                         ),
                         const Spacer(),
-                        TextButton(
+                        ElevatedButton(
                           style: TextButton.styleFrom(
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(6)),

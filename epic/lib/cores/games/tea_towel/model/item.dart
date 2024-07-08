@@ -6,4 +6,8 @@ class Item {
     required this.name,
     required this.image,
   });
+
+  set isCorrect(bool value) {
+    isCorrect = value;
+  }
 }
