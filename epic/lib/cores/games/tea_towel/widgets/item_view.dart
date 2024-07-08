@@ -40,7 +40,7 @@ class ItemView extends StatelessWidget {
           ),
         ),
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.57,
+          height: MediaQuery.of(context).size.height * 0.5,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: GridView.builder(
@@ -61,11 +61,35 @@ class ItemView extends StatelessWidget {
             ),
           ),
         ),
+        Align(
+          alignment: Alignment.center,
+          child: ElevatedButton(
+            style: ButtonStyle(
+                padding: WidgetStateProperty.all<EdgeInsetsGeometry>(
+                  const EdgeInsets.symmetric(horizontal: 8),
+                ),
+                backgroundColor: WidgetStateProperty.all<Color>(
+                  AppConstants.primaryButtonColor,
+                ),
+                shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+                  RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                )),
+            onPressed: () {
+              gameNotifier.goToSelection();
+            },
+            child: const Text(
+              "Go to Selection",
+              style: TextStyle(
+                color: AppConstants.primaryTextColor,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }
 }
-
-
-
-

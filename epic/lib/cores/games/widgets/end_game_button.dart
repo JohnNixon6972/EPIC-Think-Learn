@@ -10,7 +10,7 @@ class EndGameButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return TextButton(
+    return ElevatedButton(
       style: TextButton.styleFrom(
         backgroundColor: AppConstants.primaryBackgroundColor,
         padding: const EdgeInsets.all(12),

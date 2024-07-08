@@ -36,7 +36,7 @@ class SimonSaysGame extends ConsumerWidget {
                   child: gameState.isGameOver
                       ? SizedBox.expand(
                           child: Center(
-                            child: TextButton(
+                            child: ElevatedButton(
                               style: TextButton.styleFrom(
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(10)),

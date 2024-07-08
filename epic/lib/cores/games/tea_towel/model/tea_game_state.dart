@@ -33,6 +33,7 @@ class TeaGameState {
   List<String> userSelectedItems = [];
   List<Item> currentItems = [];
   List<String> currentItemNames = [];
+  List<String> correctUserSelectedItems = [];
 
   String? message;
   String? query;
@@ -44,6 +45,7 @@ class TeaGameState {
   bool isGameWon;
   Color backgroundColor;
   bool isItemSelection;
+
 
   TeaGameState({
     this.score = 0,
@@ -58,6 +60,7 @@ class TeaGameState {
     this.elapsedTime = Duration.zero,
     this.query = "",
     this.message = "",
+    this.correctUserSelectedItems = const [],
   });
 
   TeaGameState copyWith({
@@ -73,6 +76,7 @@ class TeaGameState {
     bool? isItemSelection,
     int? score,
     int? timeLeft,
+    List<String>? correctUserSelectedItems,
   }) {
     return TeaGameState(
       userSelectedItems: userSelectedItems ?? this.userSelectedItems,
@@ -87,6 +91,7 @@ class TeaGameState {
       score: score ?? this.score,
       isItemSelection: isItemSelection ?? this.isItemSelection,
       timeLeft: timeLeft ?? this.timeLeft,
+      correctUserSelectedItems: correctUserSelectedItems ?? this.correctUserSelectedItems,
     );
   }
 }

@@ -49,7 +49,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
                 actions: [
-                  TextButton(
+                  ElevatedButton(
                     style: TextButton.styleFrom(
                         backgroundColor: AppConstants.primaryButtonColor),
                     onPressed: () {
@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                   ),
-                  TextButton(
+                  ElevatedButton(
                     style: TextButton.styleFrom(
                         backgroundColor: AppConstants.primaryButtonColor),
                     onPressed: () {
