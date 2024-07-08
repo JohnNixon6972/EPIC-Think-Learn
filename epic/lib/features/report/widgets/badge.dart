@@ -1,80 +1,90 @@
-import 'dart:math' as math;
+import 'package:epic/cores/app_constants.dart';
+import 'package:epic/cores/screens/error_page.dart';
+import 'package:epic/cores/screens/loader.dart';
+import 'package:epic/features/strategies/provider/strategy_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class BadgePainter extends CustomPainter {
-  final double width;
-  final double height;
-  final Color badgeColor;
+class AppBadge extends StatelessWidget {
   final String strategyName;
 
-  BadgePainter({
-    required this.width,
-    required this.height,
-    required this.badgeColor,
+  const AppBadge({
     required this.strategyName,
+    super.key,
   });
 
   @override
-  void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()..color = badgeColor;
-
-    // Calculate the center of the circle
-    Offset center = Offset(width / 2, height / 2);
-
-    // Calculate the radius of the circle (using the smaller dimension)
-    double radius = math.min(width / 2, height / 2);
-
-    // Calculate the rectangle that bounds the circle
-    Rect rect = Rect.fromCircle(center: center, radius: radius);
-
-    // Draw the inverse arc (the bottom half of the circle)
-    canvas.drawArc(
-      rect,
-      0, // Start angle (radians)
-      math.pi, // Sweep angle (radians)
-      false,
-      paint,
+  Widget build(BuildContext context) {
+    return Consumer(
+      builder: (context, ref, child) {
+        final strategyAsync = ref.watch(strategyStreamProvider(strategyName));
+        return strategyAsync.when(
+          data: (strategy) {
+            final strategyData = strategy.strategy;
+            return Material(
+              borderRadius: BorderRadius.circular(60),
+              elevation: 10,
+              shadowColor: AppConstants.primaryColor,
+              child: Container(
+                height: 110,
+                width: 110,
+                decoration: BoxDecoration(
+                    border:
+                        Border.all(color: AppConstants.primaryColor, width: 8),
+                    color: strategyData.color.withOpacity(1),
+                    borderRadius: BorderRadius.circular(60)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      strategyName,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                          color: AppConstants.primaryTextColor,
+                          fontSize: 15,
+                          fontWeight: FontWeight.bold),
+                    ),
+                    SizedBox(
+                      width: 80,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          for (int i = 0; i < 5; i++)
+                            Star(
+                              isFilled: i < strategy.level / 2,
+                            ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+          loading: () => const Loader(),
+          error: (error, stackTrace) => ErrorPage(
+            message: error.toString() + stackTrace.toString(),
+          ),
+        );
+      },
     );
-
-    // Number of stars
-    int numberOfStars = 5;
-    double starRadius = 20.0; // Adjust the size of the stars as needed
-    double starPadding = 20.0; // Padding between stars and the edge of the badge
-
-    // Calculate the total space available for stars
-    double availableSpace = width - 2 * starPadding;
-    double spaceBetweenStars = availableSpace / (numberOfStars - 1);
-
-    // Calculate the position for each star along the arc
-    for (int i = 0; i < numberOfStars; i++) {
-      // Calculate angle for each star position
-      double angle = (i + 0.5) * math.pi / (numberOfStars - 1);
-
-      // Calculate position on the arc
-      double starX = center.dx + radius * math.cos(angle);
-      double starY = center.dy + radius * math.sin(angle);
-
-      // Calculate offset for centering the icon
-      Offset starOffset = Offset(starX - starRadius, starY - starRadius);
-
-      // Draw the star icon at the calculated position
-      drawStarIcon(canvas, starOffset, starRadius);
-    }
   }
+}
 
-  void drawStarIcon(Canvas canvas, Offset center, double radius) {
-    // Example: Draw a star icon (you can replace this with your own icon widget)
-    Icon starIcon = Icon(
-      Icons.star,
-      color: Colors.yellow,
-      size: radius * 2, // Size of the icon
-    );
-
-
-  }
+class Star extends StatelessWidget {
+  final bool isFilled;
+  const Star({
+    required this.isFilled,
+    super.key,
+  });
 
   @override
-  bool shouldRepaint(covariant CustomPainter oldDelegate) {
-    return false;
+  Widget build(BuildContext context) {
+    return Icon(
+      size: 16,
+      isFilled ? Icons.star : Icons.star_border,
+      color: AppConstants.primaryTextColor,
+    );
   }
 }

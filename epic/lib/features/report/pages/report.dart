@@ -11,6 +11,13 @@ class Report extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final List<String> badges = [
+      'Attention',
+      'Inhibition',
+      'Memory',
+      'Planning',
+      'Self Regulation',
+    ];
     return ref.watch(currentUserProvider).when(
         data: (currentUser) => Scaffold(
               backgroundColor: AppConstants.primaryBackgroundColor,
@@ -32,7 +39,7 @@ class Report extends ConsumerWidget {
                         height: 10,
                       ),
                       Container(
-                        height: 350,
+                        height: 310,
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                             color: AppConstants.secondaryBackgroundColor,
@@ -54,23 +61,24 @@ class Report extends ConsumerWidget {
                               ),
                               Expanded(
                                 child: Container(
-                                  decoration: BoxDecoration(
-                                      color:
-                                          AppConstants.primaryBackgroundColor,
-                                      borderRadius: BorderRadius.circular(15)),
-                                  width: MediaQuery.of(context).size.width,
-                                  child: SizedBox(
-                                    height: 30,
-                                    width: 30,
-                                    child: CustomPaint(
-                                      painter: BadgePainter(
-                                          strategyName: 'Strategy Name',
-                                          badgeColor: Colors.green,
-                                          height: 100,
-                                          width: 100),
-                                    ),
-                                  ),
-                                ),
+                                    decoration: BoxDecoration(
+                                        color:
+                                            AppConstants.primaryBackgroundColor,
+                                        borderRadius:
+                                            BorderRadius.circular(15)),
+                                    width: MediaQuery.of(context).size.width,
+                                    child: Center(
+                                      child: Wrap(
+                                        alignment: WrapAlignment.center,
+                                        spacing: 10,
+                                        runSpacing: 10,
+                                        children: badges
+                                            .map((badge) => AppBadge(
+                                                  strategyName: badge,
+                                                ))
+                                            .toList(),
+                                      ),
+                                    )),
                               ),
                             ],
                           ),
