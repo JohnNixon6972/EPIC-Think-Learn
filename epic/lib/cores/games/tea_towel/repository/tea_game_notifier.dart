@@ -15,13 +15,11 @@ class TeaGameNotifier extends StateNotifier<TeaGameState> {
   late int _count;
   Duration _startTime = Duration.zero;
   Ticker? _ticker;
-  List<bool> _isCorrect = [];
 
   TeaGameNotifier(this.gameService) : super(TeaGameState()) {
     _count = _getItemCount(gameService.level);
     state = state.copyWith(
         backgroundColor: AppConstants.memoryColor.withOpacity(0.2));
-    _isCorrect = List.generate(state.objects.length, (index) => false);
   }
 
   int _getItemCount(int level) {
@@ -72,7 +70,6 @@ class TeaGameNotifier extends StateNotifier<TeaGameState> {
     final random = Random();
     final items = <Item>[];
     final itemNames = <String>{}; // Use a Set to prevent duplicates
-    _isCorrect = List.generate(state.objects.length, (index) => false);
     while (items.length < _count) {
       final item = state.objects[random.nextInt(state.objects.length)];
       String name = item.name;
@@ -124,8 +121,9 @@ class TeaGameNotifier extends StateNotifier<TeaGameState> {
       gameService.updateLevel(gameService.level + 1);
     }
     Future.delayed(const Duration(seconds: 2), () {
-      state = state.copyWith(isGameWon: false);
+      state = state.copyWith(isGameWon: false, correctUserSelectedItems: []);
       _count = _getItemCount(gameService.level);
+
       generateItems();
     });
   }
@@ -138,39 +136,37 @@ class TeaGameNotifier extends StateNotifier<TeaGameState> {
   }
 
   void checkItems() {
-    List<String> correctItems = [];
+    final correctItems = state.currentItemNames;
+    final userSelectedItems = state.userSelectedItems;
 
-    // add the old correct items
-    for (var item in state.correctUserSelectedItems) {
-      correctItems.add(item);
+    List<String> correctUserSelectedItems = [];
+    for(String item in state.correctUserSelectedItems){
+      correctUserSelectedItems.add(item);
     }
-
-    for (var item in state.userSelectedItems) {
-      if (state.currentItemNames.contains(item)) {
-        correctItems.add(item);
-
-        final index = state.currentItemNames.indexOf(item);
-        _isCorrect[index] = true;
+    for (final item in userSelectedItems) {
+      if (correctItems.contains(item)) {
+        correctUserSelectedItems.add(item);
       }
     }
-    // add unique  items
-    correctItems = correctItems.toSet().toList();
 
-    state = state.copyWith(correctUserSelectedItems: correctItems);
+    correctUserSelectedItems = correctUserSelectedItems.toSet().toList();
 
-    final isCorrect = state.currentItemNames
-        .every((element) => state.userSelectedItems.contains(element));
-    if (isCorrect) {
+    state = state.copyWith(
+      correctUserSelectedItems: correctUserSelectedItems,
+    );
+
+    if (correctUserSelectedItems.length == correctItems.length) {
       state = state.copyWith(
-        message: "You got all items",
         score: state.score + 1,
-        backgroundColor: Colors.green.shade300,
+        message: "You got all correct!",
+        backgroundColor: Colors.green.withOpacity(0.2),
       );
       _checkScore();
     } else {
       state = state.copyWith(
-        message: "You missed some items",
-        backgroundColor: Colors.red.shade300,
+        message:
+            "You got ${correctUserSelectedItems.length} out of ${correctItems.length} correct",
+        backgroundColor: Colors.red.withOpacity(0.2),
       );
     }
 
