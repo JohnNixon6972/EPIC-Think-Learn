@@ -2,17 +2,17 @@ import 'package:epic/cores/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-class SpinKitAnimation extends StatefulWidget {
-  const SpinKitAnimation({super.key});
+class HourGlass extends StatefulWidget {
+  const HourGlass({super.key});
 
   @override
-  State<SpinKitAnimation> createState() => _SpinKitAnimationState();
+  State<HourGlass> createState() => _HourGlassState();
 }
 
-class _SpinKitAnimationState extends State<SpinKitAnimation>
+class _HourGlassState extends State<HourGlass>
     with TickerProviderStateMixin {
   late AnimationController _controller;
-  int timeDilation = 30;
+  int timeDilation = 100;
 
   @override
   void initState() {
