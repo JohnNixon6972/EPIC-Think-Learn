@@ -8,6 +8,8 @@ class StrategyModel {
   int averageAccuracy;
   DateTime lastPlayed;
   int timesPlayed;
+  int streak;
+  int maxStreak;
 
   StrategyModel({
     required this.strategy,
@@ -17,6 +19,8 @@ class StrategyModel {
     required this.averageAccuracy,
     required this.lastPlayed,
     required this.timesPlayed,
+    required this.streak,
+    required this.maxStreak,
   });
 
   factory StrategyModel.fromMap(Map<String, dynamic> map) {
@@ -32,6 +36,8 @@ class StrategyModel {
       timesPlayed: map['timesPlayed'],
       lastPlayed: DateTime.fromMillisecondsSinceEpoch(
           map['lastPlayed'].millisecondsSinceEpoch),
+      streak: map['streak'],
+      maxStreak: map['maxStreak'],
     );
   }
 
@@ -44,6 +50,8 @@ class StrategyModel {
       'timesPlayed': timesPlayed,
       'averageAccuracy': averageAccuracy,
       'lastPlayed': lastPlayed,
+      'streak': streak,
+      'maxStreak': maxStreak,
     };
   }
 }

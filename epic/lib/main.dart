@@ -67,7 +67,7 @@ class MyApp extends StatelessWidget {
                       type: _type,
                     );
                     // return LogoutPage();
-                  } else if (snapshot.connectionState ==
+                                    } else if (snapshot.connectionState ==
                       ConnectionState.waiting) {
                     return const Loader();
                   }
