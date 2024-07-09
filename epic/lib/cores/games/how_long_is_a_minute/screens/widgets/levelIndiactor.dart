@@ -23,14 +23,6 @@ class LevelIndicator extends ConsumerWidget {
       padding: const EdgeInsets.all(8.0),
       child: Column(
         children: [
-          Text(
-            '${(levelProgress * 100).toStringAsFixed(0)}% to next level',
-            style: const TextStyle(
-              color: AppConstants.selfregulationColor,
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
           LinearPercentIndicator(
             lineHeight: 20.0,
             percent: levelProgress,
@@ -51,6 +43,14 @@ class LevelIndicator extends ConsumerWidget {
             barRadius: const Radius.circular(10),
             backgroundColor: AppConstants.secondaryColorLight,
             progressColor: AppConstants.selfregulationColor,
+          ),
+          Text(
+            '${(levelProgress * 100).toStringAsFixed(0)}% to next level',
+            style: const TextStyle(
+              color: AppConstants.selfregulationColor,
+              fontSize: 15,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ],
       ),

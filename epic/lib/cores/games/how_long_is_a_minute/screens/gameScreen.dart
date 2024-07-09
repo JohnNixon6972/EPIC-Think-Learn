@@ -7,8 +7,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spring/spring.dart';
 
 class HowLongIsAMinute extends ConsumerWidget {
-
-   
   const HowLongIsAMinute({super.key});
 
   @override
@@ -56,13 +54,11 @@ class HowLongIsAMinute extends ConsumerWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
-            const LevelIndicator(),
             const Padding(
               padding: EdgeInsets.only(top: 35, bottom: 35),
-              child: SpinKitAnimation(),
+              child: HourGlass(),
             ),
-            const SizedBox(height: 20),
+            const LevelIndicator(),
             if (!gameState.isRunning)
               Spring.bubbleButton(
                 onTap: () {
@@ -110,6 +106,7 @@ class HowLongIsAMinute extends ConsumerWidget {
                 onPressed: () {
                   gameController.stopTimer();
                   gameController.updatePoints();
+
                   showDialog(
                     context: context,
                     builder: (context) => AlertDialog(
