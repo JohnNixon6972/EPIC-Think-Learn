@@ -26,8 +26,8 @@ class AppBadge extends StatelessWidget {
               elevation: 10,
               shadowColor: AppConstants.primaryColor,
               child: Container(
-                height: 110,
-                width: 110,
+                height: 105,
+                width: 105,
                 decoration: BoxDecoration(
                     border:
                         Border.all(color: AppConstants.primaryColor, width: 8),

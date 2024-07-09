@@ -114,6 +114,18 @@ class StrategyReport extends StatelessWidget {
                                         ),
                                       ],
                                     ),
+                                    Column(
+                                      children: [
+                                        KeyValReport(
+                                          label: 'Level: ',
+                                          value: '${strategy.level}',
+                                        ),
+                                        KeyValReport(
+                                          label: 'Days: ',
+                                          value: '${strategy.days}',
+                                        ),
+                                      ],
+                                    )
                                   ],
                                 )
                               ],

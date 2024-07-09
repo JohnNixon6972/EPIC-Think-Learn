@@ -18,7 +18,7 @@ class BadgeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 310,
+      height: 300,
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
           color: AppConstants.secondaryBackgroundColor,
@@ -43,7 +43,6 @@ class BadgeView extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: AppConstants.primaryBackgroundColor,
                       borderRadius: BorderRadius.circular(15)),
-                  width: MediaQuery.of(context).size.width,
                   child: Center(
                     child: Wrap(
                       alignment: WrapAlignment.center,
