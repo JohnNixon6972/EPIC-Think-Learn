@@ -15,9 +15,6 @@ class StrategyService {
   StrategyService({required this.firestore, required this.auth});
 
   Stream<StrategyModel> streamStrategy(String strategy) {
-    // print(
-    //     'streamStrategy called with strategy: $strategy and user: ${auth.currentUser!.uid}'
-    //         .toString());
     return firestore
         .collection('users')
         .doc(auth.currentUser!.uid)

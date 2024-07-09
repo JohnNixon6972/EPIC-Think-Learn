@@ -25,3 +25,15 @@ String formatDuration(Duration duration) {
   final seconds = duration.inSeconds % 60;
   return '$minutes:${seconds.toString().padLeft(2, '0')}';
 }
+
+String formatSecondsIntoTime(int seconds) {
+  int hours = seconds ~/ 3600;
+  int minutes = (seconds % 3600) ~/ 60;
+  int secs = seconds % 60;
+
+  String hoursStr = hours.toString().padLeft(2, '0');
+  String minutesStr = minutes.toString().padLeft(2, '0');
+  String secondsStr = secs.toString().padLeft(2, '0');
+
+  return '$hoursStr:$minutesStr:$secondsStr';
+}
