@@ -24,10 +24,16 @@ class GameController extends StateNotifier<List<List<int>>> {
   bool _isWinnerDeclared = false;
   bool get isWinnerDeclared => _isWinnerDeclared;
 
+  List<List<int>> _winnerCells = [];
+  List<List<int>> get getWinnerCells => _winnerCells;
+
   void _buildBoard() {
-    board = List.generate(7, (_) => List.filled(6, 0));
-    _turnYellow = true;
-    _isWinnerDeclared = false;
+    Future.delayed(const Duration(seconds: 5), () {
+      board = List.generate(7, (_) => List.filled(6, 0));
+      _turnYellow = true;
+      _isWinnerDeclared = false;
+      _winnerCells = [];
+    });
   }
 
   void incrementPoints() {
@@ -67,12 +73,13 @@ class GameController extends StateNotifier<List<List<int>>> {
         // gameService.updateLevel(gameService.level + 1);
         incrementLevel();
         _isWinnerDeclared = true;
+        print(getWinnerCells);
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             backgroundColor: AppConstants.secondaryColor,
             elevation: 5,
-            duration: Duration(seconds: 2),
-            shape: RoundedRectangleBorder(
+            duration: const Duration(seconds: 5),
+            shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(30),
                 topRight: Radius.circular(30),
@@ -80,7 +87,7 @@ class GameController extends StateNotifier<List<List<int>>> {
             ),
             content: Column(
               children: [
-                Text(
+                const Text(
                   'Yellow wins!',
                   style: TextStyle(
                     color: AppConstants.primaryTextColor,
@@ -97,13 +104,14 @@ class GameController extends StateNotifier<List<List<int>>> {
       } else if (horizontal == 2 || vertical == 2 || diagonal == 2) {
         // gameService.updateLevel(gameService.level + 1);
         _isWinnerDeclared = true;
+        print(getWinnerCells);
         incrementLevel();
         ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
+          SnackBar(
             backgroundColor: AppConstants.primaryColor,
             elevation: 5,
-            duration: Duration(seconds: 2),
-            shape: RoundedRectangleBorder(
+            duration: const Duration(seconds: 5),
+            shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(30),
                 topRight: Radius.circular(30),
@@ -111,7 +119,7 @@ class GameController extends StateNotifier<List<List<int>>> {
             ),
             content: Column(
               children: [
-                Text(
+                const Text(
                   'Red wins!',
                   style: TextStyle(
                     color: AppConstants.primaryTextColor,
@@ -127,12 +135,13 @@ class GameController extends StateNotifier<List<List<int>>> {
         _buildBoard();
       } else {
         _isWinnerDeclared = true;
+        print(getWinnerCells);
         if (isBoardFull()) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
               backgroundColor: AppConstants.planningColor,
               elevation: 5,
-              duration: Duration(seconds: 2),
+              duration: Duration(seconds: 5),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(30),
@@ -154,11 +163,12 @@ class GameController extends StateNotifier<List<List<int>>> {
       }
     } else {
       _isWinnerDeclared = true;
+      print(getWinnerCells);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           backgroundColor: AppConstants.planningColor,
           elevation: 5,
-          duration: Duration(seconds: 2),
+          duration: Duration(seconds: 5),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(30),
@@ -180,18 +190,36 @@ class GameController extends StateNotifier<List<List<int>>> {
 
   int checkHorizontalWin() {
     List<List<int>> rows = List.generate(6, (index) => getRow(index));
-    for (final row in rows) {
+    for (int rowIndex = 0; rowIndex < rows.length; rowIndex++) {
       int yellowStreak = 0;
       int redStreak = 0;
-      for (final cell in row) {
+      for (int colIndex = 0; colIndex < rows[rowIndex].length; colIndex++) {
+        final cell = rows[rowIndex][colIndex];
         if (cell == 1) {
           yellowStreak++;
           redStreak = 0;
-          if (yellowStreak == 4) return 1;
+          if (yellowStreak == 4) {
+            _winnerCells = [
+              [colIndex - 3, rowIndex],
+              [colIndex - 2, rowIndex],
+              [colIndex - 1, rowIndex],
+              [colIndex, rowIndex]
+            ];
+
+            return 1;
+          }
         } else if (cell == 2) {
           redStreak++;
           yellowStreak = 0;
-          if (redStreak == 4) return 2;
+          if (redStreak == 4) {
+            _winnerCells = [
+              [colIndex - 3, rowIndex],
+              [colIndex - 2, rowIndex],
+              [colIndex - 1, rowIndex],
+              [colIndex, rowIndex]
+            ];
+            return 2;
+          }
         } else {
           yellowStreak = 0;
           redStreak = 0;
@@ -216,11 +244,27 @@ class GameController extends StateNotifier<List<List<int>>> {
         if (board[col][row] == 1) {
           yellowStreak++;
           redStreak = 0;
-          if (yellowStreak == 4) return 1;
+          if (yellowStreak == 4) {
+            _winnerCells = [
+              [col, row - 3],
+              [col, row - 2],
+              [col, row - 1],
+              [col, row]
+            ];
+            return 1;
+          }
         } else if (board[col][row] == 2) {
           redStreak++;
           yellowStreak = 0;
-          if (redStreak == 4) return 2;
+          if (redStreak == 4) {
+            _winnerCells = [
+              [col, row - 3],
+              [col, row - 2],
+              [col, row - 1],
+              [col, row]
+            ];
+            return 2;
+          }
         } else {
           yellowStreak = 0;
           redStreak = 0;
@@ -240,11 +284,27 @@ class GameController extends StateNotifier<List<List<int>>> {
           if (board[col + i][row + i] == 1) {
             yellowStreak++;
             redStreak = 0;
-            if (yellowStreak == 4) return 1;
+            if (yellowStreak == 4) {
+              _winnerCells = [
+                [col, row],
+                [col + 1, row + 1],
+                [col + 2, row + 2],
+                [col + 3, row + 3]
+              ];
+              return 1;
+            }
           } else if (board[col + i][row + i] == 2) {
             redStreak++;
             yellowStreak = 0;
-            if (redStreak == 4) return 2;
+            if (redStreak == 4) {
+              _winnerCells = [
+                [col, row],
+                [col + 1, row + 1],
+                [col + 2, row + 2],
+                [col + 3, row + 3]
+              ];
+              return 2;
+            }
           } else {
             yellowStreak = 0;
             redStreak = 0;
@@ -262,11 +322,27 @@ class GameController extends StateNotifier<List<List<int>>> {
           if (board[col + i][row - i] == 1) {
             yellowStreak++;
             redStreak = 0;
-            if (yellowStreak == 4) return 1;
+            if (yellowStreak == 4) {
+              _winnerCells = [
+                [col, row],
+                [col + 1, row - 1],
+                [col + 2, row - 2],
+                [col + 3, row - 3]
+              ];
+              return 1;
+            }
           } else if (board[col + i][row - i] == 2) {
             redStreak++;
             yellowStreak = 0;
-            if (redStreak == 4) return 2;
+            if (redStreak == 4) {
+              _winnerCells = [
+                [col, row],
+                [col + 1, row - 1],
+                [col + 2, row - 2],
+                [col + 3, row - 3]
+              ];
+              return 2;
+            }
           } else {
             yellowStreak = 0;
             redStreak = 0;
