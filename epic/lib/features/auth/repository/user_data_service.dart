@@ -54,6 +54,8 @@ class UserDataService {
             averageTime: 0,
             lastPlayed: DateTime.now(),
             timesPlayed: 0,
+            streak: 0,
+            maxStreak: 0,
           ).toMap());
     }
   }
@@ -65,6 +67,51 @@ class UserDataService {
         .snapshots()
         .map((snapshot) =>
             UserModel.fromMap(snapshot.data() as Map<String, dynamic>));
+  }
+
+  void updateStreaks() async {
+    final strategies = [
+      'Attention',
+      'Inhibition',
+      'Memory',
+      'Planning',
+      'Self Regulation'
+    ];
+    for (var strategy in strategies) {
+      final docRef = firestore
+          .collection('users')
+          .doc(auth.currentUser!.uid)
+          .collection('strategies')
+          .doc(strategy);
+      final lastSeenVal = await docRef
+          .get()
+          .then((value) => value.data()!['lastPlayed'].millisecondsSinceEpoch);
+      DateTime lastSeen = DateTime.fromMillisecondsSinceEpoch(lastSeenVal);
+
+      // if the last played date is today, do nothing else if the last played date is not today and the last played date is yesterday, increment the streak
+      if (lastSeen.day == DateTime.now().day) {
+        docRef.update({'streak': FieldValue.increment(1)});
+      } else if (lastSeen.day == DateTime.now().day - 1) {
+        // increment the streak
+        docRef.update({'streak': FieldValue.increment(1)});
+      } else {
+        docRef.update({'streak': 0});
+      }
+
+      // update the max streak
+      final maxStreakVal = await docRef
+          .get()
+          .then((value) => value.data()!['maxStreak']);
+      int maxStreak = maxStreakVal;
+      final streakVal = await docRef
+          .get()
+          .then((value) => value.data()!['streak']);
+      int streak = streakVal;
+      if (streak > maxStreak) {
+        docRef.update({'maxStreak': streak});
+      }
+    
+    }
   }
 
   void updateLastSeenStrategy(String name) {

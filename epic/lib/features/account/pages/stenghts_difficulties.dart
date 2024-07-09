@@ -114,14 +114,6 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                   ),
                 ),
                 const SizedBox(height: 10),
-                const Text(
-                  "Please let us know if you find it difficult to do the following task:",
-                  style: TextStyle(
-                    color: AppConstants.tertiaryColor,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
                 const SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -142,16 +134,25 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                       ),
                   ],
                 ),
+                const SizedBox(height: 20),
+                const Text(
+                  "Please let us know if you find it difficult to do the following task:",
+                  style: TextStyle(
+                    color: AppConstants.tertiaryColor,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
                 Expanded(
                   child: _currentIndex == difficulties.length
                       ? Center(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Text(
+                              const Text(
                                 "We will tailor your experience based on your strengths!",
                                 textAlign: TextAlign.center,
-                                style: const TextStyle(
+                                style: TextStyle(
                                   color: AppConstants.tertiaryColor,
                                   fontSize: 24,
                                   fontWeight: FontWeight.bold,
@@ -160,37 +161,38 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                               ),
                               const SizedBox(height: 20),
                               Center(
-                                child: Column(
-                                  children: [
-                                    Spring.bubbleButton(
-                                      onTap: _onSubmit,
-                                      child: Container(
-                                        height: 50,
-                                        width: 150,
-                                        decoration: BoxDecoration(
-                                          color: AppConstants.secondaryColor,
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                        ),
-                                        child: const Center(
-                                          child: Text(
-                                            'Let`s go!',
-                                            style: TextStyle(
-                                              fontSize: 22,
-                                              color:
-                                                  AppConstants.primaryTextColor,
-                                              fontWeight: FontWeight.bold,
-                                            ),
+                                child: Spring.bubbleButton(
+                                  onTap: _onSubmit,
+                                  child: Material(
+                                    color: Colors.transparent,
+                                    elevation: 5,
+                                    shadowColor:
+                                        AppConstants.primaryButtonColor,
+                                    child: Container(
+                                      height: 50,
+                                      width: 150,
+                                      decoration: BoxDecoration(
+                                        color: AppConstants.primaryButtonColor,
+                                        borderRadius: BorderRadius.circular(5),
+                                      ),
+                                      child: const Center(
+                                        child: Text(
+                                          'Let`s go!',
+                                          style: TextStyle(
+                                            fontSize: 22,
+                                            color:
+                                                AppConstants.primaryTextColor,
+                                            fontWeight: FontWeight.bold,
                                           ),
                                         ),
                                       ),
-                                      animDuration: const Duration(seconds: 1),
-                                      bubbleStart: .4,
-                                      bubbleEnd: .9,
-                                      curve: Curves.linear, //Curves.elasticOut
-                                      delay: const Duration(milliseconds: 0),
                                     ),
-                                  ],
+                                  ),
+                                  animDuration: const Duration(seconds: 1),
+                                  bubbleStart: .4,
+                                  bubbleEnd: .9,
+                                  curve: Curves.linear, //Curves.elasticOut
+                                  delay: const Duration(milliseconds: 0),
                                 ),
                               )
                             ],
@@ -207,9 +209,29 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                           itemBuilder: (context, index) {
                             return Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                const SizedBox(height: 20),
+                                Card(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(0),
+                                  ),
+                                  elevation: 5,
+                                  color: AppConstants.tertiaryColor,
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Center(
+                                      child: Text(
+                                        difficulties[index].name,
+                                        textAlign: TextAlign.center,
+                                        style: const TextStyle(
+                                          fontSize: 24,
+                                          fontWeight: FontWeight.w400,
+                                          color: AppConstants.primaryTextColor,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 50),
                                 const Text(
                                   'We can help you improve the following skills: ',
                                   style: TextStyle(
@@ -259,112 +281,94 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                                       ),
                                     ),
                                   ),
-                                const SizedBox(
-                                  height: 20,
-                                ),
-                                Card(
-                                  elevation: 5,
-                                  color: AppConstants.tertiaryColor,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Center(
-                                      child: Text(
-                                        difficulties[index].name,
-                                        textAlign: TextAlign.center,
-                                        style: const TextStyle(
-                                          fontSize: 24,
-                                          fontWeight: FontWeight.w400,
-                                          color: AppConstants.primaryTextColor,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(height: 20),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    ElevatedButton(
-                                      onPressed:
-                                          _handleYes, // Handle Yes action
-
-                                      child: Container(
-                                        height: 40,
-                                        width: 70,
-                                        decoration: BoxDecoration(
-                                          color: AppConstants.secondaryColor,
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                        ),
-                                        child: const Center(
-                                          child: Text(
-                                            'Yes',
-                                            style: TextStyle(
-                                              fontSize: 18,
-                                              color:
-                                                  AppConstants.primaryTextColor,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    ElevatedButton(
-                                      onPressed: () {
-                                        _nextPage();
-                                      }, // Handle No action
-                                      child: Container(
-                                        height: 40,
-                                        width: 70,
-                                        decoration: BoxDecoration(
-                                          color: AppConstants.secondaryColor,
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                        ),
-                                        child: const Center(
-                                          child: Text(
-                                            'No',
-                                            style: TextStyle(
-                                              fontSize: 18,
-                                              color:
-                                                  AppConstants.primaryTextColor,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    ElevatedButton(
-                                      onPressed: _nextPage, // Handle No action
-                                      child: Container(
-                                        height: 40,
-                                        width: 70,
-                                        decoration: BoxDecoration(
-                                          color: AppConstants.secondaryColor,
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                        ),
-                                        child: const Center(
-                                          child: Text(
-                                            'Skip',
-                                            style: TextStyle(
-                                              fontSize: 18,
-                                              color:
-                                                  AppConstants.primaryTextColor,
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
                               ],
                             );
                           },
                         ),
                 ),
+                _currentIndex != difficulties.length
+                    ? Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          ElevatedButton(
+                            style: ButtonStyle(
+                              shape: WidgetStateProperty.all<
+                                  RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              elevation: WidgetStateProperty.all(5),
+                              backgroundColor: WidgetStateProperty.all<Color>(
+                                  AppConstants.primaryButtonColor),
+                            ),
+
+                            onPressed: _handleYes, // Handle Yes action
+
+                            child: const Center(
+                              child: Text(
+                                'Yes',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: AppConstants.primaryTextColor,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                          ElevatedButton(
+                            style: ButtonStyle(
+                              shape: WidgetStateProperty.all<
+                                  RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              elevation: WidgetStateProperty.all(5),
+                              backgroundColor: WidgetStateProperty.all<Color>(
+                                  AppConstants.primaryButtonColor),
+                            ),
+                            onPressed: () {
+                              _nextPage();
+                            }, // Handle No action
+                            child: const Center(
+                              child: Text(
+                                'No',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: AppConstants.primaryTextColor,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                          ElevatedButton(
+                            style: ButtonStyle(
+                              shape: WidgetStateProperty.all<
+                                  RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              elevation: WidgetStateProperty.all(5),
+                              backgroundColor: WidgetStateProperty.all<Color>(
+                                  AppConstants.primaryButtonColor),
+                            ),
+                            onPressed: _nextPage, // Handle No action
+                            child: const Center(
+                              child: Text(
+                                'Skip',
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: AppConstants.primaryTextColor,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      )
+                    : const Center(),
               ],
             ),
           ),
