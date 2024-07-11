@@ -1,9 +1,8 @@
-import 'package:date_picker_timeline/extra/color.dart';
 import 'package:epic/cores/app_constants.dart';
 import 'package:flutter/material.dart';
 
 class SecondScreen extends StatefulWidget {
-  SecondScreen(this.payload);
+  const SecondScreen(this.payload, {super.key});
 
   final String? payload;
 
@@ -24,35 +23,33 @@ class SecondScreenState extends State<SecondScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(' ${_payload.toString().split("|")[0] ?? 'No title'}'),
+        title: Text(' ${_payload.toString().split("|")[0]}'),
       ),
       body: Container(
         child: Column(children: [
-          SizedBox(
+          const SizedBox(
             height: 40,
           ),
-          Container(
-            child: Column(children: [
-              Text(
-                "Hello, DBestech",
-                style: TextStyle(
-                    fontSize: 26,
-                    fontWeight: FontWeight.w900,
-                    color: Color(0xFF162339)),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Text(
-                "You have a new reminder",
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w300,
-                    color: Colors.grey),
-              ),
-            ]),
-          ),
-          SizedBox(
+          const Column(children: [
+            Text(
+              "Hello, DBestech",
+              style: TextStyle(
+                  fontSize: 26,
+                  fontWeight: FontWeight.w900,
+                  color: Color(0xFF162339)),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Text(
+              "You have a new reminder",
+              style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w300,
+                  color: Colors.grey),
+            ),
+          ]),
+          const SizedBox(
             height: 40,
           ),
           Expanded(
@@ -60,11 +57,18 @@ class SecondScreenState extends State<SecondScreen> {
               width: double.maxFinite,
               padding: const EdgeInsets.only(left: 30, right: 30, top: 50),
               margin: const EdgeInsets.only(left: 30, right: 30),
+              decoration: const BoxDecoration(
+                  color: AppConstants.primaryColor,
+                  borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(50),
+                      topLeft: Radius.circular(50),
+                      bottomRight: Radius.circular(50),
+                      bottomLeft: Radius.circular(50))),
               //child:Text('${_payload}'),
               child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
+                    const Row(
                       children: [
                         Icon(Icons.text_format, size: 35, color: Colors.white),
                         SizedBox(
@@ -76,17 +80,17 @@ class SecondScreenState extends State<SecondScreen> {
                         )
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Text(
-                      '${_payload.toString().split("|")[0] ?? 'No message'}',
-                      style: TextStyle(color: Colors.white, fontSize: 20),
+                      _payload.toString().split("|")[0],
+                      style: const TextStyle(color: Colors.white, fontSize: 20),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    Row(
+                    const Row(
                       children: [
                         Icon(Icons.description, size: 35, color: Colors.white),
                         SizedBox(
@@ -98,17 +102,17 @@ class SecondScreenState extends State<SecondScreen> {
                         )
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Text(
-                      '${_payload.toString().split("|")[1] ?? 'No message'}',
-                      style: TextStyle(color: Colors.white, fontSize: 20),
+                      _payload.toString().split("|")[1],
+                      style: const TextStyle(color: Colors.white, fontSize: 20),
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
-                    Row(
+                    const Row(
                       children: [
                         Icon(Icons.calendar_today_outlined,
                             size: 35, color: Colors.white),
@@ -121,24 +125,17 @@ class SecondScreenState extends State<SecondScreen> {
                         )
                       ],
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 20,
                     ),
                     Text(
-                      '${_payload.toString().split("|")[2] ?? 'No message'}',
-                      style: TextStyle(color: Colors.white, fontSize: 20),
+                      _payload.toString().split("|")[2],
+                      style: const TextStyle(color: Colors.white, fontSize: 20),
                     )
                   ]),
-              decoration: BoxDecoration(
-                  color: AppConstants.primaryColor,
-                  borderRadius: BorderRadius.only(
-                      topRight: Radius.circular(50),
-                      topLeft: Radius.circular(50),
-                      bottomRight: Radius.circular(50),
-                      bottomLeft: Radius.circular(50))),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 140,
           )
         ]),
