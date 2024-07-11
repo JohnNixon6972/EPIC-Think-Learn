@@ -9,7 +9,7 @@ import cloud_firestore
 import firebase_auth
 import firebase_core
 import flutter_local_notifications
-import flutter_native_timezone
+import flutter_native_timezone_updated_gradle
 import google_sign_in_ios
 import path_provider_foundation
 import sqflite
