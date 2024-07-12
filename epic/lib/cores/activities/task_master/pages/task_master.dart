@@ -186,12 +186,6 @@ class _TaskMasterState extends State<TaskMaster> {
 
                     DateTime date = DateFormat.jm().parse(task.startTime!);
                     var myTime = DateFormat("HH:mm").format(date);
-                    /*
-                  print("my date "+date.toString());
-                  print("my time " +myTime);
-                  var t=DateFormat("M/d/yyyy hh:mm a").parse(task.date+" "+task.startTime);
-                  print(t);
-                  print(int.parse(myTime.toString().split(":")[0]));*/
 
                     notifyProvider.scheduledNotification(
                         int.parse(myTime.toString().split(":")[0]),
