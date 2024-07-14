@@ -39,9 +39,10 @@ class BoardColumn extends ConsumerWidget {
     return GestureDetector(
       onTap: () {
         gameNotifier.playColumn(colNum, context);
+        print(gameNotifier.isWinnerDeclared);
 
-        gameNotifier.isWinnerDeclared
-            ? Future.delayed(const Duration(seconds: 1), () {
+        (gameNotifier.isWinnerDeclared == false)
+            ? Future.delayed(const Duration(seconds: 2), () {
                 gameNotifier.playColumn(Random().nextInt(7), context);
               })
             : null;
