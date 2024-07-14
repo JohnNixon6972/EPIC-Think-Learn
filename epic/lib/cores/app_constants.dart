@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppConstants {
   static const String memoryCardImage = 'assets/images/memory.jpg';
@@ -35,4 +36,49 @@ class AppConstants {
 
   // static const Color primaryButtonColor = Color.fromARGB(255, 217, 168, 62);
   static const Color primaryButtonColor = attentionColor;
+
+  static TextStyle get headingTextStyle {
+    return GoogleFonts.lato(
+      textStyle: const TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+          color: AppConstants.secondaryTextColor),
+    );
+  }
+
+  static TextStyle get subHeadingTextStyle {
+    return GoogleFonts.lato(
+      textStyle: TextStyle(
+          fontSize: 20, fontWeight: FontWeight.w400, color: Colors.grey[400]),
+    );
+  }
+
+  static TextStyle get titleTextStyle {
+    return GoogleFonts.lato(
+      textStyle: const TextStyle(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+          color: AppConstants.secondaryTextColor),
+    );
+  }
+
+  static TextStyle get subTitleTextStyle {
+    return GoogleFonts.lato(
+      textStyle: TextStyle(fontSize: 16, color: Colors.grey[400]),
+    );
+  }
+
+  static TextStyle get bodyTextStyle {
+    return GoogleFonts.lato(
+      textStyle: const TextStyle(
+          fontSize: 14, fontWeight: FontWeight.w400, color: Colors.white),
+    );
+  }
+
+  static TextStyle get body2TextStyle {
+    return GoogleFonts.lato(
+      textStyle: TextStyle(
+          fontSize: 14, fontWeight: FontWeight.w400, color: Colors.grey[200]),
+    );
+  }
 }

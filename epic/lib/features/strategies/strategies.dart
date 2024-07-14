@@ -1,3 +1,4 @@
+import 'package:epic/cores/activities/activities.dart';
 import 'package:epic/cores/app_constants.dart';
 import 'package:epic/cores/games/games.dart';
 import 'package:flutter/material.dart';
@@ -7,26 +8,31 @@ enum Strategies {
       name: "Memory",
       image: AppConstants.memoryCardImage,
       game: Game.teaTowel,
+      activity: Activity.taskMaster,
       color: AppConstants.memoryColor),
 
   inhibition(
       name: "Inhibition",
       image: AppConstants.inhibitionCardImage,
       game: Game.simonSays,
+      activity: Activity.taskMaster,
       color: AppConstants.inhibitionColor),
   attention(
+      name: "Attention",
       image: AppConstants.attentionCardImage,
       game: Game.simonSays,
-      name: "Attention",
+      activity: Activity.taskMaster,
       color: AppConstants.attentionColor),
   planning(
       name: "Planning",
       image: AppConstants.planningCardImage,
       game: Game.fourInARow,
+      activity: Activity.taskMaster,
       color: AppConstants.planningColor),
   selfRegulation(
       image: AppConstants.selfRegulationCardImage,
       game: Game.howLongIsAMinute,
+      activity: Activity.taskMaster,
       name: "Self Regulation",
       color: AppConstants.selfregulationColor);
 
@@ -35,12 +41,20 @@ enum Strategies {
     required this.name,
     required this.image,
     required this.game,
+    required this.activity,
   });
 
   final String name;
   final Color color;
   final String image;
   final Game game;
+  final Activity activity;
+
+  get strategyName => name;
+  get strategyColor => color;
+  get strategyImage => image;
+  get strategyGame => game;
+  get strategyActivity => activity;
 }
 
 enum Difficulties {
