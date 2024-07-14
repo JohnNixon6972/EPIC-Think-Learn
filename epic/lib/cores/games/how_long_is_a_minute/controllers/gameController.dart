@@ -23,6 +23,7 @@ class GameController extends StateNotifier<GameState> {
   Timer? _timer;
 
   final GameService gameService;
+  
 
   void startTimer() {
     if (state.isRunning) return;

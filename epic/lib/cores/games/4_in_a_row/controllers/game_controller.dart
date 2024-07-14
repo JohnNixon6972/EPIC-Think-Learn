@@ -28,12 +28,10 @@ class GameController extends StateNotifier<List<List<int>>> {
   List<List<int>> get getWinnerCells => _winnerCells;
 
   void _buildBoard() {
-    Future.delayed(const Duration(seconds: 5), () {
-      board = List.generate(7, (_) => List.filled(6, 0));
-      _turnYellow = true;
-      _isWinnerDeclared = false;
-      _winnerCells = [];
-    });
+    board = List.generate(7, (_) => List.filled(6, 0));
+    _turnYellow = true;
+    _isWinnerDeclared = false;
+    _winnerCells = [];
   }
 
   void incrementPoints() {
@@ -73,13 +71,14 @@ class GameController extends StateNotifier<List<List<int>>> {
         // gameService.updateLevel(gameService.level + 1);
         incrementLevel();
         _isWinnerDeclared = true;
+
         print(getWinnerCells);
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             backgroundColor: AppConstants.secondaryColor,
             elevation: 5,
-            duration: const Duration(seconds: 5),
-            shape: const RoundedRectangleBorder(
+            duration: Duration(seconds: 5),
+            shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(30),
                 topRight: Radius.circular(30),
@@ -87,7 +86,7 @@ class GameController extends StateNotifier<List<List<int>>> {
             ),
             content: Column(
               children: [
-                const Text(
+                Text(
                   'Yellow wins!',
                   style: TextStyle(
                     color: AppConstants.primaryTextColor,
@@ -95,23 +94,28 @@ class GameController extends StateNotifier<List<List<int>>> {
                     fontSize: 20,
                   ),
                 ),
-                Cell(Mode: cellMode.YELLOW),
+                Cell(
+                  Mode: cellMode.YELLOW,
+                ),
               ],
             ),
           ),
         );
-        _buildBoard();
+        Future.delayed(const Duration(seconds: 5), () {
+          _buildBoard();
+        });
       } else if (horizontal == 2 || vertical == 2 || diagonal == 2) {
         // gameService.updateLevel(gameService.level + 1);
+
         _isWinnerDeclared = true;
         print(getWinnerCells);
         incrementLevel();
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
+          const SnackBar(
             backgroundColor: AppConstants.primaryColor,
             elevation: 5,
-            duration: const Duration(seconds: 5),
-            shape: const RoundedRectangleBorder(
+            duration: Duration(seconds: 5),
+            shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(30),
                 topRight: Radius.circular(30),
@@ -119,7 +123,7 @@ class GameController extends StateNotifier<List<List<int>>> {
             ),
             content: Column(
               children: [
-                const Text(
+                Text(
                   'Red wins!',
                   style: TextStyle(
                     color: AppConstants.primaryTextColor,
@@ -132,9 +136,10 @@ class GameController extends StateNotifier<List<List<int>>> {
             ),
           ),
         );
-        _buildBoard();
+        Future.delayed(const Duration(seconds: 5), () {
+          _buildBoard();
+        });
       } else {
-        _isWinnerDeclared = true;
         print(getWinnerCells);
         if (isBoardFull()) {
           ScaffoldMessenger.of(context).showSnackBar(
@@ -158,17 +163,19 @@ class GameController extends StateNotifier<List<List<int>>> {
               ),
             ),
           );
-          _buildBoard();
+          Future.delayed(const Duration(seconds: 5), () {
+            _buildBoard();
+          });
         }
       }
     } else {
-      _isWinnerDeclared = true;
+      // _isWinnerDeclared = true;
       print(getWinnerCells);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           backgroundColor: AppConstants.planningColor,
           elevation: 5,
-          duration: Duration(seconds: 5),
+          duration: Duration(seconds: 2),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(30),

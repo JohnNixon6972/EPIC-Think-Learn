@@ -9,10 +9,9 @@ class HourGlass extends StatefulWidget {
   State<HourGlass> createState() => _HourGlassState();
 }
 
-class _HourGlassState extends State<HourGlass>
-    with TickerProviderStateMixin {
+class _HourGlassState extends State<HourGlass> with TickerProviderStateMixin {
   late AnimationController _controller;
-  int timeDilation = 100;
+  int timeDilation = 70;
 
   @override
   void initState() {
@@ -20,6 +19,7 @@ class _HourGlassState extends State<HourGlass>
       duration: Duration(seconds: timeDilation),
       vsync: this,
     )..repeat();
+
     super.initState();
   }
 
@@ -32,7 +32,7 @@ class _HourGlassState extends State<HourGlass>
   @override
   Widget build(BuildContext context) {
     return SpinKitPouringHourGlassRefined(
-      color: AppConstants.selfregulationColor,
+      color: AppConstants.selfregulationColor.withOpacity(0.7),
       strokeWidth: 2,
       size: MediaQuery.of(context).size.height * 0.5,
       controller: _controller,

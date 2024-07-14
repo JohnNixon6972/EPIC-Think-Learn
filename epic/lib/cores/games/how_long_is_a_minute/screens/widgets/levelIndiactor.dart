@@ -35,14 +35,14 @@ class LevelIndicator extends ConsumerWidget {
             center: Text(
               'Level ${currLevel.currentLevel}',
               style: TextStyle(
-                color: AppConstants.secondaryColor,
+                color: AppConstants.selfregulationColor,
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
             barRadius: const Radius.circular(10),
             backgroundColor: AppConstants.secondaryColorLight,
-            progressColor: AppConstants.selfregulationColor,
+            progressColor: AppConstants.selfregulationColor.withOpacity(0.4),
           ),
           Text(
             '${(levelProgress * 100).toStringAsFixed(0)}% to next level',

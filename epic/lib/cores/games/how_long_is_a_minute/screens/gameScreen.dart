@@ -13,15 +13,21 @@ class HowLongIsAMinute extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final gameState = ref.watch(gameControllerProvider);
     final gameController = ref.read(gameControllerProvider.notifier);
+    final SpringController springController = SpringController();
+    springController.play(
+      motion: Motion.loop,
+      animDuration: Duration(seconds: 500),
+      curve: Curves.easeInOut,
+    );
 
     return Scaffold(
       backgroundColor: AppConstants.tertiaryColorLight,
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             const Text(
-              'Guess how long is a minute?',
+              'How long is a minute?',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 30,
@@ -33,10 +39,10 @@ class HowLongIsAMinute extends ConsumerWidget {
               padding: const EdgeInsets.all(8),
               child: Container(
                 decoration: BoxDecoration(
-                  color: AppConstants.secondaryColor,
+                  color: AppConstants.selfregulationColor,
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(
-                    color: AppConstants.primaryColor,
+                    color: AppConstants.planningColor,
                     width: 2,
                   ),
                 ),
@@ -46,18 +52,27 @@ class HowLongIsAMinute extends ConsumerWidget {
                     "My brain is learning about time.",
                     textAlign: TextAlign.center,
                     style: TextStyle(
-                      color: AppConstants.selfregulationColor,
+                      color: AppConstants.primaryTextColor,
                       fontSize: 22,
-                      fontWeight: FontWeight.bold,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.only(top: 35, bottom: 35),
-              child: HourGlass(),
-            ),
+            !gameState.isRunning
+                ? Spring.fadeIn(
+                    springController:
+                        springController, 
+                    startOpacity: .3, 
+                    endOpacity: 1,                   
+                    child: Icon(
+                      Icons.hourglass_empty_rounded,
+                      color: AppConstants.selfregulationColor,
+                      size: MediaQuery.of(context).size.height * 0.3,
+                    ),
+                  )
+                : const HourGlass(),
             const LevelIndicator(),
             if (!gameState.isRunning)
               Spring.bubbleButton(
