@@ -6,6 +6,7 @@ import 'package:epic/cores/activities/task_master/widgets/input_field.dart';
 import 'package:epic/cores/app_constants.dart';
 import 'package:epic/cores/widgets/main_app_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
 
 class AddTaskPage extends StatefulWidget {
@@ -16,14 +17,10 @@ class AddTaskPage extends StatefulWidget {
 }
 
 class _AddTaskPageState extends State<AddTaskPage> {
-  final _taskController = TaskMasterNotifier();
-
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _noteController = TextEditingController();
 
   DateTime _selectedDate = DateTime.now();
-  //String _startTime = DateFormat("hh:mm").format(DateTime.now());
-  //_startTime = DateFormat('hh:mm a').format(DateTime.now()).toString();
   String? _startTime = DateFormat('hh:mm a').format(DateTime.now()).toString();
 
   String? _endTime = "9:30 AM";
@@ -205,24 +202,30 @@ class _AddTaskPageState extends State<AddTaskPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   _colorChips(),
-                  GestureDetector(
-                    onTap: () {
-                      _validateInputs();
-                    },
-                    child: Container(
-                      height: 50,
-                      width: 130,
-                      decoration: BoxDecoration(
-                        color: AppConstants.primaryColor,
-                        borderRadius: BorderRadius.circular(14),
-                      ),
-                      child: const Center(
-                        child: Text(
-                          "Create Task",
-                          style: TextStyle(color: Colors.white),
+                  Consumer(
+                    builder: (context, ref, child) {
+                      final taskController = ref.watch(taskMasterProvider);
+
+                      return GestureDetector(
+                        onTap: () {
+                          _validateInputs(taskController);
+                        },
+                        child: Container(
+                          height: 50,
+                          width: 130,
+                          decoration: BoxDecoration(
+                            color: AppConstants.primaryColor,
+                            borderRadius: BorderRadius.circular(14),
+                          ),
+                          child: const Center(
+                            child: Text(
+                              "Create Task",
+                              style: TextStyle(color: Colors.white),
+                            ),
+                          ),
                         ),
-                      ),
-                    ),
+                      );
+                    },
                   ),
                 ],
               ),
@@ -236,9 +239,9 @@ class _AddTaskPageState extends State<AddTaskPage> {
     );
   }
 
-  _validateInputs() {
+  _validateInputs(TaskMasterNotifier _taskController) {
     if (_titleController.text.isNotEmpty && _noteController.text.isNotEmpty) {
-      _addTaskToDB();
+      _addTaskToDB(_taskController);
       Navigator.pop(context);
     } else if (_titleController.text.isEmpty || _noteController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
@@ -250,7 +253,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
     }
   }
 
-  _addTaskToDB() async {
+  _addTaskToDB(TaskMasterNotifier _taskController) async {
     await _taskController.addTask(
       task: Task(
         note: _noteController.text,

@@ -93,7 +93,7 @@ class NotificationProvider with ChangeNotifier {
       {required String title, required String body}) async {
     print("doing test");
     var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
-        'your channel id', 'your channel name',
+        'reminder_channel', 'Reminders', channelDescription: 'Channel for task reminders',
         importance: Importance.max, priority: Priority.high);
     var iOSPlatformChannelSpecifics = const DarwinNotificationDetails();
     var platformChannelSpecifics = NotificationDetails(
@@ -127,9 +127,17 @@ class NotificationProvider with ChangeNotifier {
       _nextInstanceOfTenAM(hour, minutes),
       const NotificationDetails(
           android: AndroidNotificationDetails(
-        'your channel id',
-        'your channel name',
-      )),
+            'reminder_channel',
+            'Reminders',
+            channelDescription: 'Channel for task reminders',
+            importance: Importance.max,
+            priority: Priority.high,
+          ),
+          iOS: DarwinNotificationDetails(
+            presentAlert: true,
+            presentBadge: true,
+            presentSound: true,
+          )),
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
       matchDateTimeComponents: DateTimeComponents.time,
@@ -147,23 +155,6 @@ class NotificationProvider with ChangeNotifier {
         ),
       );
     });
-  }
-
-  Future<void> periodicallyNotification() async {
-    const AndroidNotificationDetails androidPlatformChannelSpecifics =
-        AndroidNotificationDetails(
-      'repeating channel id',
-      'repeating channel name',
-    );
-    const NotificationDetails platformChannelSpecifics =
-        NotificationDetails(android: androidPlatformChannelSpecifics);
-    await flutterLocalNotificationsPlugin.periodicallyShow(
-      0,
-      'repeating title',
-      'repeating body',
-      RepeatInterval.everyMinute,
-      platformChannelSpecifics,
-    );
   }
 }
 
