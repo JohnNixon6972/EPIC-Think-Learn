@@ -101,15 +101,18 @@ class _TaskMasterState extends State<TaskMaster> {
             ],
           ),
           backgroundColor: AppConstants.primaryBackgroundColor,
-          body: Column(
-            children: [
-              _addTaskBar(),
-              _dateBar(),
-              const SizedBox(
-                height: 12,
-              ),
-              _showTasks(),
-            ],
+          body: Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Column(
+              children: [
+                _addTaskBar(),
+                _dateBar(),
+                const SizedBox(
+                  height: 12,
+                ),
+                _showTasks(),
+              ],
+            ),
           ),
         );
       },
@@ -199,7 +202,7 @@ class _TaskMasterState extends State<TaskMaster> {
               child: const Center(
                 child: Text(
                   "+ Add Task",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.white, fontSize: 18),
                 ),
               ),
             ),

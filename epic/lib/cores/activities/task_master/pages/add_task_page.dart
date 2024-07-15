@@ -1,10 +1,15 @@
 // ignore_for_file: no_leading_underscores_for_local_identifiers, curly_braces_in_flow_control_structures
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:epic/cores/activities/task_master/model/task_model.dart';
 import 'package:epic/cores/activities/task_master/repository/task_master_notifier.dart';
 import 'package:epic/cores/activities/task_master/widgets/input_field.dart';
 import 'package:epic/cores/app_constants.dart';
+import 'package:epic/cores/screens/error_page.dart';
+import 'package:epic/cores/screens/loader.dart';
 import 'package:epic/cores/widgets/main_app_bar.dart';
+import 'package:epic/features/account/pages/my_profile.dart';
+import 'package:epic/features/auth/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
@@ -54,185 +59,232 @@ class _AddTaskPageState extends State<AddTaskPage> {
     //_startTime = DateFormat('hh:mm a').format(DateTime.now()).toString();
     return Scaffold(
       backgroundColor: AppConstants.primaryBackgroundColor,
-      appBar: mainAppBar(context),
-      body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Add Task",
-                style: AppConstants.headingTextStyle,
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              InputField(
-                title: "Title",
-                hint: "Enter title here.",
-                controller: _titleController,
-              ),
-              InputField(
-                  title: "Note",
-                  hint: "Enter note here.",
-                  controller: _noteController),
-              InputField(
-                title: "Date",
-                hint: DateFormat.yMd().format(_selectedDate),
-                widget: IconButton(
-                  icon: (const Icon(
-                    Icons.calendar_month_sharp,
-                    color: Colors.grey,
-                  )),
-                  onPressed: () {
-                    _getDateFromUser();
-                  },
-                ),
-              ),
-              Row(
-                children: [
-                  Expanded(
-                    child: InputField(
-                      title: "Start Time",
-                      hint: _startTime,
-                      widget: IconButton(
-                        icon: (const Icon(
-                          Icons.alarm,
-                          color: Colors.grey,
-                        )),
-                        onPressed: () {
-                          _getTimeFromUser(isStartTime: true);
-                          setState(() {});
-                        },
+      appBar: AppBar(
+        backgroundColor: AppConstants.primaryColor,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios_new_rounded,
+              size: 25, color: AppConstants.primaryTextColor),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+        title: const Text(
+          "Task Master",
+          style: TextStyle(
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+              color: AppConstants.primaryTextColor),
+        ),
+        actions: [
+          Consumer(
+            builder: (context, ref, child) {
+              return ref.watch(currentUserProvider).when(
+                  data: (currentUser) => Padding(
+                        padding: const EdgeInsets.only(right: 12.0),
+                        child: GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => const MyProfile()),
+                              );
+                            },
+                            child: CircleAvatar(
+                              radius: 18,
+                              backgroundColor: Colors.grey,
+                              backgroundImage: CachedNetworkImageProvider(
+                                  currentUser.profilePic),
+                            )),
                       ),
-                    ),
-                  ),
-                  const SizedBox(
-                    width: 12,
-                  ),
-                  Expanded(
-                    child: InputField(
-                      title: "End Time",
-                      hint: _endTime,
-                      widget: IconButton(
-                        icon: (const Icon(
-                          Icons.alarm,
-                          color: Colors.grey,
-                        )),
-                        onPressed: () {
-                          _getTimeFromUser(isStartTime: false);
-                        },
-                      ),
-                    ),
-                  )
-                ],
-              ),
-              InputField(
-                title: "Remind",
-                hint: "$_selectedRemind minutes early",
-                widget: Row(
-                  children: [
-                    DropdownButton<String>(
-                        icon: const Icon(
-                          Icons.keyboard_arrow_down,
-                          color: Colors.grey,
-                        ),
-                        iconSize: 32,
-                        elevation: 4,
-                        style: AppConstants.subTitleTextStyle,
-                        underline: Container(height: 0),
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            _selectedRemind = int.parse(newValue!);
-                          });
-                        },
-                        items: remindList
-                            .map<DropdownMenuItem<String>>((int value) {
-                          return DropdownMenuItem<String>(
-                            value: value.toString(),
-                            child: Text(value.toString()),
-                          );
-                        }).toList()),
-                    const SizedBox(width: 6),
-                  ],
+                  error: (error, stackTrace) =>
+                      ErrorPage(message: error.toString()),
+                  loading: () => const Loader());
+            },
+          ),
+        ],
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Container(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Add Task",
+                  style: AppConstants.headingTextStyle,
                 ),
-              ),
-              InputField(
-                title: "Repeat",
-                hint: _selectedRepeat,
-                widget: Row(
-                  children: [
-                    DropdownButton<String>(
-                        dropdownColor: Colors.blueGrey,
-                        icon: const Icon(
-                          Icons.keyboard_arrow_down,
-                          color: Colors.grey,
-                        ),
-                        iconSize: 32,
-                        elevation: 4,
-                        style: AppConstants.subTitleTextStyle,
-                        underline: Container(
-                          height: 6,
-                        ),
-                        onChanged: (String? newValue) {
-                          setState(() {
-                            _selectedRepeat = newValue;
-                          });
-                        },
-                        items: repeatList
-                            .map<DropdownMenuItem<String>>((String value) {
-                          return DropdownMenuItem<String>(
-                            value: value,
-                            child: Text(
-                              value,
-                              style: const TextStyle(color: Colors.white),
-                            ),
-                          );
-                        }).toList()),
-                    const SizedBox(width: 6),
-                  ],
+                const SizedBox(
+                  height: 8,
                 ),
-              ),
-              const SizedBox(
-                height: 18.0,
-              ),
-              Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _colorChips(),
-                  Consumer(
-                    builder: (context, ref, child) {
-                      final taskController = ref.watch(taskMasterProvider);
-
-                      return GestureDetector(
-                        onTap: () {
-                          _validateInputs(taskController);
-                        },
-                        child: Container(
-                          height: 50,
-                          width: 130,
-                          decoration: BoxDecoration(
-                            color: AppConstants.primaryColor,
-                            borderRadius: BorderRadius.circular(14),
-                          ),
-                          child: const Center(
-                            child: Text(
-                              "Create Task",
-                              style: TextStyle(color: Colors.white),
-                            ),
-                          ),
-                        ),
-                      );
+                InputField(
+                  title: "Title",
+                  hint: "Enter title here.",
+                  controller: _titleController,
+                ),
+                InputField(
+                    title: "Note",
+                    hint: "Enter note here.",
+                    controller: _noteController),
+                InputField(
+                  title: "Date",
+                  hint: DateFormat.yMd().format(_selectedDate),
+                  widget: IconButton(
+                    icon: (const Icon(
+                      Icons.calendar_month_sharp,
+                      color: Colors.grey,
+                    )),
+                    onPressed: () {
+                      _getDateFromUser();
                     },
                   ),
-                ],
-              ),
-              const SizedBox(
-                height: 30.0,
-              ),
-            ],
+                ),
+                Row(
+                  children: [
+                    Expanded(
+                      child: InputField(
+                        title: "Start Time",
+                        hint: _startTime,
+                        widget: IconButton(
+                          icon: (const Icon(
+                            Icons.alarm,
+                            color: Colors.grey,
+                          )),
+                          onPressed: () {
+                            _getTimeFromUser(isStartTime: true);
+                            setState(() {});
+                          },
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 12,
+                    ),
+                    Expanded(
+                      child: InputField(
+                        title: "End Time",
+                        hint: _endTime,
+                        widget: IconButton(
+                          icon: (const Icon(
+                            Icons.alarm,
+                            color: Colors.grey,
+                          )),
+                          onPressed: () {
+                            _getTimeFromUser(isStartTime: false);
+                          },
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+                InputField(
+                  title: "Remind",
+                  hint: "$_selectedRemind minutes early",
+                  widget: Row(
+                    children: [
+                      DropdownButton<String>(
+                          icon: const Icon(
+                            Icons.keyboard_arrow_down,
+                            color: Colors.grey,
+                          ),
+                          iconSize: 32,
+                          elevation: 4,
+                          style: AppConstants.subTitleTextStyle,
+                          underline: Container(height: 0),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              _selectedRemind = int.parse(newValue!);
+                            });
+                          },
+                          items: remindList
+                              .map<DropdownMenuItem<String>>((int value) {
+                            return DropdownMenuItem<String>(
+                              value: value.toString(),
+                              child: Text(value.toString()),
+                            );
+                          }).toList()),
+                      const SizedBox(width: 6),
+                    ],
+                  ),
+                ),
+                InputField(
+                  title: "Repeat",
+                  hint: _selectedRepeat,
+                  widget: Row(
+                    children: [
+                      DropdownButton<String>(
+                          dropdownColor: Colors.blueGrey,
+                          icon: const Icon(
+                            Icons.keyboard_arrow_down,
+                            color: Colors.grey,
+                          ),
+                          iconSize: 32,
+                          elevation: 4,
+                          style: AppConstants.subTitleTextStyle,
+                          underline: Container(
+                            height: 6,
+                          ),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              _selectedRepeat = newValue;
+                            });
+                          },
+                          items: repeatList
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                value,
+                                style: const TextStyle(color: Colors.white),
+                              ),
+                            );
+                          }).toList()),
+                      const SizedBox(width: 6),
+                    ],
+                  ),
+                ),
+                const SizedBox(
+                  height: 18.0,
+                ),
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _colorChips(),
+                    Consumer(
+                      builder: (context, ref, child) {
+                        final taskController = ref.watch(taskMasterProvider);
+
+                        return GestureDetector(
+                          onTap: () {
+                            _validateInputs(taskController);
+                          },
+                          child: Container(
+                            height: 50,
+                            width: 130,
+                            decoration: BoxDecoration(
+                              color: AppConstants.primaryColor,
+                              borderRadius: BorderRadius.circular(14),
+                            ),
+                            child: const Center(
+                              child: Text(
+                                "Create Task",
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 30.0,
+                ),
+              ],
+            ),
           ),
         ),
       ),
