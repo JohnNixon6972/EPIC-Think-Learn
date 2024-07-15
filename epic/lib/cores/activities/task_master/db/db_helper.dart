@@ -35,12 +35,12 @@ class DBHelper {
       // delete the table
       // await _db!.execute("DROP TABLE IF EXISTS $_tableName");
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
     }
   }
 
   static Future<int> insert(Task task) async {
-    print("insert function called");
+    debugPrint("insert function called");
     return await _db!.insert(_tableName, task.toJson());
   }
 
@@ -48,20 +48,19 @@ class DBHelper {
       await _db!.delete(_tableName, where: 'id = ?', whereArgs: [task.id]);
 
   static Future<List<Map<String, dynamic>>> query() async {
-    print("query function called");
-    // return _db!.query(_tableName);
+    debugPrint("query function called");
     try {
       return await _db!.query(
         _tableName,
       );
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
       return [];
     }
   }
 
   static Future<int> update(int? id) async {
-    print("update function called");
+    debugPrint("update function called");
     return await _db!.rawUpdate('''
     UPDATE tasks   
     SET isCompleted = ?

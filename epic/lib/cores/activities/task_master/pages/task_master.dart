@@ -235,7 +235,7 @@ class _TaskMasterState extends State<TaskMaster> {
 
                           notifyProvider.scheduledNotification(
                               hour, minute, task);
-                          print("Scheduled notification");
+                          debugPrint("Scheduled notification");
                         } on FormatException {
                           debugPrint(
                               "Error parsing date: Invalid format - ${task.startTime}");
