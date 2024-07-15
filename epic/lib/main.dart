@@ -2,6 +2,7 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:epic/cores/activities/task_master/db/db_helper.dart';
+import 'package:epic/cores/activities/task_master/repository/notification_notifier.dart';
 import 'package:epic/cores/screens/loader.dart';
 import 'package:epic/features/auth/pages/login_page.dart';
 import 'package:epic/features/account/pages/stenghts_difficulties.dart';
@@ -9,13 +10,24 @@ import 'package:epic/features/home/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get_storage/get_storage.dart';
 import 'firebase_options.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:timezone/data/latest.dart' as tz;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  final DarwinInitializationSettings initializationSettingsDarwin =
+      DarwinInitializationSettings(
+          requestSoundPermission: false,
+          requestBadgePermission: false,
+          requestAlertPermission: false);
+
+
   await DBHelper.initDb();
+  tz.initializeTimeZones();
   await GetStorage.init();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -24,7 +36,7 @@ void main() async {
   runApp(ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   MyApp({super.key});
 
   String _type = '';
@@ -33,7 +45,11 @@ class MyApp extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final notifyProvider = ref.watch(notificationProvider);
+
+    notifyProvider.initializeNotification(context);
+    notifyProvider.requestIOSPermissions();
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
