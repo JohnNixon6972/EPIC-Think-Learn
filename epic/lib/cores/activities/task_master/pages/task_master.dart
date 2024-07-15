@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:epic/cores/activities/task_master/model/task_model.dart';
 import 'package:epic/cores/activities/task_master/pages/add_task_page.dart';
@@ -8,7 +9,10 @@ import 'package:epic/cores/activities/task_master/repository/task_master_notifie
 import 'package:epic/cores/activities/task_master/widgets/size_config.dart';
 import 'package:epic/cores/activities/task_master/widgets/task_tile.dart';
 import 'package:epic/cores/app_constants.dart';
-import 'package:epic/cores/widgets/main_app_bar.dart';
+import 'package:epic/cores/screens/error_page.dart';
+import 'package:epic/cores/screens/loader.dart';
+import 'package:epic/features/account/pages/my_profile.dart';
+import 'package:epic/features/auth/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -50,7 +54,52 @@ class _TaskMasterState extends State<TaskMaster> {
     return Consumer(
       builder: (context, ref, child) {
         return Scaffold(
-          appBar: mainAppBar(context),
+          appBar: AppBar(
+            backgroundColor: AppConstants.primaryColor,
+            elevation: 0,
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back_ios_new_rounded,
+                  size: 25, color: AppConstants.primaryTextColor),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            title: const Text(
+              "Task Master",
+              style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: AppConstants.primaryTextColor),
+            ),
+            actions: [
+              Consumer(
+                builder: (context, ref, child) {
+                  return ref.watch(currentUserProvider).when(
+                      data: (currentUser) => Padding(
+                            padding: const EdgeInsets.only(right: 12.0),
+                            child: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const MyProfile()),
+                                  );
+                                },
+                                child: CircleAvatar(
+                                  radius: 18,
+                                  backgroundColor: Colors.grey,
+                                  backgroundImage: CachedNetworkImageProvider(
+                                      currentUser.profilePic),
+                                )),
+                          ),
+                      error: (error, stackTrace) =>
+                          ErrorPage(message: error.toString()),
+                      loading: () => const Loader());
+                },
+              ),
+            ],
+          ),
           backgroundColor: AppConstants.primaryBackgroundColor,
           body: Column(
             children: [
@@ -161,93 +210,93 @@ class _TaskMasterState extends State<TaskMaster> {
   }
 
   _showTasks() {
-    return Consumer(builder: (context, ref, child) {
-      final taskController = ref.watch(taskMasterProvider);
-      final notifyProvider = ref.watch(notificationProvider);
-      return Expanded(
-          child: taskController.taskList.isEmpty
-              ? _noTaskMsg()
-              : ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  itemCount: taskController.taskList.length,
-                  itemBuilder: (context, index) {
-                    Task task = taskController.taskList[index];
-                    if (task.repeat == 'Daily') {
-                      try {
-                        DateFormat format = DateFormat("hh:mm a");
+    return Consumer(
+      builder: (context, ref, child) {
+        final taskController = ref.watch(taskMasterProvider);
+        final notifyProvider = ref.watch(notificationProvider);
+        return Expanded(
+            child: taskController.taskList.isEmpty
+                ? _noTaskMsg()
+                : ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    itemCount: taskController.taskList.length,
+                    itemBuilder: (context, index) {
+                      Task task = taskController.taskList[index];
+                      if (task.repeat == 'Daily') {
+                        try {
+                          DateFormat format = DateFormat("hh:mm a");
 
-                        // Parse the time string to a DateTime object
-                        DateTime dateTime = format.parse(task.startTime!);
+                          // Parse the time string to a DateTime object
+                          DateTime dateTime = format.parse(task.startTime!);
 
-                        // Extract hour and minute as integers
-                        int hour = dateTime.hour; // 24-hour format
-                        int minute = dateTime.minute;
+                          // Extract hour and minute as integers
+                          int hour = dateTime.hour; // 24-hour format
+                          int minute = dateTime.minute;
 
-                        notifyProvider.scheduledNotification(
-                            hour, minute, task);
-                            print("Scheduled notification");
-                      } on FormatException {
-                        debugPrint(
-                            "Error parsing date: Invalid format - ${task.startTime}");
+                          notifyProvider.scheduledNotification(
+                              hour, minute, task);
+                          print("Scheduled notification");
+                        } on FormatException {
+                          debugPrint(
+                              "Error parsing date: Invalid format - ${task.startTime}");
+                        }
+
+                        return AnimationConfiguration.staggeredList(
+                          position: index,
+                          duration: const Duration(milliseconds: 1375),
+                          child: SlideAnimation(
+                            horizontalOffset: 300.0,
+                            child: FadeInAnimation(
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  GestureDetector(
+                                      onTap: () {
+                                        showModalBottomSheet(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return showBottomSheet(context,
+                                                  task, taskController);
+                                            });
+                                      },
+                                      child: TaskTile(task)),
+                                ],
+                              ),
+                            ),
+                          ),
+                        );
                       }
-
-                      return AnimationConfiguration.staggeredList(
-                        position: index,
-                        duration: const Duration(milliseconds: 1375),
-                        child: SlideAnimation(
-                          horizontalOffset: 300.0,
-                          child: FadeInAnimation(
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                GestureDetector(
-                                    onTap: () {
-                                      showModalBottomSheet(
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return showBottomSheet(
-                                                context, task, taskController);
-                                          });
-                                    },
-                                    child: TaskTile(task)),
-                              ],
+                      if (task.date == DateFormat.yMd().format(_selectedDate)) {
+                        return AnimationConfiguration.staggeredList(
+                          position: index,
+                          duration: const Duration(milliseconds: 1375),
+                          child: SlideAnimation(
+                            horizontalOffset: 300.0,
+                            child: FadeInAnimation(
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  GestureDetector(
+                                      onTap: () {
+                                        showModalBottomSheet(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return showBottomSheet(context,
+                                                  task, taskController);
+                                            });
+                                      },
+                                      child: TaskTile(task)),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    }
-                    if (task.date == DateFormat.yMd().format(_selectedDate)) {
-
-
-                      return AnimationConfiguration.staggeredList(
-                        position: index,
-                        duration: const Duration(milliseconds: 1375),
-                        child: SlideAnimation(
-                          horizontalOffset: 300.0,
-                          child: FadeInAnimation(
-                            child: Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                GestureDetector(
-                                    onTap: () {
-                                      showModalBottomSheet(
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return showBottomSheet(
-                                                context, task, taskController);
-                                          });
-                                    },
-                                    child: TaskTile(task)),
-                              ],
-                            ),
-                          ),
-                        ),
-                      );
-                    } else {
-                      return Container();
-                    }
-                  }));
-    },);
+                        );
+                      } else {
+                        return Container();
+                      }
+                    }));
+      },
+    );
   }
 
   showBottomSheet(
