@@ -91,7 +91,7 @@ class NotificationProvider with ChangeNotifier {
 
   void displayNotification(
       {required String title, required String body}) async {
-    print("doing test");
+    debugPrint("doing test");
     var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
         'reminder_channel', 'Reminders', channelDescription: 'Channel for task reminders',
         importance: Importance.max, priority: Priority.high);

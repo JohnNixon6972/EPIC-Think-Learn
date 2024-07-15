@@ -45,12 +45,12 @@ class _AddTaskPageState extends State<AddTaskPage> {
   @override
   Widget build(BuildContext context) {
     //print(new DateFormat.yMMMd().format(new DateTime.now()));
-    print(" starttime ${_startTime!}");
-    final now = new DateTime.now();
+    debugPrint(" starttime ${_startTime!}");
+    final now = DateTime.now();
     final dt = DateTime(now.year, now.month, now.day, now.minute, now.second);
     final format = DateFormat.jm();
-    print(format.format(dt));
-    print("add Task date: ${DateFormat.yMd().format(_selectedDate)}");
+    debugPrint(format.format(dt));
+    debugPrint("add Task date: ${DateFormat.yMd().format(_selectedDate)}");
     //_startTime = DateFormat('hh:mm a').format(DateTime.now()).toString();
     return Scaffold(
       backgroundColor: AppConstants.primaryBackgroundColor,
@@ -249,7 +249,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
         duration: Duration(seconds: 2),
       ));
     } else {
-      print("############ SOMETHING BAD HAPPENED #################");
+      debugPrint("############ SOMETHING BAD HAPPENED #################");
     }
   }
 
@@ -321,17 +321,17 @@ class _AddTaskPageState extends State<AddTaskPage> {
     var _pickedTime = await _showTimePicker();
 
     if (_pickedTime == null)
-      print("time canceled");
+      debugPrint("time canceled");
     else if (isStartTime)
       setState(() {
         String? _formatedTime = _pickedTime.format(context);
-        print(_formatedTime);
+        debugPrint(_formatedTime);
         _startTime = _formatedTime;
       });
     else if (!isStartTime) {
       setState(() {
         String? _formatedTime = _pickedTime.format(context);
-        print(_formatedTime);
+        debugPrint(_formatedTime);
         _endTime = _formatedTime;
       });
       //_compareTime();

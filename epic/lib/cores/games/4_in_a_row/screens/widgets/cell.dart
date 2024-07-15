@@ -20,7 +20,7 @@ class Cell extends ConsumerWidget {
   });
 
   Coin _buildCoin() {
-    switch (this.Mode) {
+    switch (Mode) {
       case cellMode.YELLOW:
         return const Coin(
           CoinColor: Colors.yellow,

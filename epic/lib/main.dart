@@ -10,7 +10,6 @@ import 'package:epic/features/home/home_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get_storage/get_storage.dart';
 import 'firebase_options.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -18,13 +17,6 @@ import 'package:timezone/data/latest.dart' as tz;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  final DarwinInitializationSettings initializationSettingsDarwin =
-      DarwinInitializationSettings(
-          requestSoundPermission: false,
-          requestBadgePermission: false,
-          requestAlertPermission: false);
-
 
   await DBHelper.initDb();
   tz.initializeTimeZones();
