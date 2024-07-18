@@ -23,14 +23,13 @@ class UserDataService {
       required String email,
       required List<String> strategies,
       required String lastSeenStrategy,
-      required String type,
       required String profilePic}) async {
     UserModel user = UserModel(
       username: username,
       email: email,
       profilePic: profilePic,
       userId: auth.currentUser!.uid,
-      type: type,
+      type: 'User',
       lastSeenStrategy: lastSeenStrategy,
       strategies: strategies,
     );

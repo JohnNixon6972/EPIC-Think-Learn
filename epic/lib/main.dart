@@ -31,11 +31,6 @@ void main() async {
 class MyApp extends ConsumerWidget {
   MyApp({super.key});
 
-  String _type = '';
-  void _setType(String type) {
-    _type = type;
-  }
-
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final notifyProvider = ref.watch(notificationProvider);
@@ -56,7 +51,6 @@ class MyApp extends ConsumerWidget {
           builder: (context, snapshot) {
             if (!snapshot.hasData) {
               return LoginPage(
-                setUserType: _setType,
               );
             } else if (snapshot.connectionState == ConnectionState.waiting) {
               return const Loader();
@@ -75,7 +69,6 @@ class MyApp extends ConsumerWidget {
                       displayName: user!.displayName!,
                       profilePic: user.photoURL!,
                       email: user.email!,
-                      type: _type,
                     );
                     // return LogoutPage();
                   } else if (snapshot.connectionState ==
