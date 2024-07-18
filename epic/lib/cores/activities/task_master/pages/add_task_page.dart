@@ -7,7 +7,6 @@ import 'package:epic/cores/activities/task_master/widgets/input_field.dart';
 import 'package:epic/cores/app_constants.dart';
 import 'package:epic/cores/screens/error_page.dart';
 import 'package:epic/cores/screens/loader.dart';
-import 'package:epic/cores/widgets/main_app_bar.dart';
 import 'package:epic/features/account/pages/my_profile.dart';
 import 'package:epic/features/auth/provider/user_provider.dart';
 import 'package:flutter/material.dart';
