@@ -3,8 +3,8 @@ import 'package:epic/cores/activities/task_master/widgets/second_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:flutter_native_timezone_updated_gradle/flutter_native_timezone.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_timezone/flutter_timezone.dart';
 
 import 'package:rxdart/rxdart.dart';
 import 'package:timezone/data/latest.dart' as tz;
@@ -58,7 +58,7 @@ class NotificationProvider with ChangeNotifier {
 
   Future<void> _configureLocalTimeZone() async {
     tz.initializeTimeZones();
-    final String timeZoneName = await FlutterNativeTimezone.getLocalTimezone();
+    final String timeZoneName = await FlutterTimezone.getLocalTimezone();
     tz.setLocalLocation(tz.getLocation(timeZoneName));
   }
 
@@ -91,9 +91,9 @@ class NotificationProvider with ChangeNotifier {
 
   void displayNotification(
       {required String title, required String body}) async {
-    print("doing test");
+    debugPrint("doing test");
     var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
-        'your channel id', 'your channel name',
+        'reminder_channel', 'Reminders', channelDescription: 'Channel for task reminders',
         importance: Importance.max, priority: Priority.high);
     var iOSPlatformChannelSpecifics = const DarwinNotificationDetails();
     var platformChannelSpecifics = NotificationDetails(
@@ -127,9 +127,17 @@ class NotificationProvider with ChangeNotifier {
       _nextInstanceOfTenAM(hour, minutes),
       const NotificationDetails(
           android: AndroidNotificationDetails(
-        'your channel id',
-        'your channel name',
-      )),
+            'reminder_channel',
+            'Reminders',
+            channelDescription: 'Channel for task reminders',
+            importance: Importance.max,
+            priority: Priority.high,
+          ),
+          iOS: DarwinNotificationDetails(
+            presentAlert: true,
+            presentBadge: true,
+            presentSound: true,
+          )),
       uiLocalNotificationDateInterpretation:
           UILocalNotificationDateInterpretation.absoluteTime,
       matchDateTimeComponents: DateTimeComponents.time,
@@ -147,23 +155,6 @@ class NotificationProvider with ChangeNotifier {
         ),
       );
     });
-  }
-
-  Future<void> periodicallyNotification() async {
-    const AndroidNotificationDetails androidPlatformChannelSpecifics =
-        AndroidNotificationDetails(
-      'repeating channel id',
-      'repeating channel name',
-    );
-    const NotificationDetails platformChannelSpecifics =
-        NotificationDetails(android: androidPlatformChannelSpecifics);
-    await flutterLocalNotificationsPlugin.periodicallyShow(
-      0,
-      'repeating title',
-      'repeating body',
-      RepeatInterval.everyMinute,
-      platformChannelSpecifics,
-    );
   }
 }
 

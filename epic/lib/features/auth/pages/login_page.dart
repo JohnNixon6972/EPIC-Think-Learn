@@ -6,10 +6,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spring/spring.dart';
 
 class LoginPage extends ConsumerWidget {
-  final Function(String) setUserType;
   LoginPage({
     super.key,
-    required this.setUserType,
   });
 
   final SpringController springController = SpringController(
@@ -148,7 +146,6 @@ class LoginPage extends ConsumerWidget {
               children: [
                 Spring.bubbleButton(
                   onTap: () {
-                    setUserType('Parent');
                     ref.read(authServiceProvider).signInWithGoogle();
                   },
                   animDuration: const Duration(seconds: 1), //def=500m mil
@@ -188,7 +185,6 @@ class LoginPage extends ConsumerWidget {
                 ),
                 Spring.bubbleButton(
                   onTap: () {
-                    setUserType('Child');
                     ref.read(authServiceProvider).signInWithGoogle();
                   },
                   animDuration: const Duration(seconds: 1),

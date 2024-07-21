@@ -4,6 +4,7 @@ import 'package:epic/cores/screens/loader.dart';
 import 'package:epic/features/account/widgets/settings_dialog.dart';
 import 'package:epic/features/account/widgets/settings_item.dart';
 import 'package:epic/features/account/repository/edit_field.dart';
+import 'package:epic/features/auth/pages/login_page.dart';
 import 'package:epic/features/auth/provider/user_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

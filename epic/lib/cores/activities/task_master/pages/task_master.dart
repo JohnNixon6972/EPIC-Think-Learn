@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:epic/cores/activities/task_master/model/task_model.dart';
 import 'package:epic/cores/activities/task_master/pages/add_task_page.dart';
@@ -8,7 +9,10 @@ import 'package:epic/cores/activities/task_master/repository/task_master_notifie
 import 'package:epic/cores/activities/task_master/widgets/size_config.dart';
 import 'package:epic/cores/activities/task_master/widgets/task_tile.dart';
 import 'package:epic/cores/app_constants.dart';
-import 'package:epic/cores/widgets/main_app_bar.dart';
+import 'package:epic/cores/screens/error_page.dart';
+import 'package:epic/cores/screens/loader.dart';
+import 'package:epic/features/account/pages/my_profile.dart';
+import 'package:epic/features/auth/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
@@ -49,24 +53,66 @@ class _TaskMasterState extends State<TaskMaster> {
     SizeConfig().init(context);
     return Consumer(
       builder: (context, ref, child) {
-        final taskController = ref.watch(taskMasterProvider);
-        final notifyProvider = ref.watch(notificationProvider);
-
-        notifyProvider.initializeNotification(context);
-        notifyProvider.requestIOSPermissions();
-
         return Scaffold(
-          appBar: mainAppBar(context),
-          backgroundColor: AppConstants.primaryBackgroundColor,
-          body: Column(
-            children: [
-              _addTaskBar(taskController),
-              _dateBar(),
-              const SizedBox(
-                height: 12,
+          appBar: AppBar(
+            backgroundColor: AppConstants.primaryColor,
+            elevation: 0,
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back_ios_new_rounded,
+                  size: 25, color: AppConstants.primaryTextColor),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+            title: const Text(
+              "Task Master",
+              style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: AppConstants.primaryTextColor),
+            ),
+            actions: [
+              Consumer(
+                builder: (context, ref, child) {
+                  return ref.watch(currentUserProvider).when(
+                      data: (currentUser) => Padding(
+                            padding: const EdgeInsets.only(right: 12.0),
+                            child: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const MyProfile()),
+                                  );
+                                },
+                                child: CircleAvatar(
+                                  radius: 18,
+                                  backgroundColor: Colors.grey,
+                                  backgroundImage: CachedNetworkImageProvider(
+                                      currentUser.profilePic),
+                                )),
+                          ),
+                      error: (error, stackTrace) =>
+                          ErrorPage(message: error.toString()),
+                      loading: () => const Loader());
+                },
               ),
-              _showTasks(taskController, notifyProvider),
             ],
+          ),
+          backgroundColor: AppConstants.primaryBackgroundColor,
+          body: Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: Column(
+              children: [
+                _addTaskBar(),
+                _dateBar(),
+                const SizedBox(
+                  height: 12,
+                ),
+                _showTasks(),
+              ],
+            ),
           ),
         );
       },
@@ -118,7 +164,7 @@ class _TaskMasterState extends State<TaskMaster> {
     );
   }
 
-  _addTaskBar(TaskMasterNotifier taskController) {
+  _addTaskBar() {
     return Container(
       margin: const EdgeInsets.only(bottom: 12),
       padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -145,7 +191,6 @@ class _TaskMasterState extends State<TaskMaster> {
             onTap: () async {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const AddTaskPage()));
-              taskController.getTasks();
             },
             child: Container(
               height: 50,
@@ -157,7 +202,7 @@ class _TaskMasterState extends State<TaskMaster> {
               child: const Center(
                 child: Text(
                   "+ Add Task",
-                  style: TextStyle(color: Colors.white),
+                  style: TextStyle(color: Colors.white, fontSize: 18),
                 ),
               ),
             ),
@@ -167,78 +212,94 @@ class _TaskMasterState extends State<TaskMaster> {
     );
   }
 
-  _showTasks(
-      TaskMasterNotifier taskController, NotificationProvider notifyProvider) {
-    return Expanded(
-        child: taskController.taskList.isEmpty
-            ? _noTaskMsg()
-            : ListView.builder(
-                scrollDirection: Axis.vertical,
-                itemCount: taskController.taskList.length,
-                itemBuilder: (context, index) {
-                  Task task = taskController.taskList[index];
-                  if (task.repeat == 'Daily') {
-                    var hour = task.startTime.toString().split(":")[0].trim();
-                    var minutes =
-                        task.startTime.toString().split(":")[1].trim();
-                    debugPrint("My time is $hour");
-                    debugPrint("My minute is $minutes");
+  _showTasks() {
+    return Consumer(
+      builder: (context, ref, child) {
+        final taskController = ref.watch(taskMasterProvider);
+        final notifyProvider = ref.watch(notificationProvider);
+        return Expanded(
+            child: taskController.taskList.isEmpty
+                ? _noTaskMsg()
+                : ListView.builder(
+                    scrollDirection: Axis.vertical,
+                    itemCount: taskController.taskList.length,
+                    itemBuilder: (context, index) {
+                      Task task = taskController.taskList[index];
+                      if (task.repeat == 'Daily') {
+                        try {
+                          DateFormat format = DateFormat("hh:mm a");
 
-                    DateTime date = DateFormat.jm().parse(task.startTime!);
-                    var myTime = DateFormat("HH:mm").format(date);
+                          // Parse the time string to a DateTime object
+                          DateTime dateTime = format.parse(task.startTime!);
 
-                    notifyProvider.scheduledNotification(
-                        int.parse(myTime.toString().split(":")[0]),
-                        int.parse(myTime.toString().split(":")[1]),
-                        task);
+                          // Extract hour and minute as integers
+                          int hour = dateTime.hour; // 24-hour format
+                          int minute = dateTime.minute;
 
-                    return AnimationConfiguration.staggeredList(
-                      position: index,
-                      duration: const Duration(milliseconds: 1375),
-                      child: SlideAnimation(
-                        horizontalOffset: 300.0,
-                        child: FadeInAnimation(
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              GestureDetector(
-                                  onTap: () {
-                                    showBottomSheet(
-                                        context, task, taskController);
-                                  },
-                                  child: TaskTile(task)),
-                            ],
+                          notifyProvider.scheduledNotification(
+                              hour, minute, task);
+                          debugPrint("Scheduled notification");
+                        } on FormatException {
+                          debugPrint(
+                              "Error parsing date: Invalid format - ${task.startTime}");
+                        }
+
+                        return AnimationConfiguration.staggeredList(
+                          position: index,
+                          duration: const Duration(milliseconds: 1375),
+                          child: SlideAnimation(
+                            horizontalOffset: 300.0,
+                            child: FadeInAnimation(
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  GestureDetector(
+                                      onTap: () {
+                                        showModalBottomSheet(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return showBottomSheet(context,
+                                                  task, taskController);
+                                            });
+                                      },
+                                      child: TaskTile(task)),
+                                ],
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    );
-                  }
-                  if (task.date == DateFormat.yMd().format(_selectedDate)) {
-                    //notifyHelper.scheduledNotification();
-                    return AnimationConfiguration.staggeredList(
-                      position: index,
-                      duration: const Duration(milliseconds: 1375),
-                      child: SlideAnimation(
-                        horizontalOffset: 300.0,
-                        child: FadeInAnimation(
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              GestureDetector(
-                                  onTap: () {
-                                    showBottomSheet(
-                                        context, task, taskController);
-                                  },
-                                  child: TaskTile(task)),
-                            ],
+                        );
+                      }
+                      if (task.date == DateFormat.yMd().format(_selectedDate)) {
+                        return AnimationConfiguration.staggeredList(
+                          position: index,
+                          duration: const Duration(milliseconds: 1375),
+                          child: SlideAnimation(
+                            horizontalOffset: 300.0,
+                            child: FadeInAnimation(
+                              child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  GestureDetector(
+                                      onTap: () {
+                                        showModalBottomSheet(
+                                            context: context,
+                                            builder: (BuildContext context) {
+                                              return showBottomSheet(context,
+                                                  task, taskController);
+                                            });
+                                      },
+                                      child: TaskTile(task)),
+                                ],
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    );
-                  } else {
-                    return Container();
-                  }
-                }));
+                        );
+                      } else {
+                        return Container();
+                      }
+                    }));
+      },
+    );
   }
 
   showBottomSheet(
@@ -277,7 +338,12 @@ class _TaskMasterState extends State<TaskMaster> {
         const SizedBox(
           height: 20,
         ),
-        _buildBottomSheetButton(label: "Close", onTap: () {}, isClose: true),
+        _buildBottomSheetButton(
+            label: "Close",
+            onTap: () {
+              Navigator.pop(context);
+            },
+            isClose: true),
         const SizedBox(
           height: 20,
         ),

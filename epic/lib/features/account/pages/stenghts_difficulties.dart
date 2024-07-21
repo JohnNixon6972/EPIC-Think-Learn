@@ -13,10 +13,8 @@ class StrenghtsDifficulties extends ConsumerStatefulWidget {
   final String displayName;
   final String profilePic;
   final String email;
-  final String type;
   const StrenghtsDifficulties({
     super.key,
-    required this.type,
     required this.displayName,
     required this.profilePic,
     required this.email,
@@ -79,7 +77,6 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
           email: widget.email,
           profilePic: widget.profilePic,
           lastSeenStrategy: order[0],
-          type: widget.type,
         );
   }
 
