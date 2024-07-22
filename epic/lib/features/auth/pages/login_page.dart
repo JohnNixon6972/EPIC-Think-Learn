@@ -1,4 +1,3 @@
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:epic/cores/app_constants.dart';
 import 'package:epic/features/auth/pages/backgroundAnimation.dart';
 import 'package:epic/features/auth/repository/auth_service.dart';
@@ -98,7 +97,7 @@ class LoginPage extends ConsumerWidget {
               height: MediaQuery.of(context).size.height / 2,
               child: Stack(
                 children: [
-                  Background(),
+                  SizedBox(child: Background()),
                   Center(
                     child: Column(
                       children: [

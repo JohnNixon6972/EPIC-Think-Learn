@@ -15,9 +15,9 @@ class Background extends StatelessWidget {
   ];
 
   static const _heightPercentages = [
-    0.4,
+    0.1,
+    0.3,
     0.5,
-    0.6,
     0.7,
     0.8,
   ];
@@ -38,7 +38,7 @@ class Background extends StatelessWidget {
         durations: _durations,
         heightPercentages: _heightPercentages,
       ),
-      backgroundColor: AppConstants.primaryBackgroundColor,
+      backgroundColor: Colors.transparent,
       size: const Size(double.infinity, double.infinity),
       waveAmplitude: 0,
     );
