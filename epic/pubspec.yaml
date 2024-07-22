@@ -60,6 +60,7 @@ dependencies:
   rxdart: ^0.27.7
   get_storage: ^2.1.1
   timezone: ^0.9.4
+  wave: ^0.2.2
   
   google_fonts: ^6.2.1
   flutter_svg: ^2.0.10+1

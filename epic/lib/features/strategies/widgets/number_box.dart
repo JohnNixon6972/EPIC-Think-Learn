@@ -19,7 +19,7 @@ class NumberBox extends StatelessWidget {
         border: Border.all(color: Colors.grey),
       ),
       height: 130,
-      width: 170,
+      width: 150,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
