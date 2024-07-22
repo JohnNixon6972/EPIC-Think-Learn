@@ -5,21 +5,26 @@ import 'package:epic/features/strategies/widgets/circular_progress_bar.dart';
 import 'package:epic/features/strategies/widgets/number_box.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:spring/spring.dart';
 
 class StrategyDetail extends ConsumerWidget {
   final StrategyModel model;
   final Function(StrategyNav) changeNav;
 
-  const StrategyDetail({
+  StrategyDetail({
     required this.changeNav,
     required this.model,
     super.key,
   });
 
+  final SpringController springController = SpringController(
+    initialAnim: Motion.loop,
+  );
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      backgroundColor: AppConstants.primaryBackgroundColor,
+      backgroundColor: AppConstants.tertiaryColor.withOpacity(0.1),
       floatingActionButton: TextButton(
         style: TextButton.styleFrom(
           elevation: 5,
@@ -44,14 +49,60 @@ class StrategyDetail extends ConsumerWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Hero(
-            tag: 'strategy-image-${model.strategy.name}',
-            child: Image(
-              image: AssetImage(model.strategy.image),
-              width: double.infinity,
-              height: 250,
-              fit: BoxFit.cover,
-            ),
+          const SizedBox(
+            height: 20,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Spring.rotate(
+                springController: springController,
+                alignment: Alignment.bottomCenter,
+                startAngle: 0,
+                endAngle: 360,
+                curve: Curves.easeInBack,
+                animDuration: const Duration(seconds: 3),
+                child: HeroAnimation(model: model),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              Spring.rotate(
+                alignment: Alignment.bottomCenter,
+                startAngle: 360,
+                endAngle: 0,
+                curve: Curves.easeInBack,
+                animDuration: const Duration(seconds: 3),
+                child: HeroAnimation(model: model),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Spring.rotate(
+                alignment: Alignment.bottomCenter,
+                startAngle: 0,
+                endAngle: 360,
+                curve: Curves.easeInBack, //def=1s
+                animDuration: const Duration(seconds: 3),
+                child: HeroAnimation(model: model),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              Spring.rotate(
+                alignment: Alignment.bottomCenter,
+                startAngle: 360,
+                endAngle: 0,
+                animDuration: const Duration(seconds: 3),
+                curve: Curves.easeInBack,
+                child: HeroAnimation(model: model),
+              ),
+            ],
           ),
           Padding(
             padding: const EdgeInsets.all(16.0),
@@ -61,7 +112,9 @@ class StrategyDetail extends ConsumerWidget {
                 Text(
                   'Progress in ${model.strategy.name}',
                   style: const TextStyle(
-                      fontSize: 24, fontWeight: FontWeight.bold),
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 const SizedBox(
                   height: 10,
@@ -104,15 +157,16 @@ class StrategyDetail extends ConsumerWidget {
                         const SizedBox(
                           height: 10,
                         ),
-                        const Row(
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             CircularProgressBar(
-                              progress: 56,
+                              progress: model.streak,
                               color: Colors.green,
                             ),
                             CircularProgressBar(
-                                progress: 83, color: AppConstants.primaryColor),
+                                progress: model.averageAccuracy,
+                                color: AppConstants.primaryColor),
                           ],
                         ),
                         const SizedBox(
@@ -122,7 +176,7 @@ class StrategyDetail extends ConsumerWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             const Text(
-                              'Track ',
+                              'Streak ',
                               style: TextStyle(
                                   fontSize: 15, fontWeight: FontWeight.bold),
                             ),
@@ -135,7 +189,7 @@ class StrategyDetail extends ConsumerWidget {
                               width: 20,
                             ),
                             const Text(
-                              'Goal ',
+                              'Accuracy ',
                               style: TextStyle(
                                   fontSize: 15, fontWeight: FontWeight.bold),
                             ),
@@ -154,6 +208,28 @@ class StrategyDetail extends ConsumerWidget {
             ),
           )
         ],
+      ),
+    );
+  }
+}
+
+class HeroAnimation extends StatelessWidget {
+  const HeroAnimation({
+    super.key,
+    required this.model,
+  });
+
+  final StrategyModel model;
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      elevation: 10,
+      child: Image(
+        image: AssetImage(model.strategy.image),
+        width: 100,
+        height: 100,
+        fit: BoxFit.cover,
       ),
     );
   }
