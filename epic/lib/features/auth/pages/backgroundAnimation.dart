@@ -34,7 +34,7 @@ class Background extends StatelessWidget {
   Widget build(BuildContext context) {
     return WaveWidget(
       config: CustomConfig(
-        colors: _colors,
+        colors: _colors.map((color) => color.withOpacity(0.8)).toList(),
         durations: _durations,
         heightPercentages: _heightPercentages,
       ),

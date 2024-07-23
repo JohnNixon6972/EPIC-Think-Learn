@@ -129,7 +129,7 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                     padding: const EdgeInsets.all(8.0),
                     child: _currentIndex == difficulties.length
                         ? const Text(
-                            "We will tailor your experience based on your strengths!",
+                            "We will tailor your experience based on your areas to improve!",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: AppConstants.secondaryBackgroundColor,
@@ -240,15 +240,14 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                                 child: Material(
                                   color: Colors.transparent,
                                   elevation: 5,
-                                  shadowColor:
-                                      AppConstants.secondaryBackgroundColor,
+                                  shadowColor: AppConstants.primaryButtonColor,
                                   child: Container(
                                     height: 50,
                                     width: 150,
                                     decoration: BoxDecoration(
                                       color:
-                                          AppConstants.secondaryBackgroundColor,
-                                      borderRadius: BorderRadius.circular(5),
+                                          AppConstants.primaryButtonColor,
+                                      borderRadius: BorderRadius.circular(8),
                                     ),
                                     child: const Center(
                                       child: Text(
