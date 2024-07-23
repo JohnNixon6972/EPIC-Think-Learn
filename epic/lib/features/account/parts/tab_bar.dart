@@ -19,9 +19,9 @@ class PageTabBar extends StatelessWidget {
         Tab(
           text: "Progress",
         ),
-        Tab(
-          text: "Profile",
-        ),
+        // Tab(
+        //   text: "Profile",
+        // ),
         Tab(
           text: "Settings",
         ),
