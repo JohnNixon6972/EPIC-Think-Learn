@@ -92,62 +92,30 @@ class LoginPage extends ConsumerWidget {
                 ),
               ],
             ),
-            Spacer(),
+            const Spacer(),
             SizedBox(
               height: MediaQuery.of(context).size.height / 2,
               child: Stack(
                 children: [
-                  SizedBox(child: Background()),
+                  const SizedBox(child: Background()),
                   Center(
                     child: Column(
                       children: [
-                        Spring.animatedCard(
-                          toElevation: 1,
-                          fromElevation: 0,
-                          toShadowColor: AppConstants.primaryColor,
-                          fromWidth: MediaQuery.of(context).size.width * .48,
-                          toWidth: MediaQuery.of(context).size.width * .75,
-                          fromHeight: 60,
-                          toHeight: 80,
-                          fromColor: AppConstants.primaryColorLight,
-                          toColor: AppConstants.primaryColor,
-                          colorDuration: const Duration(seconds: 2),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5),
-                          ),
+                        Spring.fadeIn(
                           child: const Center(
                             child: Text(
                               'EPIC Think Learn',
                               style: TextStyle(
-                                fontSize: 20,
-                                color: AppConstants.primaryTextColor,
+                                fontSize: 28,
+                                color: AppConstants.primaryColor,
                                 fontWeight: FontWeight.bold,
                                 letterSpacing: 2,
                               ),
                             ),
                           ),
                         ),
-                        // const SizedBox(
-                        //   height: 50,
-                        // ),
-                        // AnimatedTextKit(
-                        //     isRepeatingAnimation: true,
-                        //     animatedTexts: [
-                        //       TyperAnimatedText(
-                        //         'Let\'s Get Started',
-                        //         textStyle: const TextStyle(
-                        //           fontSize: 24,
-                        //           color: AppConstants.tertiaryColor,
-                        //           fontWeight: FontWeight.bold,
-                        //           letterSpacing: 3,
-                        //         ),
-                        //         speed: const Duration(
-                        //           milliseconds: 100,
-                        //         ),
-                        //       ),
-                        //     ]),
                         const SizedBox(
-                          height: 20,
+                          height: 150,
                         ),
                         Spring.bubbleButton(
                           onTap: () {
@@ -157,37 +125,28 @@ class LoginPage extends ConsumerWidget {
                           bubbleStart: .4,
                           bubbleEnd: .9,
                           curve: Curves.linear, //Curves.elasticOut
-                          child: Container(
-                            height: 75,
-                            width: 175,
-                            decoration: BoxDecoration(
-                              color: AppConstants.tertiaryColor,
-                              borderRadius: BorderRadius.circular(5),
-                              border: Border.all(
-                                color: AppConstants.tertiaryColor,
-                                width: 2,
-                              ),
+
+                          child: Material(
+                            elevation: 19,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
                             ),
-                            child: const Center(
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.login,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: AppConstants.primaryColor,
+                                borderRadius: BorderRadius.circular(20),
+                              ),
+                              child: const Padding(
+                                padding: EdgeInsets.all(12.0),
+                                child: Text(
+                                  'Login/Sign Up',
+                                  style: TextStyle(
+                                    fontSize: 20,
                                     color: AppConstants.primaryTextColor,
-                                    size: 30,
+                                    fontWeight: FontWeight.w700,
+                                    letterSpacing: 3,
                                   ),
-                                  Text(
-                                    'Login/Sign Up',
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      color: AppConstants.primaryTextColor,
-                                      fontWeight: FontWeight.w700,
-                                      letterSpacing: 3,
-                                    ),
-                                  ),
-                                ],
+                                ),
                               ),
                             ),
                           ),
@@ -205,7 +164,6 @@ class LoginPage extends ConsumerWidget {
   }
 }
 
-// ignore: camel_case_types
 class LoginAnimation extends StatelessWidget {
   final Color color;
   final IconData iconName;
