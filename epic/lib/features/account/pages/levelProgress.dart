@@ -3,19 +3,34 @@ import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 
 class LevelProgressBody extends StatelessWidget {
+  final Map<String, int> strategyLevels;
+
   const LevelProgressBody({
+    required this.strategyLevels,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
+    final maxLevel = (strategyLevels.values.isNotEmpty)
+        ? strategyLevels.values.reduce((a, b) => a > b ? a : b)
+        : 50;
     return Scaffold(
       backgroundColor: AppConstants.primaryBackgroundColor,
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            const SizedBox(height: 16),
+            const Text(
+              'Level Indicator',
+              style: TextStyle(
+                color: AppConstants.tertiaryColor,
+                fontSize: 20,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 2,
+              ),
+            ),
+            const SizedBox(height: 20),
             Expanded(
               child: BarChart(
                 BarChartData(
@@ -25,8 +40,8 @@ class LevelProgressBody extends StatelessWidget {
                   barGroups: barGroups,
                   gridData: const FlGridData(show: false),
                   alignment: BarChartAlignment.spaceAround,
-                  maxY: 50,
-                  backgroundColor: AppConstants.secondaryColor.withOpacity(0.3),
+                  maxY: maxLevel.toDouble() + 5,
+                  backgroundColor: AppConstants.tertiaryColor.withOpacity(0.1),
                 ),
               ),
             ),
@@ -68,18 +83,15 @@ class LevelProgressBody extends StatelessWidget {
     String text;
     switch (value.toInt()) {
       case 0:
-        text = 'Attention';
-        break;
-      case 1:
         text = 'Inhibition';
         break;
-      case 2:
+      case 1:
         text = 'Memory';
         break;
-      case 3:
+      case 2:
         text = 'Planning';
         break;
-      case 4:
+      case 3:
         text = 'Self Regulation';
         break;
       default:
@@ -123,12 +135,29 @@ class LevelProgressBody extends StatelessWidget {
         end: Alignment.topCenter,
       );
 
+// List<BarChartGroupData> _buildBarGroups() {
+//     return model.asMap().entries.map((entry) {
+//       int index = entry.key;
+//       StrategyModel model = entry.value;
+
+//       return BarChartGroupData(
+//         x: index,
+//         barRods: [
+//           BarChartRodData(
+//             toY: model.level.toDouble(),
+//             gradient: _barsGradient,
+//           )
+//         ],
+//         showingTooltipIndicators: [0],
+//       );
+//     }).toList();
+//   }
   List<BarChartGroupData> get barGroups => [
         BarChartGroupData(
           x: 0,
           barRods: [
             BarChartRodData(
-              toY: 8,
+              toY: strategyLevels['Inhibition']?.toDouble() ?? 0,
               gradient: _barsGradient,
             )
           ],
@@ -138,7 +167,7 @@ class LevelProgressBody extends StatelessWidget {
           x: 1,
           barRods: [
             BarChartRodData(
-              toY: 10,
+              toY: strategyLevels['Memory']?.toDouble() ?? 0,
               gradient: _barsGradient,
             )
           ],
@@ -148,7 +177,7 @@ class LevelProgressBody extends StatelessWidget {
           x: 2,
           barRods: [
             BarChartRodData(
-              toY: 14,
+              toY: strategyLevels['Planning']?.toDouble() ?? 0,
               gradient: _barsGradient,
             )
           ],
@@ -158,17 +187,7 @@ class LevelProgressBody extends StatelessWidget {
           x: 3,
           barRods: [
             BarChartRodData(
-              toY: 15,
-              gradient: _barsGradient,
-            )
-          ],
-          showingTooltipIndicators: [0],
-        ),
-        BarChartGroupData(
-          x: 4,
-          barRods: [
-            BarChartRodData(
-              toY: 13,
+              toY: strategyLevels['Self Regulation']?.toDouble() ?? 0,
               gradient: _barsGradient,
             )
           ],
