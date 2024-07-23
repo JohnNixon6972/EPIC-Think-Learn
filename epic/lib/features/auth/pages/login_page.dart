@@ -129,12 +129,12 @@ class LoginPage extends ConsumerWidget {
                           child: Material(
                             elevation: 19,
                             shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(10),
                             ),
                             child: Container(
                               decoration: BoxDecoration(
-                                color: AppConstants.primaryColor,
-                                borderRadius: BorderRadius.circular(20),
+                                color: AppConstants.tertiaryColor,
+                                borderRadius: BorderRadius.circular(10),
                               ),
                               child: const Padding(
                                 padding: EdgeInsets.all(12.0),
