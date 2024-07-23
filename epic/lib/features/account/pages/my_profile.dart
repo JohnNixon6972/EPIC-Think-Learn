@@ -15,7 +15,7 @@ class MyProfile extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return ref.watch(currentUserProvider).when(
         data: (currentUser) => DefaultTabController(
-            length: 3,
+            length: 2,
             child: Scaffold(
               backgroundColor: AppConstants.primaryBackgroundColor,
               body: SafeArea(
@@ -24,7 +24,7 @@ class MyProfile extends ConsumerWidget {
                   TopHeader(user: currentUser),
                   // const Buttons(),
                   const PageTabBar(),
-                  const TabPages()
+                  TabPages()
                 ],
               )),
             )),

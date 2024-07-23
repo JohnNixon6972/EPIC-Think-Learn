@@ -62,11 +62,11 @@ dependencies:
   timezone: ^0.9.4
   wave: ^0.2.2
   pie_chart: ^5.4.0
-  
+  fl_chart: ^0.68.0
+
   google_fonts: ^6.2.1
   flutter_svg: ^2.0.10+1
   flutter_timezone: ^2.0.1
-
 
 dev_dependencies:
   flutter_test:
@@ -96,7 +96,6 @@ flutter:
     - assets/images/strategies/
     - assets/images/game_images/
     - assets/animations/
-
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

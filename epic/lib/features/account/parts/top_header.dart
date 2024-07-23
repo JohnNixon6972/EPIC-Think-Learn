@@ -8,6 +8,7 @@ class TopHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // print(user.strategies);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10.0),
       child: Column(
