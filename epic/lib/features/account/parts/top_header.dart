@@ -1,5 +1,6 @@
 import 'package:epic/cores/app_constants.dart';
 import 'package:epic/features/auth/model/user_model.dart';
+import 'package:epic/features/auth/pages/backgroundAnimation.dart';
 import 'package:flutter/material.dart';
 
 class TopHeader extends StatelessWidget {
@@ -24,66 +25,40 @@ class TopHeader extends StatelessWidget {
             "Changes made on your user name and profile picture are only reflected on this app and not on any other Google Services.",
             style: TextStyle(
               color: Colors.blueGrey,
-              fontSize: 12,
+              fontSize: 14,
             ),
             textAlign: TextAlign.justify,
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 8.0),
-            child: Text(
-              "Get connected to your parent/child",
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-                color: AppConstants.secondaryBackgroundColor,
+          SizedBox(
+            height: 150,
+            width: MediaQuery.of(context).size.width,
+            child: Card(
+              elevation: 10,
+              child: Stack(
+                children: [
+                  Background(),
+                  Column(
+                    children: [
+                      Spacer(),
+                      Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: Text(
+                          "EPIC aims to change the lens through which you see yourself and how others see and support you.",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            color: AppConstants.tertiaryColor,
+                            backgroundColor:
+                                AppConstants.primaryTextColor.withOpacity(0.8),
+                          ),
+                          textAlign: TextAlign.justify,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              SizedBox(
-                height: 50,
-                width: MediaQuery.of(context).size.width * 0.4,
-                child: TextField(
-                  decoration: InputDecoration(
-                    hintStyle: const TextStyle(fontSize: 17),
-                    hintText: 'Enter code',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(5),
-                    ),
-
-                    // suffixIcon: Icon(Icons.password),
-                    // contentPadding: EdgeInsets.all(20),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                width: 10,
-              ),
-              Container(
-                height: 50,
-                width: MediaQuery.of(context).size.width * 0.4,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: AppConstants.primaryButtonColor,
-                ),
-                child: TextButton.icon(
-                    icon: const Icon(
-                      Icons.connect_without_contact,
-                      color: AppConstants.primaryTextColor,
-                    ),
-                    onPressed: () {},
-                    label: const Text(
-                      "Connect",
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: AppConstants.primaryTextColor,
-                      ),
-                    )),
-              ),
-            ],
           ),
         ],
       ),

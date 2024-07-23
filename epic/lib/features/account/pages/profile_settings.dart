@@ -27,99 +27,96 @@ class _MyProfileSettingsState extends ConsumerState<MyProfileSettings> {
               body: SafeArea(
                 child: Padding(
                   padding: const EdgeInsets.only(top: 0),
-                  child: SingleChildScrollView(
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          SettingsItem(
-                              identifier: "Username",
-                              onPressed: () {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) => SettingsDialog(
-                                    identifier: "Your New Username",
-                                    onSave: (username) {
-                                      ref
-                                          .watch(editSettingsProvider)
-                                          .editusername(username);
-                                    },
-                                  ),
-                                );
-                              },
-                              value: currentUser.username),
-                          const Divider(),
-                          SettingsItem(
-                              identifier: "My Code",
-                              onPressed: () {
-                                //copy the code
-                              },
-                              value: "EPIC-1234"),
-                          const Divider(),
-                          SettingsItem(
-                              identifier: "Role",
-                              onPressed: () {
-                                //copy the code
-                              },
-                              value: "Parent/child"),
-                          const Divider(),
-                          Row(
-                            children: [
-                              const Text(
-                                "Keep my profile private",
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        SettingsItem(
+                            identifier: "Username",
+                            onPressed: () {
+                              showDialog(
+                                context: context,
+                                builder: (context) => SettingsDialog(
+                                  identifier: "Your New Username",
+                                  onSave: (username) {
+                                    ref
+                                        .watch(editSettingsProvider)
+                                        .editusername(username);
+                                  },
                                 ),
+                              );
+                            },
+                            value: currentUser.username),
+                        const Divider(),
+                        SettingsItem(
+                            identifier: "My Code",
+                            onPressed: () {
+                              //copy the code
+                            },
+                            value: "EPIC-1234"),
+                        // const Divider(),
+                        // SettingsItem(
+                        //     identifier: "Role",
+                        //     onPressed: () {
+                        //       //copy the code
+                        //     },
+                        //     value: "Parent/child"),
+                        const Divider(),
+                        Row(
+                          children: [
+                            const Text(
+                              "Keep my profile private",
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
                               ),
-                              const Spacer(),
-                              Switch(
-                                value: isSwitched,
-                                activeColor: AppConstants.primaryColor,
-                                inactiveTrackColor: AppConstants.secondaryColor,
-                                onChanged: (value) {
-                                  setState(() {
-                                    isSwitched = value;
-                                  });
-                                },
-                              )
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 50,
-                          ),
-                          Align(
-                            alignment: Alignment.center,
-                            child: GestureDetector(
-                              onTap: () async {
-                                await GoogleSignIn().signOut();
-                                await FirebaseAuth.instance.signOut();
+                            ),
+                            const Spacer(),
+                            Switch(
+                              value: isSwitched,
+                              activeColor: AppConstants.primaryColor,
+                              inactiveTrackColor: AppConstants.secondaryColor,
+                              onChanged: (value) {
+                                setState(() {
+                                  isSwitched = value;
+                                });
                               },
-                              child: Container(
-                                height: 45,
-                                width: 150,
-                                decoration: const BoxDecoration(
-                                  color: AppConstants.tertiaryColor,
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(12)),
-                                ),
-                                child: const Center(
-                                  child: Text(
-                                    "Log Out",
-                                    style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 16,
-                                    ),
+                            )
+                          ],
+                        ),
+                        const Divider(),
+
+                        Align(
+                          alignment: Alignment.center,
+                          child: GestureDetector(
+                            onTap: () async {
+                              await GoogleSignIn().signOut();
+                              await FirebaseAuth.instance.signOut();
+                            },
+                            child: Container(
+                              height: 45,
+                              width: 150,
+                              decoration: const BoxDecoration(
+                                color: AppConstants.tertiaryColor,
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(12)),
+                              ),
+                              child: const Center(
+                                child: Text(
+                                  "Log Out",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 16,
                                   ),
                                 ),
                               ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

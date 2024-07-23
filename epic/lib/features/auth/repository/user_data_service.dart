@@ -68,6 +68,36 @@ class UserDataService {
             UserModel.fromMap(snapshot.data() as Map<String, dynamic>));
   }
 
+  Future<Map<String, int>> fetchStrategyLevels() async {
+    final strategies = [
+      'Attention',
+      'Inhibition',
+      'Memory',
+      'Planning',
+      'Self Regulation'
+    ];
+
+    Map<String, int> strategyLevels = {};
+
+    for (var strategy in strategies) {
+      final docRef = firestore
+          .collection('users')
+          .doc(auth.currentUser!.uid)
+          .collection('strategies')
+          .doc(strategy);
+
+      final docSnapshot = await docRef.get();
+      if (docSnapshot.exists) {
+        final data = docSnapshot.data()!;
+        strategyLevels[strategy] = data['levels'];
+      } else {
+        strategyLevels[strategy] = 0; 
+      }
+    }
+
+    return strategyLevels;
+  }
+
   void updateStreaks() async {
     final strategies = [
       'Attention',
@@ -98,18 +128,15 @@ class UserDataService {
       }
 
       // update the max streak
-      final maxStreakVal = await docRef
-          .get()
-          .then((value) => value.data()!['maxStreak']);
+      final maxStreakVal =
+          await docRef.get().then((value) => value.data()!['maxStreak']);
       int maxStreak = maxStreakVal;
-      final streakVal = await docRef
-          .get()
-          .then((value) => value.data()!['streak']);
+      final streakVal =
+          await docRef.get().then((value) => value.data()!['streak']);
       int streak = streakVal;
       if (streak > maxStreak) {
         docRef.update({'maxStreak': streak});
       }
-    
     }
   }
 
