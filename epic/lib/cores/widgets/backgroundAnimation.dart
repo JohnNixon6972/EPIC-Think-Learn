@@ -4,7 +4,18 @@ import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
 
 class Background extends StatelessWidget {
-  const Background({super.key});
+  final Color color1;
+  final Color color2;
+  final Color color3;
+  final Color color4;
+  final Color color5;
+  Background(
+      {super.key,
+      required this.color1,
+      required this.color2,
+      required this.color3,
+      required this.color4,
+      required this.color5});
 
   static const _durations = [
     4000,
@@ -22,19 +33,18 @@ class Background extends StatelessWidget {
     0.8,
   ];
 
-  static const _colors = [
-    AppConstants.attentionColor,
-    AppConstants.inhibitionColor,
-    AppConstants.memoryColor,
-    AppConstants.planningColor,
-    AppConstants.selfregulationColor,
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final _colors = [
+      color1,
+      color2,
+      color3,
+      color4,
+      color5,
+    ];
     return WaveWidget(
       config: CustomConfig(
-        colors: _colors.map((color) => color.withOpacity(0.8)).toList(),
+        colors: _colors.map((color) => color).toList(),
         durations: _durations,
         heightPercentages: _heightPercentages,
       ),

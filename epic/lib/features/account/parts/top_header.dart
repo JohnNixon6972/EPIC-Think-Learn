@@ -1,6 +1,6 @@
 import 'package:epic/cores/app_constants.dart';
 import 'package:epic/features/auth/model/user_model.dart';
-import 'package:epic/features/auth/pages/backgroundAnimation.dart';
+import 'package:epic/cores/widgets/backgroundAnimation.dart';
 import 'package:flutter/material.dart';
 
 class TopHeader extends StatelessWidget {
@@ -36,7 +36,13 @@ class TopHeader extends StatelessWidget {
               elevation: 10,
               child: Stack(
                 children: [
-                  Background(),
+                  Background(
+                     color1: AppConstants.attentionColor,
+                    color2: AppConstants.inhibitionColor,
+                    color3: AppConstants.memoryColor,
+                    color4: AppConstants.planningColor,
+                    color5: AppConstants.selfregulationColor,
+                  ),
                   Column(
                     children: [
                       Spacer(),
