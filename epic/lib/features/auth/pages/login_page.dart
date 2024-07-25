@@ -1,5 +1,5 @@
 import 'package:epic/cores/app_constants.dart';
-import 'package:epic/features/auth/pages/backgroundAnimation.dart';
+import 'package:epic/cores/widgets/backgroundAnimation.dart';
 import 'package:epic/features/auth/repository/auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -97,7 +97,13 @@ class LoginPage extends ConsumerWidget {
               height: MediaQuery.of(context).size.height / 2,
               child: Stack(
                 children: [
-                  const SizedBox(child: Background()),
+                 SizedBox(child: Background(
+                     color1: AppConstants.attentionColor,
+                    color2: AppConstants.inhibitionColor,
+                    color3: AppConstants.memoryColor,
+                    color4: AppConstants.planningColor,
+                    color5: AppConstants.selfregulationColor,
+                  )),
                   Center(
                     child: Column(
                       children: [

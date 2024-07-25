@@ -1,5 +1,7 @@
+import 'package:epic/cores/app_constants.dart';
 import 'package:epic/cores/screens/error_page.dart';
 import 'package:epic/features/auth/model/user_model.dart';
+import 'package:epic/cores/widgets/backgroundAnimation.dart';
 import 'package:epic/features/auth/repository/user_data_service.dart';
 import 'package:epic/features/strategies/pages/strategy_detail_page.dart';
 import 'package:epic/features/strategies/provider/strategy_provider.dart';
@@ -39,7 +41,7 @@ class _StrategyViewState extends State<StrategyView> {
   @override
   Widget build(BuildContext context) {
     double cardheight = 280;
-    double cardWidth = 250;
+    double cardWidth = 280;
     return ValueListenableBuilder<double>(
       valueListenable: _notifierScroll,
       builder: (context, value, _) {
@@ -48,106 +50,81 @@ class _StrategyViewState extends State<StrategyView> {
           itemCount: 5,
           itemBuilder: (context, index) {
             final strategyName = widget.currentUser.strategies[index];
-            final percent = (index - value).abs();
-            final rotate = percent.clamp(0.0, 1.0);
 
-            return Consumer(
-              builder: (context, ref, child) {
-                final strategyAsync =
-                    ref.watch(strategyStreamProvider(strategyName));
-                return strategyAsync.when(
-                  data: (strategy) {
-                    final strategyData = strategy.strategy;
-                    return GestureDetector(
-                      onTap: () {
-                        ref
-                            .read(userDataServiceProvider)
-                            .updateLastSeenStrategy(strategyData.name);
+            return Center(
+              child: Consumer(
+                builder: (context, ref, child) {
+                  final strategyAsync =
+                      ref.watch(strategyStreamProvider(strategyName));
+                  return strategyAsync.when(
+                    data: (strategy) {
+                      final strategyData = strategy.strategy;
+                      return GestureDetector(
+                        onTap: () {
+                          ref
+                              .read(userDataServiceProvider)
+                              .updateLastSeenStrategy(strategyData.name);
 
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => StrategyDetailPage(
-                              strategyName: strategyData.name,
-                            ),
-                          ),
-                        );
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.only(top: 15.0),
-                        child: Center(
-                          child: Stack(
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Container(
-                                    height: cardheight,
-                                    width: cardWidth,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white.withOpacity(0.7),
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: strategyData.color
-                                                .withOpacity(1),
-                                            blurRadius: 10,
-                                            offset: const Offset(5.0, 5.0),
-                                            spreadRadius: 5,
-                                          ),
-                                        ]),
-                                  ),
-                                  const SizedBox(height: 20),
-                                  Opacity(
-                                    opacity: 1 - rotate,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          strategyData.name,
-                                          style: TextStyle(
-                                            fontSize: 20,
-                                            color: strategyData.color,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => StrategyDetailPage(
+                                strategyName: strategyData.name,
                               ),
-                              Transform(
-                                alignment: Alignment.centerLeft,
-                                transform: Matrix4.identity()
-                                  ..setEntry(3, 2, 0.002)
-                                  ..rotateY(1.2 * rotate)
-                                  ..translate(-rotate * 200),
-                                child: Hero(
-                                  tag: 'strategy-image-${strategyData.name}',
-                                  child: Image.asset(
-                                    strategyData.image,
-                                    height: cardheight,
-                                    width: cardWidth,
-                                    fit: BoxFit.cover,
+                            ),
+                          );
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.only(top: 15.0),
+                          child: Stack(
+                            alignment: Alignment.center,
+                            children: [
+                              Material(
+                                elevation: 20,
+                                shadowColor: strategyData.color,
+                                child: Container(
+                                  height: cardheight,
+                                  width: cardWidth,
+                                  decoration: BoxDecoration(
+                                    color: strategyData.color.withOpacity(0.3),
+                                  ),
+                                  child: Background(
+                                    color1: strategyData.color.withOpacity(0.1),
+                                    color2: strategyData.color.withOpacity(0.3),
+                                    color3: strategyData.color.withOpacity(0.5),
+                                    color4: strategyData.color.withOpacity(0.7),
+                                    color5: strategyData.color.withOpacity(0.9),
+                                  ),
+                                ),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(4.0),
+                                child: Text(
+                                  strategyData.name,
+                                  style: const TextStyle(
+                                    fontSize: 28,
+                                    color: AppConstants.primaryTextColor,
+                                    fontWeight: FontWeight.bold,
+                                    letterSpacing: 2,
                                   ),
                                 ),
                               ),
                             ],
                           ),
                         ),
-                      ),
-                    );
-                  },
-                  error: (error, stackTrace) => ErrorPage(
-                    message: error.toString() + stackTrace.toString(),
-                  ),
-                  loading: () {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  },
-                );
-              },
+                      );
+                    },
+                    error: (error, stackTrace) => ErrorPage(
+                      message: error.toString() + stackTrace.toString(),
+                    ),
+                    loading: () {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
+                  );
+                },
+              ),
             );
           },
         );
