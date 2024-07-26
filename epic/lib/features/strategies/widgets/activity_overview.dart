@@ -26,8 +26,8 @@ class ActivityOverview extends ConsumerWidget {
       floatingActionButton: TextButton(
         style: TextButton.styleFrom(
           elevation: 5,
-          shadowColor: AppConstants.primaryButtonColor,
-          backgroundColor: AppConstants.primaryButtonColor,
+          shadowColor: model.strategy.color,
+          backgroundColor: model.strategy.color,
           padding: const EdgeInsets.all(16),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),
@@ -63,24 +63,27 @@ class ActivityOverview extends ConsumerWidget {
                       const Text(
                         'Activity',
                         style: TextStyle(
-                            fontSize: 18, fontWeight: FontWeight.bold),
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          color: AppConstants.secondaryBackgroundColor,
+                        ),
                       ),
                       Text(
                         game.name,
                         style: const TextStyle(
-                            fontSize: 32,
+                            fontSize: 26,
                             color: AppConstants.primaryColor,
                             fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
                   ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image(
-                        image: AssetImage(game.image),
-                        height: 90,
-                        fit: BoxFit.cover,
-                      )),
+                    borderRadius: BorderRadius.circular(10),
+                    child: Image.asset(
+                      "assets/images/strategies/${model.strategy.name}.png",
+                      height: 90,
+                    ),
+                  ),
                 ],
               ),
               const SizedBox(
