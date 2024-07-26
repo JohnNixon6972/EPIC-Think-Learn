@@ -97,17 +97,24 @@ class _StrategyViewState extends State<StrategyView> {
                                   ),
                                 ),
                               ),
-                              Padding(
-                                padding: const EdgeInsets.all(4.0),
-                                child: Text(
-                                  strategyData.name,
-                                  style: const TextStyle(
-                                    fontSize: 28,
-                                    color: AppConstants.primaryTextColor,
-                                    fontWeight: FontWeight.bold,
-                                    letterSpacing: 2,
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    "assets/images/strategies/${strategyData.name}.png",
+                                    height: 150,
                                   ),
-                                ),
+                                  const SizedBox(height: 20),
+                                  Text(
+                                    strategyData.name,
+                                    style: const TextStyle(
+                                      fontSize: 28,
+                                      color: AppConstants.primaryTextColor,
+                                      fontWeight: FontWeight.bold,
+                                      letterSpacing: 2,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
