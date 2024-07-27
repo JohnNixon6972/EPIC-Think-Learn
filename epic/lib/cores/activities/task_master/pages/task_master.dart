@@ -4,7 +4,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:epic/cores/activities/task_master/model/task_model.dart';
 import 'package:epic/cores/activities/task_master/pages/add_task_page.dart';
-import 'package:epic/cores/activities/task_master/repository/notification_notifier.dart';
 import 'package:epic/cores/activities/task_master/repository/task_master_notifier.dart';
 import 'package:epic/cores/activities/task_master/widgets/size_config.dart';
 import 'package:epic/cores/activities/task_master/widgets/task_tile.dart';
@@ -216,7 +215,6 @@ class _TaskMasterState extends State<TaskMaster> {
     return Consumer(
       builder: (context, ref, child) {
         final taskController = ref.watch(taskMasterProvider);
-        final notifyProvider = ref.watch(notificationProvider);
         return Expanded(
             child: taskController.taskList.isEmpty
                 ? _noTaskMsg()
@@ -226,24 +224,6 @@ class _TaskMasterState extends State<TaskMaster> {
                     itemBuilder: (context, index) {
                       Task task = taskController.taskList[index];
                       if (task.repeat == 'Daily') {
-                        try {
-                          DateFormat format = DateFormat("hh:mm a");
-
-                          // Parse the time string to a DateTime object
-                          DateTime dateTime = format.parse(task.startTime!);
-
-                          // Extract hour and minute as integers
-                          int hour = dateTime.hour; // 24-hour format
-                          int minute = dateTime.minute;
-
-                          notifyProvider.scheduledNotification(
-                              hour, minute, task);
-                          debugPrint("Scheduled notification");
-                        } on FormatException {
-                          debugPrint(
-                              "Error parsing date: Invalid format - ${task.startTime}");
-                        }
-
                         return AnimationConfiguration.staggeredList(
                           position: index,
                           duration: const Duration(milliseconds: 1375),
