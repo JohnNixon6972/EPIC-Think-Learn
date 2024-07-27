@@ -2,7 +2,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:epic/cores/activities/task_master/db/db_helper.dart';
-import 'package:epic/cores/activities/task_master/repository/notification_notifier.dart';
 import 'package:epic/cores/screens/loader.dart';
 import 'package:epic/features/auth/pages/login_page.dart';
 import 'package:epic/features/account/pages/stenghts_difficulties.dart';
@@ -13,13 +12,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:get_storage/get_storage.dart';
 import 'firebase_options.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:timezone/data/latest.dart' as tz;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await DBHelper.initDb();
-  tz.initializeTimeZones();
   await GetStorage.init();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
@@ -33,10 +30,6 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final notifyProvider = ref.watch(notificationProvider);
-
-    notifyProvider.initializeNotification(context);
-    notifyProvider.requestIOSPermissions();
     return MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
