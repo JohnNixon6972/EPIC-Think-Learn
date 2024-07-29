@@ -1,6 +1,6 @@
 import 'package:epic/cores/app_constants.dart';
 import 'package:epic/features/auth/model/user_model.dart';
-import 'package:epic/cores/widgets/backgroundAnimation.dart';
+import 'package:epic/cores/widgets/background_animation.dart';
 import 'package:flutter/material.dart';
 
 class TopHeader extends StatelessWidget {
@@ -36,7 +36,7 @@ class TopHeader extends StatelessWidget {
               elevation: 10,
               child: Stack(
                 children: [
-                  Background(
+                  const Background(
                      color1: AppConstants.attentionColor,
                     color2: AppConstants.inhibitionColor,
                     color3: AppConstants.memoryColor,
@@ -45,9 +45,9 @@ class TopHeader extends StatelessWidget {
                   ),
                   Column(
                     children: [
-                      Spacer(),
+                      const Spacer(),
                       Padding(
-                        padding: EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: Text(
                           "EPIC aims to change the lens through which you see yourself and how others see and support you.",
                           style: TextStyle(

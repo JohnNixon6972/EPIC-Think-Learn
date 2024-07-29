@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:epic/cores/app_constants.dart';
-import 'package:epic/cores/widgets/backgroundAnimation.dart';
+import 'package:epic/cores/widgets/background_animation.dart';
 import 'package:epic/features/auth/repository/user_data_service.dart';
 import 'package:epic/features/strategies/strategies.dart';
 import 'package:flutter/material.dart';
@@ -454,7 +454,7 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                         ),
                         SizedBox(
                           height: MediaQuery.of(context).size.height / 3,
-                          child: Background(
+                          child: const Background(
                             color1: AppConstants.attentionColor,
                             color2: AppConstants.inhibitionColor,
                             color3: AppConstants.memoryColor,

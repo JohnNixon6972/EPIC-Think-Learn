@@ -5,7 +5,7 @@ import 'package:epic/cores/screens/loader.dart';
 import 'package:epic/features/auth/provider/user_provider.dart';
 import 'package:epic/features/discover/widgets/ongoing_strategy_view.dart';
 import 'package:epic/features/discover/widgets/strategy_view.dart';
-import 'package:epic/features/strategies/provider/strategy_provider.dart';
+import 'package:epic/features/discover/widgets/taskmaster_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -66,74 +66,7 @@ class Discover extends ConsumerWidget {
                             fontWeight: FontWeight.bold,
                             color: AppConstants.primaryColor),
                       ),
-                      Wrap(
-                        spacing: 5,
-                        runSpacing: 5,
-                        children: [
-                          for (var strat in currentUser.strategies)
-                            Consumer(
-                              builder: (context, ref, child) {
-                                final strategyAsync =
-                                    ref.watch(strategyStreamProvider(strat));
-
-                                return strategyAsync.when(
-                                    data: (strategy) {
-                                      final activityData =
-                                          strategy.strategy.activity;
-                                      return ElevatedButton(
-                                        style: TextButton.styleFrom(
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius:
-                                                    BorderRadius.circular(6)),
-                                            backgroundColor:
-                                                strategy.strategy.color,
-                                            textStyle: const TextStyle(
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w400)),
-                                        onPressed: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    activityData
-                                                        .activityWidget),
-                                          );
-                                        },
-                                        child: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            Icon(
-                                              activityData.activityIcon,
-                                              color:
-                                                  AppConstants.primaryTextColor,
-                                            ),
-                                            const SizedBox(
-                                              width: 5,
-                                            ),
-                                            Text(
-                                              activityData.activityName,
-                                              style: const TextStyle(
-                                                  color: AppConstants
-                                                      .primaryTextColor,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    },
-                                    error: (error, stackTrace) => ErrorPage(
-                                          message: error.toString() +
-                                              stackTrace.toString(),
-                                        ),
-                                    loading: () {
-                                      return const Center(
-                                        child: CircularProgressIndicator(),
-                                      );
-                                    });
-                              },
-                            ),
-                        ],
-                      )
+                      const TaskMasterCard()
                     ],
                   ),
                 ),

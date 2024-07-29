@@ -1,7 +1,7 @@
 import 'package:epic/cores/app_constants.dart';
 import 'package:epic/cores/screens/error_page.dart';
 import 'package:epic/features/auth/model/user_model.dart';
-import 'package:epic/cores/widgets/backgroundAnimation.dart';
+import 'package:epic/cores/widgets/background_animation.dart';
 import 'package:epic/features/auth/repository/user_data_service.dart';
 import 'package:epic/features/strategies/pages/strategy_detail_page.dart';
 import 'package:epic/features/strategies/provider/strategy_provider.dart';
