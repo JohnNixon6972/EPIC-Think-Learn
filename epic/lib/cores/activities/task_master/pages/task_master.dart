@@ -129,7 +129,6 @@ class _TaskMasterState extends State<TaskMaster> {
           width: 80,
           initialSelectedDate: DateTime.now(),
           selectionColor: AppConstants.primaryColor,
-          //selectedTextColor: primaryClr,
           selectedTextColor: Colors.white,
           dateTextStyle: GoogleFonts.lato(
             textStyle: const TextStyle(

@@ -24,7 +24,7 @@ class MyProfile extends ConsumerWidget {
                   TopHeader(user: currentUser),
                   // const Buttons(),
                   const PageTabBar(),
-                  TabPages()
+                  const TabPages()
                 ],
               )),
             )),

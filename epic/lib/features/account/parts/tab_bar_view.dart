@@ -1,4 +1,4 @@
-import 'package:epic/features/account/pages/levelProgress.dart';
+import 'package:epic/features/account/pages/level_progress.dart';
 import 'package:epic/features/account/pages/profile_settings.dart';
 import 'package:epic/features/auth/repository/user_data_service.dart';
 import 'package:flutter/material.dart';

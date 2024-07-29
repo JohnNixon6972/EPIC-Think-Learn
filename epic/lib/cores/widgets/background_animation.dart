@@ -1,4 +1,3 @@
-import 'package:epic/cores/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:wave/config.dart';
 import 'package:wave/wave.dart';
@@ -9,7 +8,7 @@ class Background extends StatelessWidget {
   final Color color3;
   final Color color4;
   final Color color5;
-  Background(
+  const Background(
       {super.key,
       required this.color1,
       required this.color2,
@@ -35,7 +34,7 @@ class Background extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final _colors = [
+    final colors = [
       color1,
       color2,
       color3,
@@ -44,7 +43,7 @@ class Background extends StatelessWidget {
     ];
     return WaveWidget(
       config: CustomConfig(
-        colors: _colors.map((color) => color).toList(),
+        colors: colors.map((color) => color).toList(),
         durations: _durations,
         heightPercentages: _heightPercentages,
       ),

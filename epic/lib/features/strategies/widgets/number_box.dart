@@ -31,12 +31,12 @@ class NumberBox extends StatelessWidget {
           child: Center(
             child: Row(
               children: [
-                SizedBox(
+                const SizedBox(
                   width: 10,
                 ),
                 Text(
                   label,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18,
                     color: AppConstants.primaryTextColor,
                     fontWeight: FontWeight.bold,
@@ -64,7 +64,7 @@ class NumberBox extends StatelessWidget {
           child: Center(
             child: Text(
               value,
-              style: TextStyle(
+              style: const TextStyle(
                 fontSize: 18,
                 color: AppConstants.primaryTextColor,
                 fontWeight: FontWeight.bold,
