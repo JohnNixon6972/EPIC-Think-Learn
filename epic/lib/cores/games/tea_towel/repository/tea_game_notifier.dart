@@ -23,11 +23,8 @@ class TeaGameNotifier extends StateNotifier<TeaGameState> {
   }
 
   int _getItemCount(int level) {
-    int count = ((gameService.level) / 5).floor();
-    if (count < 1) {
-      count = 5;
-    }
-    return count * 5 % state.objects.length;
+    int count = (gameService.level) + 4;
+    return count % state.objects.length;
   }
 
   void _startTimer() {
@@ -81,7 +78,7 @@ class TeaGameNotifier extends StateNotifier<TeaGameState> {
     state = state.copyWith(
         query: "Remember the items in the list below",
         currentItems: items,
-        timeLeft: _count * 5 * 2,
+        timeLeft: _count * 7,
         // timeLeft: 5,
         currentItemNames: itemNames.toList(),
         isItemSelection: false);
@@ -140,7 +137,7 @@ class TeaGameNotifier extends StateNotifier<TeaGameState> {
     final userSelectedItems = state.userSelectedItems;
 
     List<String> correctUserSelectedItems = [];
-    for(String item in state.correctUserSelectedItems){
+    for (String item in state.correctUserSelectedItems) {
       correctUserSelectedItems.add(item);
     }
     for (final item in userSelectedItems) {

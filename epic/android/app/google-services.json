@@ -14,11 +14,27 @@
       },
       "oauth_client": [
         {
+          "client_id": "282675936913-11bk9a8c1f5k2cbhvs5nl1bejhd768s9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.epic.app",
+            "certificate_hash": "4625958ce15b959fa93cd460a76a94750b23ceb2"
+          }
+        },
+        {
           "client_id": "282675936913-6krs5e8hve5essggacedqmib5pq9d9j0.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.epic.app",
             "certificate_hash": "c48469feafe669c808e9a85b9e64a0c447ae10d8"
+          }
+        },
+        {
+          "client_id": "282675936913-abn4bela4eqrue2vb88slf6d1q4mkter.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.epic.app",
+            "certificate_hash": "4471ec1dda85ac872e130678105eced1eb1c20da"
           }
         },
         {

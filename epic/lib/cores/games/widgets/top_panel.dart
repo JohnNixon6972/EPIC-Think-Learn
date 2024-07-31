@@ -129,7 +129,7 @@ class TopPanel extends StatelessWidget {
                       child: Consumer(
                         builder: (context, ref, child) {
                           return Text(
-                            "Score : ${gameState.score}",
+                            "Round : ${gameState.score + 1}",
                             style: const TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,

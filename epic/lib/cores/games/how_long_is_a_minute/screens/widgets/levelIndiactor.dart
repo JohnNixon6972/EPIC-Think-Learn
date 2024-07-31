@@ -1,5 +1,5 @@
 import 'package:epic/cores/app_constants.dart';
-import 'package:epic/cores/games/how_long_is_a_minute/controllers/gameController.dart';
+import 'package:epic/cores/games/how_long_is_a_minute/controllers/game_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -34,7 +34,7 @@ class LevelIndicator extends ConsumerWidget {
             ),
             center: Text(
               'Level ${currLevel.currentLevel}',
-              style: TextStyle(
+              style: const TextStyle(
                 color: AppConstants.selfregulationColor,
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
@@ -45,7 +45,7 @@ class LevelIndicator extends ConsumerWidget {
             progressColor: AppConstants.selfregulationColor.withOpacity(0.4),
           ),
           Text(
-            '${(levelProgress * 100).toStringAsFixed(0)}% to next level',
+            '${(levelProgress * 100).toStringAsFixed(0)}% complete',
             style: const TextStyle(
               color: AppConstants.selfregulationColor,
               fontSize: 15,

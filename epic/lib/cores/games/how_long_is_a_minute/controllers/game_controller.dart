@@ -1,7 +1,5 @@
-// ignore_for_file: unused_element
-
 import 'package:epic/cores/games/game_internals/provider/game_provider.dart';
-import 'package:epic/cores/games/how_long_is_a_minute/controllers/gameState.dart';
+import 'package:epic/cores/games/how_long_is_a_minute/controllers/game_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:async';
 
@@ -29,7 +27,7 @@ class GameController extends StateNotifier<GameState> {
     if (state.isRunning) return;
 
     state = GameState(isRunning: true, elapsedTime: 0, points: state.points);
-    _timer = Timer.periodic(Duration(milliseconds: 100), (timer) {
+    _timer = Timer.periodic(const Duration(milliseconds: 100), (timer) {
       state = GameState(
           isRunning: true,
           elapsedTime: state.elapsedTime + 100,

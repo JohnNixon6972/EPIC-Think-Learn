@@ -92,7 +92,7 @@ class SimonGameNotifier extends StateNotifier<SimonGameState> {
   }
 
   void _checkScore() {
-    if (state.score == 2) {
+    if (state.score == 4) {
       state = state.copyWith(isGameWon: true, score: 0);
       gameService.updateLevel(gameService.level + 1);
 
