@@ -155,12 +155,12 @@ class _StrategyViewState extends State<StrategyView> {
               },
             ),
             Positioned(
-              left: -10,
+              left: -20,
               child: IconButton(
                 icon: const Icon(
                   Icons.keyboard_arrow_left_rounded,
                   size: 40,
-                  color: AppConstants.primaryButtonColor,
+                  color: AppConstants.primaryColor,
                 ),
                 onPressed: () {
                   if (_controller.page! > 0) {
@@ -170,12 +170,12 @@ class _StrategyViewState extends State<StrategyView> {
               ),
             ),
             Positioned(
-              right: -10,
+              right: -20,
               child: IconButton(
                 icon: const Icon(
                   Icons.keyboard_arrow_right_rounded,
                   size: 40,
-                  color: AppConstants.primaryButtonColor,
+                  color: AppConstants.primaryColor,
                 ),
                 onPressed: () {
                   if (_controller.page! < 4) {
