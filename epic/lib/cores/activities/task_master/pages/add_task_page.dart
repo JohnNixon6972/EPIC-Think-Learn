@@ -27,7 +27,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
   DateTime _selectedDate = DateTime.now();
   String? _startTime = DateFormat('hh:mm a').format(DateTime.now()).toString();
 
-  String? _endTime = "9:30 AM";
+  String? _endTime = DateFormat('hh:mm a').format(DateTime.now()).toString();
   int _selectedColor = 0;
 
   int _selectedRemind = 5;
@@ -122,13 +122,16 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   title: "Title",
                   hint: "Enter title here.",
                   controller: _titleController,
+                  isValue: false,
                 ),
                 InputField(
                     title: "Note",
                     hint: "Enter note here.",
+                    isValue: false,
                     controller: _noteController),
                 InputField(
                   title: "Date",
+                  isValue: true,
                   hint: DateFormat.yMd().format(_selectedDate),
                   widget: IconButton(
                     icon: (const Icon(
@@ -144,6 +147,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   children: [
                     Expanded(
                       child: InputField(
+                        isValue: true,
                         title: "Start Time",
                         hint: _startTime,
                         widget: IconButton(
@@ -163,6 +167,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                     ),
                     Expanded(
                       child: InputField(
+                        isValue: true,
                         title: "End Time",
                         hint: _endTime,
                         widget: IconButton(
@@ -179,6 +184,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   ],
                 ),
                 InputField(
+                  isValue: true,
                   title: "Remind",
                   hint: "$_selectedRemind minutes early",
                   widget: Row(
@@ -209,6 +215,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   ),
                 ),
                 InputField(
+                  isValue: true,
                   title: "Repeat",
                   hint: _selectedRepeat,
                   widget: Row(
@@ -379,14 +386,31 @@ class _AddTaskPageState extends State<AddTaskPage> {
         String? _formatedTime = _pickedTime.format(context);
         debugPrint(_formatedTime);
         _startTime = _formatedTime;
+        _endTime = _formatedTime;
       });
     else if (!isStartTime) {
+      if (toDouble(_pickedTime) <
+              toDouble(TimeOfDay(
+                  hour: int.parse(_startTime!.split(":")[0]),
+                  minute:
+                      int.parse(_startTime!.split(":")[1].split(" ")[0]))) ||
+          toDouble(_pickedTime) ==
+              toDouble(TimeOfDay(
+                  hour: int.parse(_startTime!.split(":")[0]),
+                  minute:
+                      int.parse(_startTime!.split(":")[1].split(" ")[0])))) {
+        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          content: Text("End time cannot be less than start time."),
+          duration: Duration(seconds: 2),
+        ));
+        return;
+      }
+
       setState(() {
         String? _formatedTime = _pickedTime.format(context);
         debugPrint(_formatedTime);
         _endTime = _formatedTime;
       });
-      //_compareTime();
     }
   }
 
