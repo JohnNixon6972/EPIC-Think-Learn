@@ -399,6 +399,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   hour: int.parse(_startTime!.split(":")[0]),
                   minute:
                       int.parse(_startTime!.split(":")[1].split(" ")[0])))) {
+        // ignore: use_build_context_synchronously
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           content: Text("End time cannot be less than start time."),
           duration: Duration(seconds: 2),
