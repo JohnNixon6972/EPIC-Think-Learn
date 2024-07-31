@@ -1,5 +1,3 @@
-// ignore_for_file: no_leading_underscores_for_local_identifiers
-
 import 'dart:math';
 
 import 'package:epic/cores/games/4_in_a_row/controllers/game_controller.dart';
@@ -20,7 +18,7 @@ class BoardColumn extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final gameNotifier = ref.read(gameControllerProvider.notifier);
-    List<Cell> _buildBoardColumn() {
+    List<Cell> buildBoardColumn() {
       return chips.reversed
           .map((number) => number == 1
               ? const Cell(
@@ -39,7 +37,7 @@ class BoardColumn extends ConsumerWidget {
     return GestureDetector(
       onTap: () {
         gameNotifier.playColumn(colNum, context);
-        print(gameNotifier.isWinnerDeclared);
+        debugPrint(gameNotifier.isWinnerDeclared.toString());
 
         (gameNotifier.isWinnerDeclared == false)
             ? Future.delayed(const Duration(seconds: 2), () {
@@ -49,7 +47,7 @@ class BoardColumn extends ConsumerWidget {
       },
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: _buildBoardColumn(),
+        children: buildBoardColumn(),
       ),
     );
   }

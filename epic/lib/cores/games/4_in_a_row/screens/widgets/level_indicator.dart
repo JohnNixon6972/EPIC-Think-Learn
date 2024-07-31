@@ -24,7 +24,7 @@ class LevelIndicator extends ConsumerWidget {
           color: AppConstants.primaryColor,
           size: 30.0,
         ),
-        center: Text(
+        center: const Text(
           'Level Indicator',
           style: TextStyle(
             color: AppConstants.primaryTextColor,

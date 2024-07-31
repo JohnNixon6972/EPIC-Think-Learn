@@ -38,6 +38,14 @@ class _StrategyViewState extends State<StrategyView> {
     super.dispose();
   }
 
+  void _navigateToPage(int index) {
+    _controller.animateToPage(
+      index,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     double cardheight = 280;
@@ -45,95 +53,138 @@ class _StrategyViewState extends State<StrategyView> {
     return ValueListenableBuilder<double>(
       valueListenable: _notifierScroll,
       builder: (context, value, _) {
-        return PageView.builder(
-          controller: _controller,
-          itemCount: 5,
-          itemBuilder: (context, index) {
-            final strategyName = widget.currentUser.strategies[index];
+        return Stack(
+          alignment: Alignment.center,
+          children: [
+            PageView.builder(
+              controller: _controller,
+              itemCount: 5,
+              itemBuilder: (context, index) {
+                final strategyName = widget.currentUser.strategies[index];
 
-            return Center(
-              child: Consumer(
-                builder: (context, ref, child) {
-                  final strategyAsync =
-                      ref.watch(strategyStreamProvider(strategyName));
-                  return strategyAsync.when(
-                    data: (strategy) {
-                      final strategyData = strategy.strategy;
-                      return GestureDetector(
-                        onTap: () {
-                          ref
-                              .read(userDataServiceProvider)
-                              .updateLastSeenStrategy(strategyData.name);
+                return Center(
+                  child: Consumer(
+                    builder: (context, ref, child) {
+                      final strategyAsync =
+                          ref.watch(strategyStreamProvider(strategyName));
+                      return strategyAsync.when(
+                        data: (strategy) {
+                          final strategyData = strategy.strategy;
+                          return GestureDetector(
+                            onTap: () {
+                              ref
+                                  .read(userDataServiceProvider)
+                                  .updateLastSeenStrategy(strategyData.name);
 
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => StrategyDetailPage(
-                                strategyName: strategyData.name,
-                              ),
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => StrategyDetailPage(
+                                    strategyName: strategyData.name,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: [
+                                Material(
+                                  elevation: 20,
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(20)),
+                                  shadowColor: strategyData.color,
+                                  child: Container(
+                                    height: cardheight,
+                                    width: cardWidth,
+                                    decoration: BoxDecoration(
+                                      color:
+                                          strategyData.color.withOpacity(0.3),
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(20),
+                                      ),
+                                    ),
+                                    child: Background(
+                                      color1:
+                                          strategyData.color.withOpacity(0.1),
+                                      color2:
+                                          strategyData.color.withOpacity(0.3),
+                                      color3:
+                                          strategyData.color.withOpacity(0.5),
+                                      color4:
+                                          strategyData.color.withOpacity(0.7),
+                                      color5:
+                                          strategyData.color.withOpacity(0.9),
+                                    ),
+                                  ),
+                                ),
+                                Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Image.asset(
+                                      "assets/images/strategies/${strategyData.name}.png",
+                                      height: 150,
+                                    ),
+                                    const SizedBox(height: 20),
+                                    Text(
+                                      strategyData.name,
+                                      style: const TextStyle(
+                                        fontSize: 28,
+                                        color: AppConstants.primaryTextColor,
+                                        fontWeight: FontWeight.bold,
+                                        letterSpacing: 2,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
                             ),
                           );
                         },
-                        child: Padding(
-                          padding: const EdgeInsets.only(top: 15.0),
-                          child: Stack(
-                            alignment: Alignment.center,
-                            children: [
-                              Material(
-                                elevation: 20,
-                                shadowColor: strategyData.color,
-                                child: Container(
-                                  height: cardheight,
-                                  width: cardWidth,
-                                  decoration: BoxDecoration(
-                                    color: strategyData.color.withOpacity(0.3),
-                                  ),
-                                  child: Background(
-                                    color1: strategyData.color.withOpacity(0.1),
-                                    color2: strategyData.color.withOpacity(0.3),
-                                    color3: strategyData.color.withOpacity(0.5),
-                                    color4: strategyData.color.withOpacity(0.7),
-                                    color5: strategyData.color.withOpacity(0.9),
-                                  ),
-                                ),
-                              ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Image.asset(
-                                    "assets/images/strategies/${strategyData.name}.png",
-                                    height: 150,
-                                  ),
-                                  const SizedBox(height: 20),
-                                  Text(
-                                    strategyData.name,
-                                    style: const TextStyle(
-                                      fontSize: 28,
-                                      color: AppConstants.primaryTextColor,
-                                      fontWeight: FontWeight.bold,
-                                      letterSpacing: 2,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
+                        error: (error, stackTrace) => ErrorPage(
+                          message: error.toString() + stackTrace.toString(),
                         ),
+                        loading: () {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        },
                       );
                     },
-                    error: (error, stackTrace) => ErrorPage(
-                      message: error.toString() + stackTrace.toString(),
-                    ),
-                    loading: () {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    },
-                  );
+                  ),
+                );
+              },
+            ),
+            Positioned(
+              left: -10,
+              child: IconButton(
+                icon: const Icon(
+                  Icons.keyboard_arrow_left_rounded,
+                  size: 40,
+                  color: AppConstants.primaryButtonColor,
+                ),
+                onPressed: () {
+                  if (_controller.page! > 0) {
+                    _navigateToPage(_controller.page!.toInt() - 1);
+                  }
                 },
               ),
-            );
-          },
+            ),
+            Positioned(
+              right: -10,
+              child: IconButton(
+                icon: const Icon(
+                  Icons.keyboard_arrow_right_rounded,
+                  size: 40,
+                  color: AppConstants.primaryButtonColor,
+                ),
+                onPressed: () {
+                  if (_controller.page! < 4) {
+                    _navigateToPage(_controller.page!.toInt() + 1);
+                  }
+                },
+              ),
+            ),
+          ],
         );
       },
     );

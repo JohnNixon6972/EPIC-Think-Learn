@@ -36,7 +36,7 @@ class LoginPage extends ConsumerWidget {
                   curve: Curves.easeInBack,
                   animDuration: const Duration(seconds: 3),
                   child: const LoginAnimation(
-                    color: AppConstants.selfregulationColor,
+                    color: AppConstants.attentionColor,
                     iconName: Icons.games,
                   ),
                 ),
@@ -97,8 +97,9 @@ class LoginPage extends ConsumerWidget {
               height: MediaQuery.of(context).size.height / 2,
               child: Stack(
                 children: [
-                 const SizedBox(child: Background(
-                     color1: AppConstants.attentionColor,
+                  const SizedBox(
+                      child: Background(
+                    color1: AppConstants.attentionColor,
                     color2: AppConstants.inhibitionColor,
                     color3: AppConstants.memoryColor,
                     color4: AppConstants.planningColor,

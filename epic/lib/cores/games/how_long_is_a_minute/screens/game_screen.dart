@@ -1,6 +1,6 @@
 import 'package:epic/cores/app_constants.dart';
-import 'package:epic/cores/games/how_long_is_a_minute/controllers/gameController.dart';
-import 'package:epic/cores/games/how_long_is_a_minute/screens/widgets/hourglassAnimation.dart';
+import 'package:epic/cores/games/how_long_is_a_minute/controllers/game_controller.dart';
+import 'package:epic/cores/games/how_long_is_a_minute/screens/widgets/hourglass_animation.dart';
 import 'package:epic/cores/games/how_long_is_a_minute/screens/widgets/levelIndiactor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,7 +16,7 @@ class HowLongIsAMinute extends ConsumerWidget {
     final SpringController springController = SpringController();
     springController.play(
       motion: Motion.loop,
-      animDuration: Duration(seconds: 500),
+      animDuration: const Duration(seconds: 500),
       curve: Curves.easeInOut,
     );
 

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:epic/cores/app_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -11,10 +13,10 @@ class HourGlass extends StatefulWidget {
 
 class _HourGlassState extends State<HourGlass> with TickerProviderStateMixin {
   late AnimationController _controller;
-  int timeDilation = 70;
 
   @override
   void initState() {
+    int timeDilation =  Random().nextInt(30) + 1;
     _controller = AnimationController(
       duration: Duration(seconds: timeDilation),
       vsync: this,

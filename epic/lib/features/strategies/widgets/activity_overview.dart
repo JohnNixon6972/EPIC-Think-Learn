@@ -106,21 +106,19 @@ class ActivityOverview extends ConsumerWidget {
                       fontWeight: FontWeight.bold,
                     )),
               ),
-              const Text(
-                'Benefits',
-                style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                    color: AppConstants.secondaryBackgroundColor),
-              ),
+              const Text('Rules',
+                  style: TextStyle(
+                      color: AppConstants.secondaryBackgroundColor,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold)),
               SizedBox(
-                height: 240,
+                height: 300,
                 child: ListView(
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
                   physics: const NeverScrollableScrollPhysics(),
                   children: [
-                    for (String benefit in game.benefits)
+                    for (String benefit in game.rules)
                       ListTile(
                         dense: true,
                         contentPadding: EdgeInsets.zero,
@@ -136,19 +134,21 @@ class ActivityOverview extends ConsumerWidget {
                   ],
                 ),
               ),
-              const Text('Rules',
-                  style: TextStyle(
-                      color: AppConstants.secondaryBackgroundColor,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold)),
+              const Text(
+                'Benefits',
+                style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: AppConstants.secondaryBackgroundColor),
+              ),
               SizedBox(
-                height: 300,
+                height: 240,
                 child: ListView(
                   shrinkWrap: true,
                   scrollDirection: Axis.vertical,
                   physics: const NeverScrollableScrollPhysics(),
                   children: [
-                    for (String benefit in game.rules)
+                    for (String benefit in game.benefits)
                       ListTile(
                         dense: true,
                         contentPadding: EdgeInsets.zero,

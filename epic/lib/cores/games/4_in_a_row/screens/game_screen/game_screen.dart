@@ -1,7 +1,7 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:epic/cores/app_constants.dart';
 import 'package:epic/cores/games/4_in_a_row/screens/widgets/game_body.dart';
-import 'package:epic/cores/games/4_in_a_row/screens/widgets/levelIndicator.dart';
+import 'package:epic/cores/games/4_in_a_row/screens/widgets/level_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

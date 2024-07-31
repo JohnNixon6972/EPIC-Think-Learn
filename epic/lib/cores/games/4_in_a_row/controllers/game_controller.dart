@@ -72,7 +72,7 @@ class GameController extends StateNotifier<List<List<int>>> {
         incrementLevel();
         _isWinnerDeclared = true;
 
-        print(getWinnerCells);
+        debugPrint(getWinnerCells.toString());
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             backgroundColor: AppConstants.secondaryColor,
@@ -108,7 +108,7 @@ class GameController extends StateNotifier<List<List<int>>> {
         // gameService.updateLevel(gameService.level + 1);
 
         _isWinnerDeclared = true;
-        print(getWinnerCells);
+        debugPrint(getWinnerCells.toString());
         incrementLevel();
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -140,7 +140,7 @@ class GameController extends StateNotifier<List<List<int>>> {
           _buildBoard();
         });
       } else {
-        print(getWinnerCells);
+        debugPrint(getWinnerCells.toString());
         if (isBoardFull()) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
@@ -170,7 +170,7 @@ class GameController extends StateNotifier<List<List<int>>> {
       }
     } else {
       // _isWinnerDeclared = true;
-      print(getWinnerCells);
+      debugPrint(getWinnerCells.toString());
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           backgroundColor: AppConstants.planningColor,

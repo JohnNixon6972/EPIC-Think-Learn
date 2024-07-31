@@ -83,7 +83,7 @@ enum Difficulties {
     areaOfImprovement: [Strategies.attention, Strategies.selfRegulation],
   ),
   d6(
-    name: "Complete/ finish a task",
+    name: "Complete/Finish a task",
     areaOfImprovement: [
       Strategies.attention,
       Strategies.planning,
@@ -117,7 +117,7 @@ enum Difficulties {
     areaOfImprovement: [Strategies.memory],
   ),
   d13(
-    name: "Time management/ kepping track of time",
+    name: "Time management/keeping track of time",
     areaOfImprovement: [Strategies.planning, Strategies.selfRegulation],
   ),
   d14(

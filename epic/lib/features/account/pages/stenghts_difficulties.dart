@@ -308,58 +308,7 @@ class _StrenghtsDifficultiesState extends ConsumerState<StrenghtsDifficulties> {
                                     ),
                                   ),
                                 ),
-                                // const SizedBox(
-                                //   height: 50,
-                                // ),
-                                // const Text(
-                                //   'We can help you improve the following skills: ',
-                                //   style: TextStyle(
-                                //     fontSize: 20,
-                                //     fontWeight: FontWeight.w500,
-                                //     color: AppConstants.tertiaryColor,
-                                //   ),
-                                //   textAlign: TextAlign.center,
-                                // ),
-                                // for (var strategy
-                                //     in difficulties[index].areaOfImprovement)
-                                //   Center(
-                                //     child: Padding(
-                                //       padding: const EdgeInsets.all(8.0),
-                                //       child: Container(
-                                //         height: 50,
-                                //         width: 150,
-                                //         decoration: BoxDecoration(
-                                //           borderRadius:
-                                //               BorderRadius.circular(50),
-                                //           color: strategy.name == 'Memory'
-                                //               ? AppConstants.memoryColor
-                                //               : strategy.name == 'Inhibition'
-                                //                   ? AppConstants.inhibitionColor
-                                //                   : strategy.name == 'Attention'
-                                //                       ? AppConstants
-                                //                           .attentionColor
-                                //                       : strategy.name ==
-                                //                               'Planning'
-                                //                           ? AppConstants
-                                //                               .planningColor
-                                //                           : AppConstants
-                                //                               .selfregulationColor,
-                                //         ),
-                                //         child: Center(
-                                //           child: Text(
-                                //             strategy.name,
-                                //             style: const TextStyle(
-                                //               fontSize: 18,
-                                //               fontWeight: FontWeight.bold,
-                                //               color:
-                                //                   AppConstants.primaryTextColor,
-                                //             ),
-                                //             textAlign: TextAlign.center,
-                                //           ),
-                                //         ),
-                                //       ),
-                                //     ),
-                                //   ),
+                               
                               ],
                             ),
                           );
