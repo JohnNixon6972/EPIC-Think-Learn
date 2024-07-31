@@ -50,7 +50,7 @@ class Discover extends ConsumerWidget {
                       ),
                       SizedBox(
                         height: 350,
-                        width: MediaQuery.of(context).size.width,
+                        width: MediaQuery.of(context).size.width - 30,
                         child: StrategyView(
                           currentUser: currentUser,
                         ),
