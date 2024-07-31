@@ -30,14 +30,14 @@ class TopHeader extends StatelessWidget {
             textAlign: TextAlign.justify,
           ),
           SizedBox(
-            height: 150,
+            height: 170,
             width: MediaQuery.of(context).size.width,
-            child: Card(
+            child: const Card(
               elevation: 10,
               child: Stack(
                 children: [
-                  const Background(
-                     color1: AppConstants.attentionColor,
+                  Background(
+                    color1: AppConstants.attentionColor,
                     color2: AppConstants.inhibitionColor,
                     color3: AppConstants.memoryColor,
                     color4: AppConstants.planningColor,
@@ -45,17 +45,17 @@ class TopHeader extends StatelessWidget {
                   ),
                   Column(
                     children: [
-                      const Spacer(),
+                      Spacer(),
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: EdgeInsets.all(8.0),
                         child: Text(
                           "EPIC aims to change the lens through which you see yourself and how others see and support you.",
                           style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                            color: AppConstants.tertiaryColor,
-                            backgroundColor:
-                                AppConstants.primaryTextColor.withOpacity(0.8),
+                            fontSize: 21,
+                            fontWeight: FontWeight.bold,
+                            color: AppConstants.primaryTextColor,
+                            // backgroundColor:
+                            // AppConstants.primaryTextColor.withOpacity(0.8),
                           ),
                           textAlign: TextAlign.justify,
                         ),

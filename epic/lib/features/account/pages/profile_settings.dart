@@ -86,7 +86,7 @@ class _MyProfileSettingsState extends ConsumerState<MyProfileSettings> {
                             )
                           ],
                         ),
-                        const Divider(),
+                        // const Divider(),
 
                         Align(
                           alignment: Alignment.center,
