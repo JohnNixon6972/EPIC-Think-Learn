@@ -22,7 +22,7 @@ class SimonGameNotifier extends StateNotifier<SimonGameState> {
   }
 
   int _getShapeCount(int level) {
-    int count = (gameService.level) % 10;
+    int count = min(9, gameService.level);
     count < 2 ? count = 2 : count;
 
     return count;
@@ -64,12 +64,24 @@ class SimonGameNotifier extends StateNotifier<SimonGameState> {
     final shape = state.shapes[random.nextInt(_count)];
     final color = state.colors[random.nextInt(state.colors.length)];
     final query = "Color the $shape ${currentColorToString(color)}";
+    final simonSays = random.nextBool();
+
+    if (!simonSays) {
+      Future.delayed(const Duration(seconds: 5), () {
+        state = state.copyWith(
+            message: "Well done! Simon didn't say!",
+            backgroundColor: Colors.green.shade300);
+
+        generateNewCommand();
+      });
+    }
 
     state = state.copyWith(
         currentShape: shape,
         currentColor: color,
         query: query,
         score: state.score! + 1,
+        simonSays: simonSays,
         backgroundColor: Colors.green.shade300);
   }
 
@@ -92,7 +104,7 @@ class SimonGameNotifier extends StateNotifier<SimonGameState> {
   }
 
   void _checkScore() {
-    if (state.score == 4) {
+    if (state.score! >= 5) {
       state = state.copyWith(isGameWon: true, score: 0);
       gameService.updateLevel(gameService.level + 1);
 
@@ -106,6 +118,17 @@ class SimonGameNotifier extends StateNotifier<SimonGameState> {
   int get count => _count;
 
   void checkUserSelection(String shape, Color color) {
+    if (!state.simonSays) {
+      state = state.copyWith(
+          message: "Simon didn't say!", backgroundColor: Colors.red.shade300);
+      Future.delayed(const Duration(seconds: 2), () {
+        state = state.copyWith(
+            message: "",
+            backgroundColor: AppConstants.inhibitionColor.withOpacity(0.3));
+      });
+      return;
+    }
+
     if (shape == state.currentShape && color == state.currentColor) {
       state = state.copyWith(message: "Correct! Well done!");
       generateNewCommand();
@@ -123,7 +146,7 @@ class SimonGameNotifier extends StateNotifier<SimonGameState> {
       Future.delayed(const Duration(seconds: 2), () {
         state = state.copyWith(
             message: "",
-            backgroundColor: AppConstants.inhibitionColor..withOpacity(0.3));
+            backgroundColor: AppConstants.inhibitionColor.withOpacity(0.3));
       });
     }
   }
