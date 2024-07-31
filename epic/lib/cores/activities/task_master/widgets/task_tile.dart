@@ -91,15 +91,14 @@ class TaskTile extends StatelessWidget {
   }
 
   _getBGClr(int? no) {
-    switch (no) {
-      case 0:
-        return AppConstants.planningColor;
-      case 1:
-        return AppConstants.memoryColor;
-      case 2:
-        return AppConstants.attentionColor;
-      default:
-        return AppConstants.planningColor;
-    }
+    final List<Color> bgColors = [
+      AppConstants.primaryColor,
+      AppConstants.memoryColor,
+      AppConstants.attentionColor,
+      AppConstants.inhibitionColor,
+      AppConstants.planningColor,
+    ];
+
+    return bgColors[no!];
   }
 }

@@ -214,7 +214,6 @@ class _AddTaskPageState extends State<AddTaskPage> {
                   widget: Row(
                     children: [
                       DropdownButton<String>(
-                          dropdownColor: Colors.blueGrey,
                           icon: const Icon(
                             Icons.keyboard_arrow_down,
                             color: Colors.grey,
@@ -236,7 +235,6 @@ class _AddTaskPageState extends State<AddTaskPage> {
                               value: value,
                               child: Text(
                                 value,
-                                style: const TextStyle(color: Colors.white),
                               ),
                             );
                           }).toList()),
@@ -321,6 +319,13 @@ class _AddTaskPageState extends State<AddTaskPage> {
   }
 
   _colorChips() {
+    final List<Color> bgColors = [
+      AppConstants.primaryColor,
+      AppConstants.memoryColor,
+      AppConstants.attentionColor,
+      AppConstants.inhibitionColor,
+      AppConstants.planningColor,
+    ];
     return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
       Text(
         "Color",
@@ -331,7 +336,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
       ),
       Wrap(
         children: List<Widget>.generate(
-          3,
+          5,
           (int index) {
             return GestureDetector(
               onTap: () {
@@ -343,11 +348,7 @@ class _AddTaskPageState extends State<AddTaskPage> {
                 padding: const EdgeInsets.only(right: 8.0),
                 child: CircleAvatar(
                   radius: 14,
-                  backgroundColor: index == 0
-                      ? AppConstants.primaryColor
-                      : index == 1
-                          ? AppConstants.memoryColor
-                          : AppConstants.attentionColor,
+                  backgroundColor: bgColors[index],
                   child: index == _selectedColor
                       ? const Center(
                           child: Icon(
