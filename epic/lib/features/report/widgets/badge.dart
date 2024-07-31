@@ -15,6 +15,7 @@ class AppBadge extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double size = MediaQuery.of(context).size.width * 0.27;
     return Consumer(
       builder: (context, ref, child) {
         final strategyAsync = ref.watch(strategyStreamProvider(strategyName));
@@ -26,8 +27,8 @@ class AppBadge extends StatelessWidget {
               elevation: 10,
               shadowColor: AppConstants.primaryColor,
               child: Container(
-                height: 105,
-                width: 105,
+                height: size,
+                width: size,
                 decoration: BoxDecoration(
                     border:
                         Border.all(color: AppConstants.primaryColor, width: 8),
