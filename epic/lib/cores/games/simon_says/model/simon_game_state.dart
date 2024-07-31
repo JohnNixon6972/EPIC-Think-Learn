@@ -13,6 +13,7 @@ class SimonGameState {
   Duration? elapsedTime;
   bool isGameOver;
   bool isGameWon;
+  bool simonSays;
 
   SimonGameState({
     this.shapes = const [
@@ -26,6 +27,7 @@ class SimonGameState {
       "Diamond",
       "Cross",
     ],
+
     this.colors = const [
       Colors.red,
       Colors.blue,
@@ -46,6 +48,7 @@ class SimonGameState {
     this.elapsedTime = Duration.zero,
     this.isGameOver = true,
     this.isGameWon = false,
+    this.simonSays = true,
   });
 
   SimonGameState copyWith({
@@ -60,6 +63,7 @@ class SimonGameState {
     Duration? elapsedTime,
     bool? isGameOver,
     bool? isGameWon,
+    bool? simonSays,
   }) {
     return SimonGameState(
       shapes: shapes ?? this.shapes,
@@ -73,6 +77,7 @@ class SimonGameState {
       elapsedTime: elapsedTime ?? this.elapsedTime,
       isGameOver: isGameOver ?? this.isGameOver,
       isGameWon: isGameWon ?? this.isGameWon,
+      simonSays: simonSays ?? this.simonSays,
     );
   }
 }

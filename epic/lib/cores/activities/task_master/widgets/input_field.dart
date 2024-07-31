@@ -6,9 +6,11 @@ class InputField extends StatelessWidget {
   final TextEditingController? controller;
   final String? hint;
   final Widget? widget;
+  final bool isValue;
 
   const InputField(
       {super.key,
+      required this.isValue,
       required this.title,
       this.controller,
       required this.hint,
@@ -46,10 +48,14 @@ class InputField extends StatelessWidget {
                     cursorColor: Colors.grey[600],
                     readOnly: widget == null ? false : true,
                     controller: controller,
-                    style: AppConstants.subTitleTextStyle,
+                    style: AppConstants.subTitleTextStyle.copyWith(
+                        color: AppConstants.secondaryTextColor,
+                        fontWeight: FontWeight.bold),
                     decoration: InputDecoration(
                       hintText: hint,
-                      hintStyle: AppConstants.subTitleTextStyle,
+                      hintStyle: !isValue? AppConstants.subTitleTextStyle:AppConstants.subTitleTextStyle.copyWith(
+                        color: AppConstants.secondaryTextColor,
+                        fontWeight: FontWeight.bold),
                       focusedBorder: const UnderlineInputBorder(
                         borderSide: BorderSide(
                           color: AppConstants.primaryBackgroundColor,

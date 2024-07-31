@@ -59,98 +59,85 @@ class _DiscoverState extends ConsumerState<Discover> {
         data: (currentUser) => Scaffold(
               backgroundColor: AppConstants.primaryBackgroundColor,
               body: SafeArea(
-                  child: Stack(
-                children: [
-                  RawScrollbar(
-                    scrollbarOrientation: ScrollbarOrientation.right,
-                    controller: _scrollController,
-                    thumbColor: AppConstants.primaryColor,
-                    thickness: 4,
-                    padding: EdgeInsets.fromLTRB(10, 2, 5, 2),
-                    radius: const Radius.circular(10),
-                    trackVisibility: true,
-                    thumbVisibility: true,
-                    child: Padding(
+                  child: Padding(
                       padding: const EdgeInsets.symmetric(
-                          horizontal: 10.0, vertical: 10.0),
-                      child: SingleChildScrollView(
-                        controller: _scrollController,
-                        scrollDirection: Axis.vertical,
-                        physics: const BouncingScrollPhysics(),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "${getGreetings()} ${currentUser.username.split(" ")[0]}",
-                              style: const TextStyle(
-                                  color: AppConstants.secondaryTextColor,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.w500),
+                          horizontal: 12.0, vertical: 10.0),
+                      child: Stack(
+                        children: [
+                          SingleChildScrollView(
+                            controller: _scrollController,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "${getGreetings()} ${currentUser.username.split(" ")[0]}",
+                                  style: const TextStyle(
+                                      color: AppConstants.secondaryTextColor,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.w500),
+                                ),
+                                const SizedBox(
+                                  height: 10,
+                                ),
+                                OngoingStrategyView(
+                                  currentUser: currentUser,
+                                ),
+                                const SizedBox(
+                                  height: 15,
+                                ),
+                                const Text(
+                                  "Strategies",
+                                  style: TextStyle(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold,
+                                      color: AppConstants.primaryColor),
+                                ),
+                                SizedBox(
+                                  height: 350,
+                                  width: MediaQuery.of(context).size.width,
+                                  child: StrategyView(
+                                    currentUser: currentUser,
+                                  ),
+                                ),
+                                const Divider(
+                                  color: AppConstants.secondaryBackgroundColor,
+                                  thickness: 1,
+                                ),
+                                const Text(
+                                  'Activities',
+                                  style: TextStyle(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold,
+                                      color: AppConstants.primaryColor),
+                                ),
+                                const TaskMasterCard()
+                              ],
                             ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            OngoingStrategyView(
-                              currentUser: currentUser,
-                            ),
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            const Text(
-                              "Strategies",
-                              style: TextStyle(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
-                                  color: AppConstants.primaryColor),
-                            ),
-                            SizedBox(
-                              height: 350,
-                              width: MediaQuery.of(context).size.width,
-                              child: StrategyView(
-                                currentUser: currentUser,
+                          ),
+                          if (_showScrollIndicator)
+                            Positioned(
+                              bottom: 0,
+                              right: 0,
+                              child: GestureDetector(
+                                onTap: () {
+                                  _scrollController.animateTo(
+                                      _scrollController
+                                          .position.maxScrollExtent,
+                                      duration:
+                                          const Duration(milliseconds: 500),
+                                      curve: Curves.easeIn);
+                                },
+                                child: const Center(
+                                  child: Icon(
+                                    Icons.swipe_down,
+                                    size: 40,
+                                    color: AppConstants.primaryColor,
+                                  ),
+                                ),
                               ),
-                            ),
-                            const Divider(
-                              color: AppConstants.secondaryBackgroundColor,
-                              thickness: 1,
-                            ),
-                            const Text(
-                              'Activities',
-                              style: TextStyle(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.bold,
-                                  color: AppConstants.primaryColor),
-                            ),
-                            const TaskMasterCard()
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  // if (_showScrollIndicator)
-                  //   Positioned(
-                  //     bottom: 0,
-                  //     right: 0,
-                  //     child: GestureDetector(
-                  //       onTap: () {
-                  //         _scrollController.animateTo(
-                  //             _scrollController
-                  //                 .position.maxScrollExtent,
-                  //             duration:
-                  //                 const Duration(milliseconds: 500),
-                  //             curve: Curves.easeIn);
-                  //       },
-                  //       child: const Center(
-                  //         child: Icon(
-                  //           Icons.swipe_down,
-                  //           size: 40,
-                  //           color: AppConstants.primaryColor,
-                  //         ),
-                  //       ),
-                  //     ),
-                  //   )
-                ],
-              )),
+                            )
+                        ],
+                      ))),
             ),
         error: (error, stackTrace) => ErrorPage(
               message: error.toString() + stackTrace.toString(),
