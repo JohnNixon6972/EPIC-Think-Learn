@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:epic/cores/app_constants.dart';
 import 'package:epic/cores/screens/error_page.dart';
 import 'package:epic/cores/screens/loader.dart';
-import 'package:epic/features/account/pages/my_profile.dart';
 import 'package:epic/features/auth/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
