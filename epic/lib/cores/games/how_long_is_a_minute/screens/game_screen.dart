@@ -1,7 +1,7 @@
 import 'package:epic/cores/app_constants.dart';
 import 'package:epic/cores/games/how_long_is_a_minute/controllers/game_controller.dart';
 import 'package:epic/cores/games/how_long_is_a_minute/screens/widgets/hourglass_animation.dart';
-import 'package:epic/cores/games/how_long_is_a_minute/screens/widgets/levelIndiactor.dart';
+import 'package:epic/cores/games/how_long_is_a_minute/screens/widgets/level_indiactor.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:spring/spring.dart';

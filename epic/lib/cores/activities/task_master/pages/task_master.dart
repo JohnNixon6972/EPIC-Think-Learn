@@ -149,7 +149,6 @@ class _TaskMasterState extends State<TaskMaster> {
               color: Colors.grey,
             ),
           ),
-
           onDateChange: (date) {
             setState(
               () {
@@ -286,7 +285,7 @@ class _TaskMasterState extends State<TaskMaster> {
     return Container(
       padding: const EdgeInsets.only(top: 4),
       height: task.isCompleted == 1
-          ? SizeConfig.screenHeight * 0.20
+          ? SizeConfig.screenHeight * 0.21
           : SizeConfig.screenHeight * 0.35,
       width: SizeConfig.screenWidth,
       color: Colors.white,
